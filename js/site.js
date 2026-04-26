@@ -434,7 +434,7 @@
                 /\[Garages\]\(\/garages\/\)/g,
                 '<a href="' +
                     gp +
-                    '" class="text-red-400 hover:text-red-300 underline underline-offset-2">Private Garages waitlist</a>'
+                    '" class="text-[#c5a26f] hover:text-[#e8d5b5] underline underline-offset-2">Private Garages waitlist</a>'
             );
             return h.replace(/\n/g, '<br>');
         }
@@ -463,9 +463,9 @@
             wrap.className = 'msg-enter flex justify-start';
             wrap.innerHTML =
                 '<div class="bg-zinc-900/95 border border-zinc-700/90 rounded-2xl rounded-bl-md px-4 py-3 flex gap-1.5 items-center shadow-lg" role="status" aria-live="polite">' +
-                '<span class="typing-dot w-2 h-2 rounded-full bg-red-500"></span>' +
-                '<span class="typing-dot w-2 h-2 rounded-full bg-red-500"></span>' +
-                '<span class="typing-dot w-2 h-2 rounded-full bg-red-500"></span>' +
+                '<span class="typing-dot w-2 h-2 rounded-full bg-[#c5a26f]"></span>' +
+                '<span class="typing-dot w-2 h-2 rounded-full bg-[#c5a26f]"></span>' +
+                '<span class="typing-dot w-2 h-2 rounded-full bg-[#c5a26f]"></span>' +
                 '</div>';
             messagesEl.appendChild(wrap);
             messagesEl.scrollTop = messagesEl.scrollHeight;

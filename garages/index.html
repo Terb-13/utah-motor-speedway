@@ -3,65 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#09090b">
+    <meta name="theme-color" content="#0a0a0a">
     <title>Private Garages | Utah Motorsports Campus</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/site.css">
 </head>
-<body class="bg-zinc-950 text-zinc-200 pb-24 md:pb-0">
+<body class="bg-[#0a0a0a] text-[#c4c4c4] pb-24 md:pb-0">
 
-    <nav class="bg-zinc-900/90 backdrop-blur-xl border-b border-zinc-800/80 sticky top-0 z-50 supports-[backdrop-filter]:bg-zinc-900/75">
+    <nav class="umc-nav-shell sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="flex items-center justify-between min-h-[4.5rem] sm:h-20 gap-2">
-                <a href="../index.html" class="flex items-center gap-x-2 sm:gap-x-3 min-w-0 shrink-0 text-inherit no-underline hover:opacity-90 transition-opacity">
-                    <div class="flex items-center gap-x-2 min-w-0">
-                        <div class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-red-900/50 ring-1 ring-white/10">
-                            <i class="fa-solid fa-flag-checkered text-white text-2xl sm:text-3xl"></i>
-                        </div>
-                        <div class="min-w-0 leading-tight">
-                            <span class="font-bold text-lg sm:text-2xl md:text-3xl tracking-tighter heading-font block truncate">UTAH MOTORSPORTS</span>
-                            <span class="font-bold text-lg sm:text-2xl md:text-3xl tracking-tighter text-red-600 heading-font block -mt-0.5">CAMPUS</span>
-                        </div>
+            <div class="flex items-center justify-between min-h-[4.5rem] sm:h-20 gap-4">
+                <a href="../index.html" class="flex items-center gap-x-3 min-w-0 shrink-0 text-inherit no-underline hover:opacity-90 transition-opacity">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl border border-[#c5a26f]/35 bg-[#0c0c0c] flex items-center justify-center shadow-[0_0_40px_-10px_rgba(197,162,111,0.4)]">
+                        <i class="fa-solid fa-flag-checkered text-[#c5a26f] text-lg sm:text-xl" aria-hidden="true"></i>
+                    </div>
+                    <div class="min-w-0 leading-tight">
+                        <span class="font-medium text-base sm:text-xl md:text-2xl tracking-[0.14em] uppercase text-white heading-font block truncate">Utah Motorsports</span>
+                        <span class="text-[10px] sm:text-xs tracking-[0.28em] uppercase text-[#c5a26f]/90 font-normal block -mt-0.5">Campus</span>
                     </div>
                 </a>
-                <div class="hidden md:flex items-center gap-x-7 text-sm font-medium">
+                <div class="hidden md:flex items-center gap-x-8">
                     <a href="../track/index.html" class="nav-link">The Track</a>
                     <a href="../karting/index.html" class="nav-link">Karting</a>
                     <a href="../rocket-rally/index.html" class="nav-link">Rocket Rally</a>
                     <a href="../events/index.html" class="nav-link">Events</a>
                     <a href="index.html" class="nav-link" aria-current="page">Private Garages</a>
                 </div>
-                <div class="flex items-center gap-2 sm:gap-x-3 shrink-0">
-                    <a href="../index.html#contact" class="hidden md:inline-flex px-5 py-2.5 text-sm font-semibold border border-zinc-600 hover:bg-zinc-800 rounded-2xl transition cta-secondary items-center justify-center">Talk to Us</a>
-                    <button type="button" class="booking-trigger px-4 py-2.5 sm:px-7 sm:py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-2xl text-sm cta-primary inline-flex items-center justify-center gap-x-2 min-h-[44px] min-w-[44px]" data-booking-preset="track-day"><span>Book Now</span></button>
-                    <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-xl text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-800 transition">
-                        <i class="fa-solid fa-bars" aria-hidden="true"></i><span class="sr-only">Open menu</span>
-                    </button>
-                </div>
+                <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-xl text-[#c5a26f] rounded-xl border border-white/10 hover:bg-white/5 transition">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i><span class="sr-only">Open menu</span>
+                </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900/98 border-t border-zinc-800 px-4 sm:px-6 py-6">
-            <div class="flex flex-col gap-y-1 text-base font-medium">
-                <a href="../track/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">The Track</a>
-                <a href="../karting/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">Karting</a>
-                <a href="../rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">Rocket Rally</a>
-                <a href="../events/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">Events</a>
-                <a href="index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800 text-red-400" aria-current="page">Private Garages</a>
-                <a href="../index.html#contact" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800 text-red-400">Talk to Us</a>
-                <div class="pt-4 mt-2 border-t border-zinc-800 space-y-3">
-                    <button type="button" class="booking-trigger block w-full text-center py-3.5 min-h-[48px] bg-red-600 hover:bg-red-500 rounded-2xl font-bold cta-primary">Book Your Experience</button>
-                </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/[0.06] px-4 sm:px-6 py-6 bg-[#0a0a0a]/98">
+            <div class="flex flex-col gap-y-1 text-sm font-medium tracking-wide">
+                <a href="../track/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">The Track</a>
+                <a href="../karting/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Karting</a>
+                <a href="../rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Rocket Rally</a>
+                <a href="../events/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Events</a>
+                <a href="index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f]" aria-current="page">Private Garages</a>
             </div>
         </div>
     </nav>
 
-    <header class="border-b border-zinc-800 bg-gradient-to-b from-zinc-900 to-zinc-950">
+    <header class="border-b border-white/[0.06] bg-[#0c0c0c]">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-12 sm:pt-14 sm:pb-16 text-center">
             <nav class="text-sm text-zinc-500 mb-6" aria-label="Breadcrumb">
                 <a href="../index.html" class="hover:text-white transition-colors">Home</a><span class="mx-2 text-zinc-600" aria-hidden="true">/</span><span class="text-zinc-400">Private Garages</span>
             </nav>
-            <div class="inline-flex px-4 py-1.5 bg-white/10 text-xs font-semibold tracking-widest rounded-full mb-6 border border-white/10">COMING SOON</div>
+            <div class="inline-flex px-4 py-1.5 text-[#c5a26f] text-[10px] font-medium tracking-[0.35em] uppercase rounded-sm mb-6 border border-[#c5a26f]/30 bg-[#c5a26f]/5">Coming soon</div>
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter heading-font">Your Own Private Garage<br>on the Track</h1>
             <p class="mt-8 text-xl sm:text-2xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">Imagine pulling up to <span class="font-semibold text-white">your own private garage</span> right here at Utah Motorsports Campus.</p>
             <p class="mt-6 text-lg text-zinc-400 max-w-3xl mx-auto leading-relaxed">We’re building a new era where passionate owners of fast and luxury cars can <span class="text-zinc-200 font-semibold">buy or lease</span> their own secure, climate-controlled bay on the property.</p>
@@ -69,8 +59,8 @@
     </header>
 
     <main>
-        <section class="bg-black py-16 sm:py-20 border-b border-zinc-800 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-b from-red-950/20 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+        <section class="bg-[#0a0a0a] py-16 sm:py-20 border-b border-white/[0.06] relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#c5a26f]/[0.07] via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
             <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative">
                 <div class="max-w-3xl mx-auto">
                     <div class="mt-4 grid sm:grid-cols-2 gap-4 sm:gap-6 text-left reveal-stagger">
@@ -120,8 +110,8 @@
                                             <textarea id="waitlist-notes" name="notes" class="booking-field" placeholder="Vehicle interests, timing, or questions…" rows="3" autocomplete="off"></textarea>
                                         </div>
                                     </div>
-                                    <button type="submit" id="waitlist-submit-btn" class="w-full min-h-[52px] rounded-2xl bg-white text-zinc-950 hover:bg-zinc-100 font-bold text-base cta-secondary shadow-lg shadow-black/30">
-                                        Join the waitlist
+                                    <button type="submit" id="waitlist-submit-btn" class="w-full min-h-[52px] rounded-xl font-semibold text-base cta-primary border-0">
+                                        Join the Waitlist
                                     </button>
                                 </form>
                             </div>
@@ -131,7 +121,7 @@
                                 </div>
                                 <h2 class="text-xl font-bold text-white heading-font">You’re on the list</h2>
                                 <p class="text-zinc-400 mt-3 text-sm sm:text-base leading-relaxed max-w-sm mx-auto">We’ll reach out when applications open. Thanks for your interest in Private Garages at Utah Motorsports Campus.</p>
-                                <button type="button" id="waitlist-reset" class="mt-8 text-sm font-semibold text-red-400 hover:text-red-300 underline underline-offset-4 decoration-red-500/50 hover:decoration-red-400 transition">
+                                <button type="button" id="waitlist-reset" class="mt-8 text-sm font-semibold text-[#c5a26f] hover:text-[#e8d5b5] underline underline-offset-4 decoration-[#c5a26f]/40 hover:decoration-[#c5a26f]/70 transition">
                                     Submit another entry
                                 </button>
                             </div>
@@ -141,59 +131,46 @@
             </div>
         </section>
 
-        <section class="bg-gradient-to-b from-zinc-900 to-zinc-950 border-t border-zinc-800 py-16 sm:py-20">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center reveal">
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter heading-font">Ready to make it legendary — and own your future?</h2>
-                <div class="mt-10 sm:mt-12 flex flex-col gap-3 sm:gap-4 justify-center">
-                    <button type="button" class="booking-trigger px-10 sm:px-14 py-5 sm:py-6 min-h-[56px] bg-red-600 hover:bg-red-500 font-bold text-lg sm:text-xl rounded-3xl cta-primary w-full inline-flex items-center justify-center" data-booking-preset="track-day">Book Your Track Day, Karting, or Rocket Rally</button>
-                    <a href="mailto:events@utahmotorsportscampus.com" class="px-10 sm:px-14 py-5 sm:py-6 min-h-[56px] border-2 border-white/35 hover:bg-white/10 font-semibold text-lg sm:text-xl rounded-3xl cta-ghost-light w-full inline-flex items-center justify-center">Inquire About Hosting an Event</a>
-                    <a href="#garage-waitlist" class="px-10 sm:px-14 py-5 sm:py-6 min-h-[56px] border-2 border-zinc-600 bg-zinc-900/80 hover:bg-zinc-800 font-semibold text-lg sm:text-xl rounded-3xl cta-secondary w-full inline-flex items-center justify-center">Join the Private Garage Waitlist</a>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer class="bg-black border-t border-zinc-900 py-14 sm:py-16">
+    <footer class="bg-[#080808] border-t border-white/[0.06] py-14 sm:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-12 gap-y-12 md:gap-y-14">
             <div class="md:col-span-5 reveal">
                 <a href="../index.html" class="flex items-center gap-x-3 mb-6 text-inherit no-underline hover:opacity-90 transition-opacity">
-                    <div class="w-10 h-10 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-red-900/40"><i class="fa-solid fa-flag-checkered text-white" aria-hidden="true"></i></div>
-                    <span class="font-bold text-2xl sm:text-3xl tracking-tighter heading-font">UTAH MOTORSPORTS CAMPUS</span>
+                    <div class="w-10 h-10 rounded-xl border border-[#c5a26f]/35 bg-[#0c0c0c] flex items-center justify-center"><i class="fa-solid fa-flag-checkered text-[#c5a26f]" aria-hidden="true"></i></div>
+                    <span class="font-medium text-lg tracking-[0.12em] uppercase text-white heading-font">Utah Motorsports Campus</span>
                 </a>
-                <div class="text-zinc-400 max-w-sm leading-relaxed">Utah’s largest outdoor event venue and premier racing facility since 2006.</div>
-                <div class="flex gap-x-6 mt-10 text-2xl">
-                    <a href="#" class="hover:text-red-500 transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-red-500 transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="Facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-red-500 transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+                <div class="text-white/40 max-w-sm leading-relaxed text-sm font-light">Utah’s largest outdoor event venue and premier racing facility since 2006.</div>
+                <div class="flex gap-x-6 mt-10 text-xl text-white/35">
+                    <a href="#" class="hover:text-[#c5a26f] transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" class="hover:text-[#c5a26f] transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="Facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#" class="hover:text-[#c5a26f] transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
                 </div>
             </div>
             <div class="md:col-span-3 reveal">
-                <div class="font-semibold text-sm tracking-widest mb-5">QUICK LINKS</div>
-                <div class="space-y-3 text-zinc-400">
-                    <a href="../track/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">The Track</a>
-                    <a href="../karting/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">Karting</a>
-                    <a href="../rocket-rally/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">Rocket Rally</a>
-                    <a href="../events/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">Events</a>
-                    <a href="index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">Private Garages</a>
+                <div class="text-[10px] tracking-[0.25em] text-[#c5a26f]/80 uppercase mb-5 font-semibold">Navigate</div>
+                <div class="space-y-3 text-sm text-white/45 font-light">
+                    <a href="../track/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">The Track</a>
+                    <a href="../karting/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Karting</a>
+                    <a href="../rocket-rally/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Rocket Rally</a>
+                    <a href="../events/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Events</a>
+                    <a href="index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Private Garages</a>
                 </div>
             </div>
             <div class="md:col-span-4 reveal scroll-mt-24">
-                <div class="font-semibold text-sm tracking-widest mb-5">CONTACT</div>
-                <div class="space-y-5 text-sm">
-                    <div><div class="text-zinc-400 mb-1">Events</div><a href="mailto:events@utahmotorsportscampus.com" class="inline-flex cta-primary px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold break-all">events@utahmotorsportscampus.com</a></div>
-                    <div><div class="text-zinc-400 mb-1">Sales &amp; Groups</div><a href="mailto:sales@utahmotorsportscampus.com" class="inline-flex cta-primary px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold break-all">sales@utahmotorsportscampus.com</a></div>
+                <div class="text-[10px] tracking-[0.25em] text-[#c5a26f]/80 uppercase mb-5 font-semibold">Contact</div>
+                <div class="space-y-4 text-sm font-light">
+                    <div><div class="text-white/35 mb-1 text-xs uppercase tracking-wider">Events</div><a href="mailto:events@utahmotorsportscampus.com" class="text-[#c5a26f] hover:text-[#e8d5b5] break-all transition-colors">events@utahmotorsportscampus.com</a></div>
+                    <div><div class="text-white/35 mb-1 text-xs uppercase tracking-wider">Sales &amp; Groups</div><a href="mailto:sales@utahmotorsportscampus.com" class="text-[#c5a26f] hover:text-[#e8d5b5] break-all transition-colors">sales@utahmotorsportscampus.com</a></div>
                 </div>
-                <div class="mt-10 text-xs text-zinc-500 leading-relaxed">Grantsville, Utah • 35 minutes from Salt Lake City</div>
+                <div class="mt-10 text-xs text-white/30 leading-relaxed">Grantsville, Utah · 35 minutes from Salt Lake City</div>
             </div>
         </div>
-        <div class="text-center text-xs text-zinc-600 mt-16 sm:mt-20 px-4">© 2026 Utah Motorsports Campus. All rights reserved.</div>
+        <div class="text-center text-xs text-white/25 mt-16 sm:mt-20 px-4">© 2026 Utah Motorsports Campus. All rights reserved.</div>
     </footer>
 
-    <div class="mobile-cta-bar md:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-zinc-800 bg-zinc-950/95 backdrop-blur-xl px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_32px_rgba(0,0,0,0.5)]" role="region" aria-label="Quick actions">
-        <div class="flex gap-2 max-w-lg mx-auto">
-            <button type="button" class="booking-trigger flex-1 min-h-[48px] inline-flex items-center justify-center px-3 py-3 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold text-sm cta-primary text-center leading-tight" data-booking-preset="track-day">Book Your Experience</button>
-            <a href="../index.html#contact" class="flex-1 min-h-[48px] inline-flex items-center justify-center px-3 py-3 rounded-2xl border-2 border-zinc-600 bg-zinc-900/80 font-semibold text-sm cta-secondary text-center leading-tight">Talk to Us</a>
-        </div>
+    <div class="mobile-cta-bar md:hidden fixed bottom-0 left-0 right-0 z-40 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl" role="region" aria-label="Primary action">
+        <a href="#garage-waitlist" class="flex w-full max-w-lg mx-auto min-h-[48px] items-center justify-center rounded-sm border border-[#c5a26f]/60 text-[#c5a26f] text-xs font-semibold tracking-[0.15em] uppercase hover:bg-[#c5a26f]/10 transition-colors">Join the Waitlist</a>
     </div>
 
     <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" aria-describedby="booking-modal-desc">
@@ -203,7 +180,7 @@
             <div class="p-6 sm:p-8">
                 <div class="flex justify-between items-start gap-4">
                     <div class="flex gap-3 min-w-0">
-                        <div class="w-11 h-11 shrink-0 rounded-xl bg-red-600 flex items-center justify-center shadow-lg shadow-red-900/50 ring-1 ring-white/10"><i class="fa-solid fa-flag-checkered text-white text-lg" aria-hidden="true"></i></div>
+                        <div class="w-11 h-11 shrink-0 rounded-xl border border-[#c5a26f]/40 bg-[#0c0c0c] flex items-center justify-center"><i class="fa-solid fa-flag-checkered text-[#c5a26f] text-lg" aria-hidden="true"></i></div>
                         <div class="min-w-0">
                             <h2 id="booking-modal-title" class="text-xl sm:text-2xl font-bold heading-font text-white tracking-tight">Book your experience</h2>
                             <p id="booking-modal-desc" class="text-sm text-zinc-400 mt-1 leading-relaxed">Tell us what you’re after — we’ll follow up with availability and next steps.</p>
@@ -214,7 +191,7 @@
                 <div id="booking-error" class="booking-error-banner" role="alert" aria-live="assertive"></div>
                 <div id="booking-form-block" class="booking-form-block">
                 <form id="booking-form" class="mt-8 space-y-5" novalidate>
-                    <div><label for="booking-experience" class="block text-xs font-semibold tracking-widest text-red-500 uppercase mb-2">Experience type</label><select id="booking-experience" name="experience-type" class="booking-field" required><option value="track-day">Track Day</option><option value="karting">Karting</option><option value="rocket-rally">Rocket Rally</option></select></div>
+                    <div><label for="booking-experience" class="block text-xs font-semibold tracking-widest text-[#c5a26f] uppercase mb-2">Experience type</label><select id="booking-experience" name="experience-type" class="booking-field" required><option value="track-day">Track Day</option><option value="karting">Karting</option><option value="rocket-rally">Rocket Rally</option></select></div>
                     <div><label for="booking-date" class="block text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">Date</label><input id="booking-date" name="booking-date" type="date" class="booking-field" required autocomplete="off"></div>
                     <div><label for="booking-people" class="block text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">Number of people</label><input id="booking-people" name="booking-people" type="number" class="booking-field" min="1" max="999" value="1" required inputmode="numeric"></div>
                     <fieldset class="border border-zinc-800 rounded-2xl p-4 sm:p-5 bg-zinc-950/80 space-y-4">
@@ -223,7 +200,7 @@
                         <div><label for="booking-email" class="sr-only">Email</label><input id="booking-email" name="contact-email" type="email" class="booking-field" placeholder="Email" required autocomplete="email"></div>
                         <div><label for="booking-phone" class="sr-only">Phone</label><input id="booking-phone" name="contact-phone" type="tel" class="booking-field" placeholder="Phone" required autocomplete="tel"></div>
                     </fieldset>
-                    <button type="submit" id="booking-submit-btn" class="w-full min-h-[52px] rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold text-base cta-primary shadow-lg shadow-red-950/40">Send booking request</button>
+                    <button type="submit" id="booking-submit-btn" class="w-full min-h-[52px] rounded-xl font-semibold text-base cta-primary">Send booking request</button>
                     <p class="text-center text-xs text-zinc-500 leading-relaxed">Submit securely — our team will follow up by email with availability and next steps.</p>
                 </form>
                 </div>
@@ -234,7 +211,7 @@
                     <h2 class="text-xl font-bold text-white heading-font">Request received</h2>
                     <p class="text-zinc-400 mt-3 text-sm sm:text-base leading-relaxed max-w-sm mx-auto">Thank you. Our team will reach out soon with availability and next steps.</p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:justify-center">
-                        <button type="button" id="booking-success-close" class="min-h-[48px] px-6 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-semibold cta-primary">Done</button>
+                        <button type="button" id="booking-success-close" class="min-h-[48px] px-6 rounded-xl font-semibold cta-primary">Done</button>
                         <button type="button" id="booking-another-btn" class="min-h-[48px] px-6 rounded-2xl border border-zinc-600 bg-zinc-900/80 text-zinc-200 font-semibold cta-secondary hover:bg-zinc-800">Submit another request</button>
                     </div>
                 </div>

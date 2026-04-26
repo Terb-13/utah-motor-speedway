@@ -3,30 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#09090b">
-    <title>Utah Motorsports Campus | Own the Moment</title>
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Utah Motorsports Campus | Private Motorsports Estate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/site.css">
 </head>
-<body class="bg-zinc-950 text-zinc-200 pb-24 md:pb-0">
+<body class="bg-[#0a0a0a] text-[#c4c4c4] antialiased pb-20 md:pb-0">
 
-    <nav class="bg-zinc-900/90 backdrop-blur-xl border-b border-zinc-800/80 sticky top-0 z-50 supports-[backdrop-filter]:bg-zinc-900/75">
+    <nav class="umc-nav-shell sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="flex items-center justify-between min-h-[4.5rem] sm:h-20 gap-2">
-                <a href="index.html" class="flex items-center gap-x-2 sm:gap-x-3 min-w-0 shrink-0 text-inherit no-underline hover:opacity-90 transition-opacity">
-                    <div class="flex items-center gap-x-2 min-w-0">
-                        <div class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-red-900/50 ring-1 ring-white/10">
-                            <i class="fa-solid fa-flag-checkered text-white text-2xl sm:text-3xl"></i>
-                        </div>
-                        <div class="min-w-0 leading-tight">
-                            <span class="font-bold text-lg sm:text-2xl md:text-3xl tracking-tighter heading-font block truncate">UTAH MOTORSPORTS</span>
-                            <span class="font-bold text-lg sm:text-2xl md:text-3xl tracking-tighter text-red-600 heading-font block -mt-0.5">CAMPUS</span>
-                        </div>
+            <div class="flex items-center justify-between min-h-[4.5rem] sm:h-20 gap-4">
+                <a href="index.html" class="flex items-center gap-x-3 min-w-0 shrink-0 text-inherit no-underline hover:opacity-90 transition-opacity">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl border border-[#c5a26f]/35 bg-[#0c0c0c] flex items-center justify-center shadow-[0_0_40px_-10px_rgba(197,162,111,0.4)]">
+                        <i class="fa-solid fa-flag-checkered text-[#c5a26f] text-lg sm:text-xl" aria-hidden="true"></i>
+                    </div>
+                    <div class="min-w-0 leading-tight">
+                        <span class="font-medium text-base sm:text-xl md:text-2xl tracking-[0.14em] uppercase text-white heading-font block truncate">Utah Motorsports</span>
+                        <span class="text-[10px] sm:text-xs tracking-[0.28em] uppercase text-[#c5a26f]/90 font-normal block -mt-0.5">Campus</span>
                     </div>
                 </a>
 
-                <div class="hidden md:flex items-center gap-x-7 text-sm font-medium">
+                <div class="hidden md:flex items-center gap-x-8">
                     <a href="track/index.html" class="nav-link">The Track</a>
                     <a href="karting/index.html" class="nav-link">Karting</a>
                     <a href="rocket-rally/index.html" class="nav-link">Rocket Rally</a>
@@ -34,394 +32,203 @@
                     <a href="garages/index.html" class="nav-link">Private Garages</a>
                 </div>
 
-                <div class="flex items-center gap-2 sm:gap-x-3 shrink-0">
-                    <a href="#contact"
-                       class="hidden md:inline-flex px-5 py-2.5 text-sm font-semibold border border-zinc-600 hover:bg-zinc-800 rounded-2xl transition cta-secondary items-center justify-center">
-                        Talk to Us
-                    </a>
-                    <button type="button"
-                       class="booking-trigger px-4 py-2.5 sm:px-7 sm:py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-2xl text-sm cta-primary inline-flex items-center justify-center gap-x-2 min-h-[44px] min-w-[44px]"
-                       data-booking-preset="track-day">
-                        <span>Book Now</span>
-                    </button>
-
-                    <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu"
-                            class="md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-xl text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-800 transition">
-                        <i class="fa-solid fa-bars" aria-hidden="true"></i>
-                        <span class="sr-only">Open menu</span>
-                    </button>
-                </div>
+                <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu"
+                        class="md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-xl text-[#c5a26f] rounded-xl border border-white/10 hover:bg-white/5 transition">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                    <span class="sr-only">Open menu</span>
+                </button>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900/98 border-t border-zinc-800 px-4 sm:px-6 py-6">
-            <div class="flex flex-col gap-y-1 text-base font-medium">
-                <a href="track/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">The Track</a>
-                <a href="karting/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">Karting</a>
-                <a href="rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">Rocket Rally</a>
-                <a href="events/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">Events</a>
-                <a href="garages/index.html" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800">Private Garages</a>
-                <a href="#contact" class="py-3 px-2 rounded-xl hover:bg-zinc-800/80 active:bg-zinc-800 text-red-400">Talk to Us</a>
-                <div class="pt-4 mt-2 border-t border-zinc-800 space-y-3">
-                    <button type="button" class="booking-trigger block w-full text-center py-3.5 min-h-[48px] bg-red-600 hover:bg-red-500 rounded-2xl font-bold cta-primary">Book Your Experience</button>
-                </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/[0.06] px-4 sm:px-6 py-6 bg-[#0a0a0a]/98">
+            <div class="flex flex-col gap-y-1 text-sm font-medium tracking-wide">
+                <a href="track/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">The Track</a>
+                <a href="karting/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Karting</a>
+                <a href="rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Rocket Rally</a>
+                <a href="events/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Events</a>
+                <a href="garages/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Private Garages</a>
             </div>
         </div>
     </nav>
 
-    <header class="hero-bg min-h-[100dvh] min-h-[100svh] flex items-center relative overflow-hidden">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center py-28 sm:py-20 relative z-10">
-            <div class="max-w-4xl mx-auto">
-                <div class="reveal inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm mb-6 sm:mb-8 border border-white/15 shadow-lg shadow-black/20 max-w-full">
-                    <div class="w-2 h-2 shrink-0 bg-emerald-400 rounded-full animate-pulse"></div>
-                    <span class="font-medium tracking-wide text-left sm:text-center leading-snug">511 ACRES • 14,000 SEATS • 200 MPH STRAIGHTAWAY</span>
-                </div>
-
-                <h1 class="reveal text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.08] mb-6 sm:mb-8 heading-font">
-                    YOU DON’T JUST WANT TO<br>WATCH THE RACE.<br>
-                    <span class="bg-gradient-to-r from-red-400 via-red-500 to-rose-400 bg-clip-text text-transparent">YOU WANT TO OWN THE MOMENT — AND MAYBE EVEN YOUR OWN PIECE OF THE TRACK.</span>
-                </h1>
-
-                <p class="reveal max-w-2xl mx-auto text-lg sm:text-xl md:text-2xl text-zinc-300 mb-8 sm:mb-12 leading-relaxed px-1">
-                    Utah’s largest and most legendary motorsports campus. High-speed track days. Unforgettable events. And soon… your own private garage for the cars you love most.
-                </p>
-
-                <div class="reveal flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-1">
-                    <button type="button"
-                       class="booking-trigger px-8 sm:px-14 py-4 sm:py-5 min-h-[52px] bg-white text-zinc-950 hover:bg-zinc-100 font-bold text-base sm:text-lg rounded-3xl flex items-center justify-center gap-x-3 group cta-secondary shadow-xl shadow-black/30 w-full sm:w-auto"
-                       data-booking-preset="track-day">
-                        <span>Book Your Experience</span>
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true"></i>
-                    </button>
-                    <a href="garages/index.html"
-                       class="px-8 sm:px-10 py-4 sm:py-5 min-h-[52px] border-2 border-white/35 hover:bg-white/10 font-semibold text-base sm:text-lg rounded-3xl flex items-center justify-center gap-x-3 cta-ghost-light backdrop-blur-sm bg-black/20">
-                        Join the Garage Waitlist
-                    </a>
-                </div>
+    <header class="hero-bg min-h-[100dvh] min-h-[100svh] flex flex-col justify-end relative overflow-hidden">
+        <div class="relative z-10 max-w-4xl mx-auto px-6 pb-28 sm:pb-36 pt-32 text-left md:text-center">
+            <p class="reveal text-[#c5a26f] tracking-[0.35em] text-[10px] sm:text-xs uppercase mb-8 font-medium">Utah · Private Motorsports Estate</p>
+            <h1 class="reveal text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white heading-font font-medium leading-[1.12] mb-8">
+                Where world-class velocity<br>
+                <span class="text-[#c5a26f]">meets quiet exclusivity.</span>
+            </h1>
+            <p class="reveal max-w-2xl md:mx-auto text-lg sm:text-xl text-white/55 leading-[1.75] font-light mb-14">
+                One campus — a full circuit, outdoor karting, our in-house Rocket Rally, major events, and a private-garage vision for those who live this life year-round.
+            </p>
+            <div class="reveal">
+                <a href="#experiences" class="inline-flex items-center justify-center gap-3 px-10 py-4 min-h-[52px] rounded-sm tracking-[0.2em] uppercase text-xs font-semibold bg-[#c5a26f] text-[#0a0a0a] hover:bg-[#d4b487] transition-colors cta-primary">
+                    Explore the Campus
+                    <i class="fa-solid fa-arrow-down text-[10px] opacity-80" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
-
-        <div class="absolute bottom-8 sm:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
-            <span class="text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[4px] font-mono mb-2 sm:mb-3 text-zinc-400 text-center px-4">SCROLL TO BEGIN YOUR JOURNEY</span>
-            <i class="fa-solid fa-chevron-down text-xl sm:text-2xl text-zinc-400 animate-bounce" aria-hidden="true"></i>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 pointer-events-none">
+            <span class="text-[10px] tracking-[0.35em] text-white/35 uppercase mb-3">Scroll</span>
+            <span class="w-px h-10 bg-gradient-to-b from-[#c5a26f]/50 to-transparent" aria-hidden="true"></span>
         </div>
     </header>
 
-    <div class="bg-zinc-900 border-b border-zinc-800 py-10 sm:py-12">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-4 text-center reveal-stagger">
-            <div>
-                <div class="text-4xl sm:text-5xl md:text-6xl font-bold text-white stat">511</div>
-                <div class="text-xs sm:text-sm text-zinc-400 mt-2 tracking-widest">ACRES</div>
-            </div>
-            <div>
-                <div class="text-4xl sm:text-5xl md:text-6xl font-bold text-white stat">14,000</div>
-                <div class="text-xs sm:text-sm text-zinc-400 mt-2 tracking-widest">GRANDSTAND SEATS</div>
-            </div>
-            <div>
-                <div class="text-4xl sm:text-5xl md:text-6xl font-bold text-white stat">200</div>
-                <div class="text-xs sm:text-sm text-zinc-400 mt-2 tracking-widest">MPH STRAIGHTAWAY</div>
-            </div>
-            <div>
-                <div class="text-4xl sm:text-5xl md:text-6xl font-bold text-white stat">24</div>
-                <div class="text-xs sm:text-sm text-zinc-400 mt-2 tracking-widest">KART CONFIGURATIONS</div>
-            </div>
-        </div>
-    </div>
+    <section class="py-24 sm:py-32 px-6 border-t border-white/[0.06]">
+        <p class="max-w-2xl mx-auto text-center text-lg sm:text-xl text-white/45 leading-[1.85] font-light reveal">
+            Since 2006, Utah Motorsports Campus has set the stage for those who expect scale, discretion, and infrastructure that never apologizes. This is not a rental venue — it is a landscape built for obsession.
+        </p>
+    </section>
 
-    <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div class="reveal">
-                <span class="uppercase tracking-[3px] text-xs font-semibold text-red-500">THE PROBLEM</span>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mt-4 leading-none heading-font">You’ve tried other venues.</h2>
+    <section id="experiences" class="scroll-mt-28 border-t border-white/[0.06] bg-[#0c0c0c]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-24 sm:py-32">
+            <header class="text-center mb-20 sm:mb-28 reveal">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl text-white heading-font font-medium mb-5">Your canvas awaits</h2>
+                <p class="text-white/40 max-w-md mx-auto font-light leading-relaxed">Five invitations — each its own chapter. Choose where the story begins.</p>
+            </header>
 
-                <div class="mt-8 text-lg sm:text-xl text-zinc-300 space-y-6 leading-relaxed">
-                    <p>Corporate events feel generic. Track days are one-and-done. Finding a place that can deliver serious racing <em>and</em> massive celebrations <em>and</em> a real long-term home for your passion? Almost impossible.</p>
-                    <p>You’re left with average experiences, limited scale, and no path to something bigger.</p>
-                    <p class="font-medium text-white"><span class="text-red-400 text-xs font-semibold tracking-widest uppercase block mb-2">Internal problem</span>Deep down, you know you deserve more than just another rented track or stuffy ballroom. You want the rush of 200 mph, the roar of the crowd, legendary memories, <em>and</em> a permanent stake in the place that makes it all possible.</p>
+            <article class="grid md:grid-cols-2 gap-12 md:gap-20 items-center mb-28 sm:mb-36 last:mb-0">
+                <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[4/3] md:aspect-auto md:min-h-[320px]">
+                    <img src="searched_images/VXGAO.jpg" alt="Aerial view of the full circuit at Utah Motorsports Campus" class="w-full h-full object-cover img-cinematic img-reveal min-h-[280px]" loading="lazy" width="1200" height="800">
                 </div>
-            </div>
-
-            <div class="reveal bg-zinc-900/80 border border-zinc-800 p-8 sm:p-10 rounded-3xl shadow-2xl shadow-black/40 backdrop-blur-sm">
-                <span class="uppercase tracking-[3px] text-xs font-semibold text-red-500">THE GUIDE</span>
-                <h3 class="text-3xl sm:text-4xl font-bold tracking-tight mt-4">Since 2006, Utah Motorsports Campus has been Utah’s premier motorsports destination.</h3>
-
-                <div class="mt-8 text-base sm:text-lg text-zinc-300 leading-relaxed space-y-4">
-                    <p>Named “Motorsports Facility of the Year” by the Professional Motorsport World Expo.</p>
-                    <p>511 acres. 14,000-seat grandstands. A 200-mph straightaway. Multiple world-class configurations. A fully equipped media center, race control, and premium hospitality that overlooks the action.</p>
-                    <p>We’ve hosted everything from grassroots racing to major festivals, corporate takeovers, and private celebrations. We don’t just rent space — we engineer unforgettable experiences.</p>
-                    <p class="font-semibold text-white">We’ve done this before. We’ll do it for you. And we’re building the future with you in mind.</p>
+                <div class="reveal space-y-6 md:pl-4">
+                    <p class="text-[#c5a26f] text-[10px] sm:text-xs tracking-[0.35em] uppercase font-medium">The Track</p>
+                    <h3 class="text-3xl sm:text-4xl text-white heading-font font-medium leading-tight">Four layouts. One unforgettable straightaway.</h3>
+                    <p class="text-white/45 leading-[1.8] font-light text-base sm:text-lg">Multi-configuration asphalt, serious runoff, and the kind of infrastructure that makes every lap feel considered.</p>
+                    <a href="track/index.html" class="umc-link-gold inline-flex items-center gap-2 text-sm tracking-wide uppercase font-medium pt-2">Discover the circuit <span aria-hidden="true">→</span></a>
                 </div>
+            </article>
 
-                <div class="mt-8 flex items-center gap-x-3 text-sm">
-                    <div class="px-5 py-2.5 bg-zinc-800 rounded-2xl border border-zinc-700/80">Motorsports Facility of the Year — Professional Motorsport World Expo</div>
+            <article class="grid md:grid-cols-2 gap-12 md:gap-20 items-center mb-28 sm:mb-36">
+                <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[4/3] md:order-2 md:aspect-auto md:min-h-[320px]">
+                    <img src="searched_images/LbUj7.jpg" alt="Outdoor go-karts at Utah Motorsports Campus" class="w-full h-full object-cover img-cinematic img-reveal min-h-[280px]" loading="lazy" width="960" height="600">
                 </div>
-            </div>
+                <div class="reveal space-y-6 md:pr-4 md:order-1">
+                    <p class="text-[#c5a26f] text-[10px] sm:text-xs tracking-[0.35em] uppercase font-medium">Karting</p>
+                    <h3 class="text-3xl sm:text-4xl text-white heading-font font-medium leading-tight">Utah’s largest outdoor kart circuit.</h3>
+                    <p class="text-white/45 leading-[1.8] font-light text-base sm:text-lg">National-caliber outdoor pace — refined for first-timers and racers alike.</p>
+                    <a href="karting/index.html" class="umc-link-gold inline-flex items-center gap-2 text-sm tracking-wide uppercase font-medium pt-2">Enter the paddock <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+
+            <article class="grid md:grid-cols-2 gap-12 md:gap-20 items-center mb-28 sm:mb-36">
+                <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[4/3] md:aspect-auto md:min-h-[320px]">
+                    <img src="searched_images/1Pal1.jpg" alt="Rocket Rally on the dirt arena" class="w-full h-full object-cover img-cinematic img-reveal min-h-[280px]" loading="lazy" width="1600" height="900">
+                </div>
+                <div class="reveal space-y-6 md:pl-4">
+                    <p class="text-[#c5a26f] text-[10px] sm:text-xs tracking-[0.35em] uppercase font-medium">Rocket Rally</p>
+                    <h3 class="text-3xl sm:text-4xl text-white heading-font font-medium leading-tight">Car soccer. Real cars. Pure theater.</h3>
+                    <p class="text-white/45 leading-[1.8] font-light text-base sm:text-lg">Our in-house dirt-arena spectacle — built for groups who want stories, not slideshows.</p>
+                    <a href="rocket-rally/index.html" class="umc-link-gold inline-flex items-center gap-2 text-sm tracking-wide uppercase font-medium pt-2">See the experience <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+
+            <article class="grid md:grid-cols-2 gap-12 md:gap-20 items-center mb-28 sm:mb-36">
+                <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[4/3] md:order-2 md:aspect-auto md:min-h-[320px]">
+                    <img src="searched_images/VXGAO.jpg" alt="Utah Motorsports Campus venue and grandstands" class="w-full h-full object-cover img-cinematic img-reveal min-h-[280px] object-[center_40%]" loading="lazy" width="1200" height="800">
+                </div>
+                <div class="reveal space-y-6 md:pr-4 md:order-1">
+                    <p class="text-[#c5a26f] text-[10px] sm:text-xs tracking-[0.35em] uppercase font-medium">Events</p>
+                    <h3 class="text-3xl sm:text-4xl text-white heading-font font-medium leading-tight">Scale that commands the room.</h3>
+                    <p class="text-white/45 leading-[1.8] font-light text-base sm:text-lg">Grandstands, broadcast-ready infrastructure, and hospitality that matches the ambition of your guest list.</p>
+                    <a href="events/index.html" class="umc-link-gold inline-flex items-center gap-2 text-sm tracking-wide uppercase font-medium pt-2">Host at UMC <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+
+            <article class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+                <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[4/3] md:aspect-auto md:min-h-[320px]">
+                    <img src="searched_images/oS0Ib.jpg" alt="Campus atmosphere at dusk" class="w-full h-full object-cover img-cinematic img-reveal min-h-[280px]" loading="lazy" width="1400" height="700">
+                </div>
+                <div class="reveal space-y-6 md:pl-4">
+                    <p class="text-[#c5a26f] text-[10px] sm:text-xs tracking-[0.35em] uppercase font-medium">Private Garages</p>
+                    <h3 class="text-3xl sm:text-4xl text-white heading-font font-medium leading-tight">A bay of your own — on the property.</h3>
+                    <p class="text-white/45 leading-[1.8] font-light text-base sm:text-lg">The waitlist is open for those planning a longer relationship with this place.</p>
+                    <a href="garages/index.html" class="umc-link-gold inline-flex items-center gap-2 text-sm tracking-wide uppercase font-medium pt-2">Request consideration <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
         </div>
     </section>
 
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-zinc-800">
-        <div class="reveal text-center max-w-2xl mx-auto mb-12">
-            <span class="uppercase tracking-[3px] text-xs font-semibold text-red-500">THE PLAN</span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-4 heading-font">Four simple steps</h2>
-        </div>
-        <ol class="grid sm:grid-cols-2 gap-6 reveal-stagger list-none p-0 m-0">
-            <li class="bg-zinc-900 border border-zinc-800 p-6 sm:p-8 rounded-3xl text-left">
-                <span class="text-red-500 font-mono text-sm font-bold">01</span>
-                <h3 class="text-lg font-bold text-white mt-3 heading-font">Experience the Rush</h3>
-                <p class="text-zinc-400 mt-2 text-sm sm:text-base leading-relaxed">Track day, karting, or Rocket Rally</p>
-            </li>
-            <li class="bg-zinc-900 border border-zinc-800 p-6 sm:p-8 rounded-3xl text-left">
-                <span class="text-red-500 font-mono text-sm font-bold">02</span>
-                <h3 class="text-lg font-bold text-white mt-3 heading-font">Host Something Legendary</h3>
-                <p class="text-zinc-400 mt-2 text-sm sm:text-base leading-relaxed">Events &amp; group experiences</p>
-            </li>
-            <li class="bg-zinc-900 border border-zinc-800 p-6 sm:p-8 rounded-3xl text-left">
-                <span class="text-red-500 font-mono text-sm font-bold">03</span>
-                <h3 class="text-lg font-bold text-white mt-3 heading-font">Secure Your Legacy</h3>
-                <p class="text-zinc-400 mt-2 text-sm sm:text-base leading-relaxed">Join the private garage waitlist</p>
-            </li>
-            <li class="bg-zinc-900 border border-zinc-800 p-6 sm:p-8 rounded-3xl text-left">
-                <span class="text-red-500 font-mono text-sm font-bold">04</span>
-                <h3 class="text-lg font-bold text-white mt-3 heading-font">Become Part of the Story</h3>
-                <p class="text-zinc-400 mt-2 text-sm sm:text-base leading-relaxed">Own your place at Utah Motorsports Campus</p>
-            </li>
-        </ol>
-        <div class="text-center text-zinc-400 mt-10 reveal">
-            <span class="font-semibold text-white">Ready to start?</span>
-            <button type="button" class="booking-trigger ml-1 text-red-400 hover:text-red-300 font-semibold underline underline-offset-4 decoration-red-500/50 bg-transparent border-0 cursor-pointer p-0 font-inherit rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500" data-booking-preset="track-day">Book Your Experience</button>
-            <span class="mx-1 text-zinc-600" aria-hidden="true">·</span>
-            <a href="garages/index.html" class="text-red-400 hover:text-red-300 font-semibold underline underline-offset-4 decoration-red-500/50">Join the Garage Waitlist</a>
-        </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-zinc-800">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 reveal-stagger">
-            <a href="track/index.html" class="group bg-zinc-900 border border-zinc-800 hover:border-red-500/40 p-6 rounded-3xl transition-colors text-left no-underline text-inherit">
-                <span class="text-red-500 text-xs font-semibold tracking-widest">THE CANVAS</span>
-                <span class="mt-3 block text-lg font-bold heading-font group-hover:text-white">The Track</span>
-            </a>
-            <a href="karting/index.html" class="group bg-zinc-900 border border-zinc-800 hover:border-red-500/40 p-6 rounded-3xl transition-colors text-left no-underline text-inherit">
-                <span class="text-red-500 text-xs font-semibold tracking-widest">FAST FUN</span>
-                <span class="mt-3 block text-lg font-bold heading-font group-hover:text-white">Karting</span>
-            </a>
-            <a href="rocket-rally/index.html" class="group bg-zinc-900 border border-zinc-800 hover:border-red-500/40 p-6 rounded-3xl transition-colors text-left no-underline text-inherit">
-                <span class="text-red-500 text-xs font-semibold tracking-widest">NEW</span>
-                <span class="mt-3 block text-lg font-bold heading-font group-hover:text-white">Rocket Rally</span>
-            </a>
-            <a href="events/index.html" class="group bg-zinc-900 border border-zinc-800 hover:border-red-500/40 p-6 rounded-3xl transition-colors text-left no-underline text-inherit">
-                <span class="text-red-500 text-xs font-semibold tracking-widest">WORLD-CLASS EVENTS</span>
-                <span class="mt-3 block text-lg font-bold heading-font group-hover:text-white">Events</span>
-            </a>
-            <a href="garages/index.html" class="group bg-zinc-900 border border-zinc-800 hover:border-red-500/40 p-6 rounded-3xl transition-colors text-left no-underline text-inherit sm:col-span-2 lg:col-span-1">
-                <span class="text-red-500 text-xs font-semibold tracking-widest">COMING SOON</span>
-                <span class="mt-3 block text-lg font-bold heading-font group-hover:text-white">Private Garages</span>
+    <section class="py-28 sm:py-36 px-6 border-t border-white/[0.06]">
+        <div class="max-w-2xl mx-auto text-center reveal">
+            <h2 class="text-3xl sm:text-5xl text-white heading-font font-medium mb-6 leading-tight">Begin your journey</h2>
+            <p class="text-white/45 font-light text-lg leading-relaxed mb-12">Step into the campus — one experience at a time.</p>
+            <a href="#experiences" class="inline-flex items-center justify-center px-12 py-4 min-h-[52px] rounded-sm border border-[#c5a26f]/50 text-[#c5a26f] text-xs font-semibold tracking-[0.25em] uppercase hover:bg-[#c5a26f]/10 transition-colors">
+                Explore offerings
             </a>
         </div>
     </section>
 
-    <section id="rocket-rally" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 border-t border-zinc-800 scroll-mt-20">
-        <div class="reveal rounded-3xl overflow-hidden border border-zinc-700 shadow-2xl img-reveal-wrap mb-10 md:mb-14">
-            <img src="searched_images/1Pal1.jpg" alt="Rocket Rally — real rally cars and giant ball on the Utah Motorsports Campus dirt arena" class="w-full h-[220px] sm:h-[300px] md:h-[380px] object-cover object-center img-reveal" width="1600" height="900" loading="lazy">
-        </div>
-        <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-            <div class="reveal space-y-6">
-                <span class="uppercase tracking-[3px] text-xs font-semibold text-red-500">Rocket Rally Experience — in-house at UMC</span>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter heading-font leading-tight">Car soccer with real rally cars and a giant ball on our dirt arena.</h2>
-                <p class="text-base sm:text-lg text-zinc-300 leading-relaxed">Two teams of three strap into real rally cars, slam into a massive ball, and battle to drive it into the goal — full-contact, pedal-down chaos on our purpose-built dirt arena. It’s the most shareable adrenaline rush we offer: loud engines, flying dirt, and instant highlights.</p>
-                <div class="grid grid-cols-3 gap-3 sm:gap-4">
-                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
-                        <div class="text-lg sm:text-xl font-bold text-white heading-font">4 hr</div>
-                        <div class="text-[10px] sm:text-xs text-zinc-500 uppercase tracking-wider mt-1">events</div>
-                    </div>
-                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
-                        <div class="text-lg sm:text-xl font-bold text-white heading-font">$150</div>
-                        <div class="text-[10px] sm:text-xs text-zinc-500 uppercase tracking-wider mt-1">per person</div>
-                    </div>
-                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
-                        <div class="text-lg sm:text-xl font-bold text-white heading-font">3v3</div>
-                        <div class="text-[10px] sm:text-xs text-zinc-500 uppercase tracking-wider mt-1">teams</div>
-                    </div>
-                </div>
-                <p class="font-semibold text-white">Fast. Chaotic. Unforgettable.</p>
-                <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                    <button type="button" class="booking-trigger px-8 py-4 min-h-[52px] bg-red-600 hover:bg-red-500 rounded-2xl font-bold text-center cta-primary w-full sm:w-auto" data-booking-preset="rocket-rally">Book Rocket Rally Session</button>
-                    <a href="rocket-rally/index.html" class="px-8 py-4 min-h-[52px] border-2 border-zinc-600 hover:border-zinc-500 hover:bg-zinc-800/80 rounded-2xl font-semibold text-center cta-secondary w-full sm:w-auto inline-flex items-center justify-center">Learn More</a>
-                </div>
+    <section class="max-w-3xl mx-auto px-6 py-20 sm:py-24 border-t border-white/[0.06]">
+        <h3 class="text-2xl sm:text-3xl text-white heading-font font-medium mb-12 text-center reveal">Questions</h3>
+        <div class="space-y-10 text-left reveal">
+            <div class="border-b border-white/[0.06] pb-10">
+                <div class="text-white/90 font-medium mb-2 heading-font text-lg">How do I book track time, karting, or Rocket Rally?</div>
+                <p class="text-white/45 font-light leading-relaxed">Open the experience page you want and use the single booking path there — or speak with our campus assistant anytime.</p>
             </div>
-            <div class="space-y-6">
-                <div class="reveal rounded-3xl overflow-hidden border border-zinc-700 shadow-xl img-reveal-wrap">
-                    <img src="searched_images/oS0Ib.jpg" alt="Wide view of a Rocket Rally event on the dirt arena" class="w-full h-48 sm:h-56 md:h-64 object-cover object-center img-reveal" width="1400" height="700" loading="lazy">
-                </div>
-                <div class="reveal rounded-3xl overflow-hidden border border-zinc-700 shadow-xl img-reveal-wrap">
-                    <img src="searched_images/7cCqi.jpg" alt="Close-up Rocket Rally action — rally car and giant ball on dirt" class="w-full h-52 sm:h-64 object-cover object-center img-reveal" width="1200" height="800" loading="lazy">
-                </div>
+            <div class="border-b border-white/[0.06] pb-10">
+                <div class="text-white/90 font-medium mb-2 heading-font text-lg">What is the largest event you can host?</div>
+                <p class="text-white/45 font-light leading-relaxed">Up to 14,000 in the grandstands, with full media and hospitality infrastructure on site.</p>
             </div>
-        </div>
-    </section>
-
-    <section id="private-garages" class="bg-gradient-to-b from-zinc-900/50 to-zinc-950 border-t border-zinc-800 py-16 sm:py-20 scroll-mt-20">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6">
-            <div class="reveal text-center max-w-3xl mx-auto mb-12">
-                <span class="uppercase tracking-[3px] text-xs font-semibold text-red-500">Private Garages — Your Own Piece of the Track</span>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-4 heading-font">Imagine pulling up to your own private garage right here at Utah Motorsports Campus.</h2>
-                <p class="mt-6 text-lg text-zinc-300 leading-relaxed">We’re building a new era where passionate owners of fast and luxury cars can <span class="text-white font-semibold">buy or lease</span> their own secure, climate-controlled bay on the property.</p>
-            </div>
-            <ul class="grid sm:grid-cols-2 gap-4 reveal-stagger text-left max-w-3xl mx-auto">
-                <li class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl text-zinc-300"><span class="text-white font-semibold block mb-1">Direct track access</span></li>
-                <li class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl text-zinc-300"><span class="text-white font-semibold block mb-1">Community of like-minded enthusiasts</span></li>
-                <li class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl text-zinc-300"><span class="text-white font-semibold block mb-1">Priority scheduling and exclusive events</span></li>
-                <li class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl text-zinc-300"><span class="text-white font-semibold block mb-1">The ultimate motorsports lifestyle — right here in Utah</span></li>
-            </ul>
-            <p class="text-center text-zinc-400 mt-10 max-w-2xl mx-auto reveal">This is more than storage. It’s legacy. It’s community. It’s ownership.</p>
-            <div class="mt-8 flex justify-center reveal">
-                <a href="garages/index.html" class="inline-flex min-h-[52px] items-center justify-center px-8 py-4 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-100 font-bold cta-secondary">Join the Private Garage Waitlist</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-5xl mx-auto px-4 sm:px-6 py-20 sm:py-24 text-center border-t border-zinc-800" aria-labelledby="transformation-title">
-        <div class="max-w-3xl mx-auto reveal">
-            <p class="text-red-500 uppercase tracking-[3px] text-xs font-semibold mb-3">THE TRANSFORMATION</p>
-            <h2 id="transformation-title" class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-white heading-font leading-tight">From spectator to story.</h2>
-
-            <div class="mt-12 sm:mt-16 grid md:grid-cols-2 gap-6 sm:gap-8 text-left">
-                <div class="bg-zinc-900 border border-zinc-800 p-8 sm:p-10 rounded-3xl">
-                    <div class="text-red-500 text-xs tracking-widest mb-4">BEFORE</div>
-                    <div class="text-base sm:text-lg text-zinc-300 leading-relaxed space-y-4">
-                        <p>Average venues. Forgettable events. One-off track days with no soul. No real home for your passion.</p>
-                    </div>
-                </div>
-                <div class="bg-zinc-900 border border-red-900/60 p-8 sm:p-10 rounded-3xl shadow-lg shadow-red-950/20 ring-1 ring-red-500/10">
-                    <div class="text-emerald-400 text-xs tracking-widest mb-4">AFTER</div>
-                    <div class="text-base sm:text-lg text-zinc-200 leading-relaxed space-y-4">
-                        <p>You host legendary experiences on one of North America’s finest motorsports campuses. Your people talk about it for months. And soon… you’ll have your own garage on the track you love.</p>
-                        <p class="font-semibold text-white">You don’t just attend motorsports — you <em>own</em> the moment and the future.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-20 border-t border-zinc-800">
-        <div class="reveal text-center">
-            <span class="uppercase tracking-[3px] text-xs font-semibold text-red-500">The stakes</span>
-            <div class="mt-8 text-lg sm:text-xl text-zinc-300 space-y-4 leading-relaxed text-left max-w-xl mx-auto">
-                <p>Another season slips by.</p>
-                <p>Your team-building event stays mediocre.</p>
-                <p>Your clients get the same old dinner-and-drinks night.</p>
-                <p>The next generation of Utah car culture builds without you in it.</p>
-                <p class="font-bold text-white pt-4">Don’t let that be your story.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="book" class="bg-gradient-to-b from-zinc-900 to-zinc-950 border-t border-zinc-800 py-16 sm:py-20 scroll-mt-20">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center reveal">
-            <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter heading-font">Ready to make it legendary — and own your future?</h2>
-            <div class="mt-10 sm:mt-12 flex flex-col gap-3 sm:gap-4 justify-center">
-                <button type="button" class="booking-trigger px-10 sm:px-14 py-5 sm:py-6 min-h-[56px] bg-red-600 hover:bg-red-500 font-bold text-lg sm:text-xl rounded-3xl cta-primary w-full inline-flex items-center justify-center" data-booking-preset="track-day">Book Your Track Day, Karting, or Rocket Rally</button>
-                <a href="mailto:events@utahmotorsportscampus.com" class="px-10 sm:px-14 py-5 sm:py-6 min-h-[56px] border-2 border-white/35 hover:bg-white/10 font-semibold text-lg sm:text-xl rounded-3xl cta-ghost-light w-full inline-flex items-center justify-center">Inquire About Hosting an Event</a>
-                <a href="garages/index.html" class="px-10 sm:px-14 py-5 sm:py-6 min-h-[56px] border-2 border-zinc-600 bg-zinc-900/80 hover:bg-zinc-800 font-semibold text-lg sm:text-xl rounded-3xl cta-secondary w-full inline-flex items-center justify-center">Join the Private Garage Waitlist</a>
-            </div>
-
-            <div class="mt-12 text-sm text-zinc-400 space-y-1">
-                <p class="font-semibold text-white">Utah Motorsports Campus</p>
-                <p>Grantsville, Utah • 35 minutes from Salt Lake City</p>
-                <p><a href="mailto:events@utahmotorsportscampus.com" class="text-red-400 hover:text-red-300">events@utahmotorsportscampus.com</a> • <a href="mailto:sales@utahmotorsportscampus.com" class="text-red-400 hover:text-red-300">sales@utahmotorsportscampus.com</a></p>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20 border-t border-zinc-800">
-        <h3 class="text-3xl sm:text-4xl font-bold tracking-tight mb-10 sm:mb-12 text-center reveal">Frequently Asked Questions</h3>
-
-        <div class="space-y-6 sm:space-y-8 text-base sm:text-lg reveal">
-            <div class="border-b border-zinc-800 pb-6 sm:pb-8">
-                <div class="font-semibold text-white">How do I book track time, karting, or Rocket Rally?</div>
-                <div class="text-zinc-400 mt-3 leading-relaxed">Use the “Book Now” buttons or contact us directly. We’ll walk you through availability and options.</div>
-            </div>
-            <div class="border-b border-zinc-800 pb-6 sm:pb-8">
-                <div class="font-semibold text-white">What’s the largest group you can accommodate?</div>
-                <div class="text-zinc-400 mt-3 leading-relaxed">Up to 14,000 in the grandstands for major events, or private groups from 10–300 in our meeting and hospitality spaces.</div>
-            </div>
-            <div class="border-b border-zinc-800 pb-6 sm:pb-8">
-                <div class="font-semibold text-white">Do you host corporate events and team building?</div>
-                <div class="text-zinc-400 mt-3 leading-relaxed">Absolutely. We specialize in creating custom racing experiences for companies and groups of any size — including our new Rocket Rally Experience.</div>
-            </div>
-            <div class="border-b border-zinc-800 pb-6 sm:pb-8">
-                <div class="font-semibold text-white">What track configurations are available?</div>
-                <div class="text-zinc-400 mt-3 leading-relaxed">We offer four main layouts: 4.448-mile Full Course, 3.048-mile Outer Course, and two 2.2-mile East/West courses — plus dedicated karting, off-road, rock crawling, and rallycross areas.</div>
-            </div>
-            <div class="border-b border-zinc-800 pb-6 sm:pb-8">
-                <div class="font-semibold text-white">When will the Private Garages be available?</div>
-                <div class="text-zinc-400 mt-3 leading-relaxed">We’re currently building the vision and accepting early interest. Join the waitlist to be the first to know when applications open.</div>
+            <div class="border-b border-white/[0.06] pb-10">
+                <div class="text-white/90 font-medium mb-2 heading-font text-lg">When will Private Garages be available?</div>
+                <p class="text-white/45 font-light leading-relaxed">We are curating interest now. Join the waitlist on the Private Garages page to be notified first.</p>
             </div>
             <div>
-                <div class="font-semibold text-white">Is the facility suitable for large public events like concerts or festivals?</div>
-                <div class="text-zinc-400 mt-3 leading-relaxed">Yes. We have the infrastructure, seating, media capabilities, and on-site support to host world-class races, concerts, festivals, car shows, and more.</div>
+                <div class="text-white/90 font-medium mb-2 heading-font text-lg">Where are you located?</div>
+                <p class="text-white/45 font-light leading-relaxed">Grantsville, Utah — roughly 35 minutes from Salt Lake City.</p>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black border-t border-zinc-900 py-14 sm:py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-12 gap-y-12 md:gap-y-14">
+    <footer class="border-t border-white/[0.06] py-16 sm:py-20 bg-[#080808]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-12 gap-y-14 md:gap-y-16">
             <div class="md:col-span-5 reveal">
                 <div class="flex items-center gap-x-3 mb-6">
-                    <div class="w-10 h-10 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-red-900/40">
-                        <i class="fa-solid fa-flag-checkered text-white" aria-hidden="true"></i>
+                    <div class="w-10 h-10 rounded-xl border border-[#c5a26f]/35 bg-[#0c0c0c] flex items-center justify-center">
+                        <i class="fa-solid fa-flag-checkered text-[#c5a26f]" aria-hidden="true"></i>
                     </div>
-                    <span class="font-bold text-2xl sm:text-3xl tracking-tighter heading-font">UTAH MOTORSPORTS CAMPUS</span>
+                    <span class="font-medium text-lg sm:text-xl tracking-[0.12em] uppercase text-white heading-font">Utah Motorsports Campus</span>
                 </div>
-                <div class="text-zinc-400 max-w-sm leading-relaxed">Utah’s largest outdoor event venue and premier racing facility since 2006.</div>
-
-                <p class="text-zinc-500 text-sm mt-6 max-w-sm leading-relaxed">Follow us on Instagram, Facebook &amp; YouTube for the latest action.</p>
-                <div class="flex gap-x-6 mt-6 text-2xl">
-                    <a href="#" class="hover:text-red-500 transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-red-500 transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="Facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-red-500 transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+                <p class="text-white/40 max-w-sm leading-relaxed font-light text-sm">Utah’s largest outdoor event venue and premier racing facility since 2006.</p>
+                <div class="flex gap-x-6 mt-8 text-lg text-white/35">
+                    <a href="#" class="hover:text-[#c5a26f] transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" class="hover:text-[#c5a26f] transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="Facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#" class="hover:text-[#c5a26f] transition p-2 -m-2 min-w-[44px] min-h-[44px] inline-flex items-center justify-center" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
                 </div>
             </div>
-
             <div class="md:col-span-3 reveal">
-                <div class="font-semibold text-sm tracking-widest mb-5">QUICK LINKS</div>
-                <div class="space-y-3 text-zinc-400">
-                    <a href="track/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">The Track</a>
-                    <a href="karting/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">Karting</a>
-                    <a href="rocket-rally/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">Rocket Rally</a>
-                    <a href="events/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">Events</a>
-                    <a href="garages/index.html" class="block hover:text-white py-1 min-h-[44px] md:min-h-0 flex items-center">Private Garages</a>
+                <div class="text-[10px] tracking-[0.25em] text-[#c5a26f]/80 uppercase mb-5 font-semibold">Navigate</div>
+                <div class="space-y-3 text-sm text-white/45 font-light">
+                    <a href="track/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">The Track</a>
+                    <a href="karting/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Karting</a>
+                    <a href="rocket-rally/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Rocket Rally</a>
+                    <a href="events/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Events</a>
+                    <a href="garages/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Private Garages</a>
                 </div>
             </div>
-
             <div id="contact" class="md:col-span-4 reveal scroll-mt-24">
-                <div class="font-semibold text-sm tracking-widest mb-5">CONTACT</div>
-                <div class="space-y-5 text-sm">
+                <div class="text-[10px] tracking-[0.25em] text-[#c5a26f]/80 uppercase mb-5 font-semibold">Contact</div>
+                <div class="space-y-4 text-sm font-light">
                     <div>
-                        <div class="text-zinc-400 mb-1">Events</div>
-                        <a href="mailto:events@utahmotorsportscampus.com" class="inline-flex cta-primary px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold break-all">events@utahmotorsportscampus.com</a>
+                        <div class="text-white/35 mb-1 text-xs uppercase tracking-wider">Events</div>
+                        <a href="mailto:events@utahmotorsportscampus.com" class="text-[#c5a26f] hover:text-[#e8d5b5] break-all transition-colors">events@utahmotorsportscampus.com</a>
                     </div>
                     <div>
-                        <div class="text-zinc-400 mb-1">Sales &amp; Groups</div>
-                        <a href="mailto:sales@utahmotorsportscampus.com" class="inline-flex cta-primary px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold break-all">sales@utahmotorsportscampus.com</a>
+                        <div class="text-white/35 mb-1 text-xs uppercase tracking-wider">Sales &amp; Groups</div>
+                        <a href="mailto:sales@utahmotorsportscampus.com" class="text-[#c5a26f] hover:text-[#e8d5b5] break-all transition-colors">sales@utahmotorsportscampus.com</a>
                     </div>
                 </div>
-
-                <div class="mt-10 text-xs text-zinc-500 leading-relaxed">Grantsville, Utah • 35 minutes from Salt Lake City</div>
+                <p class="mt-10 text-xs text-white/30 leading-relaxed">Grantsville, Utah · 35 minutes from Salt Lake City</p>
             </div>
         </div>
-
-        <div class="text-center text-xs text-zinc-500 mt-16 sm:mt-20 px-4 leading-relaxed space-y-2">
-            <p>Utah Motorsports Campus · Grantsville, Utah · 35 minutes from Salt Lake City</p>
-            <p><a href="mailto:events@utahmotorsportscampus.com" class="text-zinc-400 hover:text-white">events@utahmotorsportscampus.com</a> | <a href="mailto:sales@utahmotorsportscampus.com" class="text-zinc-400 hover:text-white">sales@utahmotorsportscampus.com</a></p>
-            <p class="text-zinc-600 text-[10px] sm:text-xs pt-2">© 2026 Utah Motorsports Campus. All rights reserved.</p>
-        </div>
+        <p class="text-center text-xs text-white/25 mt-16 px-4">© 2026 Utah Motorsports Campus. All rights reserved.</p>
     </footer>
 
-    <div class="mobile-cta-bar md:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-zinc-800 bg-zinc-950/95 backdrop-blur-xl px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_32px_rgba(0,0,0,0.5)]" role="region" aria-label="Quick actions">
-        <div class="flex gap-2 max-w-lg mx-auto">
-            <button type="button" class="booking-trigger flex-1 min-h-[48px] inline-flex items-center justify-center px-3 py-3 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold text-sm cta-primary text-center leading-tight" data-booking-preset="track-day">Book Your Experience</button>
-            <a href="#contact" class="flex-1 min-h-[48px] inline-flex items-center justify-center px-3 py-3 rounded-2xl border-2 border-zinc-600 bg-zinc-900/80 font-semibold text-sm cta-secondary text-center leading-tight">Talk to Us</a>
-        </div>
+    <div class="mobile-cta-bar md:hidden fixed bottom-0 left-0 right-0 z-40 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl" role="region" aria-label="Primary action">
+        <a href="#experiences" class="flex w-full max-w-lg mx-auto min-h-[48px] items-center justify-center rounded-sm bg-[#c5a26f] text-[#0a0a0a] text-xs font-semibold tracking-[0.2em] uppercase">
+            Explore the Campus
+        </a>
     </div>
 
     <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" aria-describedby="booking-modal-desc">
@@ -431,15 +238,15 @@
             <div class="p-6 sm:p-8">
                 <div class="flex justify-between items-start gap-4">
                     <div class="flex gap-3 min-w-0">
-                        <div class="w-11 h-11 shrink-0 rounded-xl bg-red-600 flex items-center justify-center shadow-lg shadow-red-900/50 ring-1 ring-white/10">
-                            <i class="fa-solid fa-flag-checkered text-white text-lg" aria-hidden="true"></i>
+                        <div class="w-11 h-11 shrink-0 rounded-xl border border-[#c5a26f]/40 bg-[#0c0c0c] flex items-center justify-center">
+                            <i class="fa-solid fa-flag-checkered text-[#c5a26f] text-lg" aria-hidden="true"></i>
                         </div>
                         <div class="min-w-0">
-                            <h2 id="booking-modal-title" class="text-xl sm:text-2xl font-bold heading-font text-white tracking-tight">Book your experience</h2>
-                            <p id="booking-modal-desc" class="text-sm text-zinc-400 mt-1 leading-relaxed">Tell us what you’re after — we’ll follow up with availability and next steps.</p>
+                            <h2 id="booking-modal-title" class="text-xl sm:text-2xl heading-font text-white tracking-wide font-medium">Book your experience</h2>
+                            <p id="booking-modal-desc" class="text-sm text-white/45 mt-1 leading-relaxed font-light">Tell us what you are after — we will follow up with availability and next steps.</p>
                         </div>
                     </div>
-                    <button type="button" id="booking-modal-close" class="shrink-0 w-11 h-11 rounded-xl border border-zinc-700 bg-zinc-900/80 text-zinc-400 hover:text-white hover:border-zinc-500 hover:bg-zinc-800 flex items-center justify-center transition" aria-label="Close booking form">
+                    <button type="button" id="booking-modal-close" class="shrink-0 w-11 h-11 rounded-xl border border-white/10 bg-white/[0.03] text-white/50 hover:text-white hover:border-[#c5a26f]/30 flex items-center justify-center transition" aria-label="Close booking form">
                         <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -448,7 +255,7 @@
                 <div id="booking-form-block" class="booking-form-block">
                 <form id="booking-form" class="mt-8 space-y-5" novalidate>
                     <div>
-                        <label for="booking-experience" class="block text-xs font-semibold tracking-widest text-red-500 uppercase mb-2">Experience type</label>
+                        <label for="booking-experience" class="block text-xs font-semibold tracking-widest text-[#c5a26f] uppercase mb-2">Experience type</label>
                         <select id="booking-experience" name="experience-type" class="booking-field" required>
                             <option value="track-day">Track Day</option>
                             <option value="karting">Karting</option>
@@ -456,15 +263,15 @@
                         </select>
                     </div>
                     <div>
-                        <label for="booking-date" class="block text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">Date</label>
+                        <label for="booking-date" class="block text-xs font-semibold tracking-widest text-white/35 uppercase mb-2">Date</label>
                         <input id="booking-date" name="booking-date" type="date" class="booking-field" required autocomplete="off">
                     </div>
                     <div>
-                        <label for="booking-people" class="block text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">Number of people</label>
+                        <label for="booking-people" class="block text-xs font-semibold tracking-widest text-white/35 uppercase mb-2">Number of people</label>
                         <input id="booking-people" name="booking-people" type="number" class="booking-field" min="1" max="999" value="1" required inputmode="numeric">
                     </div>
-                    <fieldset class="border border-zinc-800 rounded-2xl p-4 sm:p-5 bg-zinc-950/80 space-y-4">
-                        <legend class="text-xs font-semibold tracking-widest text-zinc-500 uppercase px-1">Contact info</legend>
+                    <fieldset class="border border-white/[0.08] rounded-2xl p-4 sm:p-5 bg-[#0a0a0a]/80 space-y-4">
+                        <legend class="text-xs font-semibold tracking-widest text-white/35 uppercase px-1">Contact info</legend>
                         <div>
                             <label for="booking-name" class="sr-only">Full name</label>
                             <input id="booking-name" name="contact-name" type="text" class="booking-field" placeholder="Full name" required autocomplete="name">
@@ -478,21 +285,21 @@
                             <input id="booking-phone" name="contact-phone" type="tel" class="booking-field" placeholder="Phone" required autocomplete="tel">
                         </div>
                     </fieldset>
-                    <button type="submit" id="booking-submit-btn" class="w-full min-h-[52px] rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold text-base cta-primary shadow-lg shadow-red-950/40">
+                    <button type="submit" id="booking-submit-btn" class="w-full min-h-[52px] rounded-xl font-semibold text-base cta-primary">
                         Send booking request
                     </button>
-                    <p class="text-center text-xs text-zinc-500 leading-relaxed">Submit securely — our team will follow up by email with availability and next steps.</p>
+                    <p class="text-center text-xs text-white/35 leading-relaxed font-light">Submit securely — our team will follow up by email with availability and next steps.</p>
                 </form>
                 </div>
                 <div id="booking-success" class="booking-success-panel" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
                     <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-5">
                         <i class="fa-solid fa-check text-2xl text-emerald-400" aria-hidden="true"></i>
                     </div>
-                    <h2 class="text-xl font-bold text-white heading-font">Request received</h2>
-                    <p class="text-zinc-400 mt-3 text-sm sm:text-base leading-relaxed max-w-sm mx-auto">Thank you. Our team will reach out soon with availability and next steps.</p>
+                    <h2 class="text-xl font-medium text-white heading-font">Request received</h2>
+                    <p class="text-white/45 mt-3 text-sm sm:text-base leading-relaxed max-w-sm mx-auto font-light">Thank you. Our team will reach out soon with availability and next steps.</p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:justify-center">
-                        <button type="button" id="booking-success-close" class="min-h-[48px] px-6 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-semibold cta-primary">Done</button>
-                        <button type="button" id="booking-another-btn" class="min-h-[48px] px-6 rounded-2xl border border-zinc-600 bg-zinc-900/80 text-zinc-200 font-semibold cta-secondary hover:bg-zinc-800">Submit another request</button>
+                        <button type="button" id="booking-success-close" class="min-h-[48px] px-6 rounded-xl font-semibold cta-primary">Done</button>
+                        <button type="button" id="booking-another-btn" class="min-h-[48px] px-6 rounded-xl border border-white/15 bg-white/[0.04] text-white/80 font-medium hover:bg-white/[0.07] transition">Submit another request</button>
                     </div>
                 </div>
             </div>
