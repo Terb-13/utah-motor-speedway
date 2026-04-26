@@ -1,0 +1,14 @@
+{
+  "name": "utah-motor-speedway",
+  "private": true,
+  "description": "Utah Motorsports Campus marketing site + Vercel APIs (Supabase bookings/waitlist, Grok chat)",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "vercel-build": "echo 'No build step — static assets served from repo root'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  }
+}
