@@ -1,7 +1,7 @@
 {
   "name": "utah-motor-speedway",
   "private": true,
-  "description": "Utah Motorsports Campus marketing site + Vercel APIs (Supabase bookings/waitlist, Grok chat)",
+  "description": "Wildfire Raceway marketing site + Vercel APIs (Supabase bookings/waitlist, Grok chat)",
   "engines": {
     "node": ">=18"
   },

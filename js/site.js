@@ -382,7 +382,7 @@
             '<button type="button" id="umc-chat-launcher" class="umc-chat-launcher" aria-expanded="false" aria-controls="umc-chat-panel">' +
             '<i class="fa-solid fa-comments umc-launcher-icon-open text-xl" aria-hidden="true"></i>' +
             '<i class="fa-solid fa-xmark umc-launcher-icon-close text-xl" aria-hidden="true"></i>' +
-            '<span class="sr-only">Toggle campus assistant</span>' +
+            '<span class="sr-only">Toggle member concierge</span>' +
             '</button>' +
             '<div id="umc-chat-panel" class="umc-chat-panel chat-shell" role="dialog" aria-modal="true" aria-labelledby="umc-chat-title" aria-hidden="true">' +
             '<div class="umc-chat-panel-header">' +
@@ -565,7 +565,7 @@
         appendBubble(
             'assistant',
             formatAssistantMarkdown(
-                'Welcome to **Utah Motorsports Campus**. Ask about the track, karting, our in-house **Rocket Rally** experience, events, or **Private Garages**. Quick replies can open booking for you.'
+                'Welcome to **Wildfire Raceway**. Ask about membership, the circuit, karting, our in-house **Rocket Rally** experience, private events, or **Private Garages**. Quick replies can open booking for you.'
             ),
             '',
             false

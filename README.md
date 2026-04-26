@@ -1,4 +1,4 @@
-# Utah Motorsports Campus — site
+# Wildfire Raceway — site
 
 Static marketing pages (HTML, Tailwind CDN, shared [`css/site.css`](css/site.css) and [`js/site.js`](js/site.js)) plus Vercel Node serverless routes under [`api/`](api/) for Supabase inserts and the xAI Grok chat proxy.
 
@@ -7,7 +7,7 @@ Static marketing pages (HTML, Tailwind CDN, shared [`css/site.css`](css/site.css
 - **StoryBrand copy** is aligned with `utah-motor-speedway-updated-storybrand-copy.md` on the home page and experience pages (including Rocket Rally and Private Garages).
 - **Booking modal** posts to **`POST /api/bookings`** → Supabase table **`bookings`**; success and error states are shown in the modal.
 - **Garage waitlist** on `garages/index.html` posts to **`POST /api/waitlist`** → **`garage_waitlist`**; success and error states are supported.
-- **Campus Assistant** is a **floating chat widget** on every page (see `js/site.js` + `css/site.css`); it calls **`POST /api/chat`** with the API key server-side (`XAI_API_KEY`).
+- **Member Concierge** is a **floating chat widget** on every page (see `js/site.js` + `css/site.css`); it calls **`POST /api/chat`** with the API key server-side (`XAI_API_KEY`).
 - **Mobile sticky bar** and primary CTAs match across pages (Book Your Experience + Talk to Us).
 
 ## Project layout
@@ -108,4 +108,4 @@ python3 -m http.server 8080
 
 ## License / content
 
-© Utah Motorsports Campus. Copy and imagery are for the venue; update footer links and legal text as needed.
+© Wildfire Raceway. Copy and imagery are for the venue; update footer links and legal text as needed.
