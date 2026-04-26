@@ -458,7 +458,265 @@ textarea.booking-field {
     }
 }
 
+/* Floating campus assistant (all pages) */
+.umc-chat-root {
+    position: fixed;
+    z-index: 90;
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    font-family: inherit;
+}
+
+@media (max-width: 767px) {
+    .umc-chat-root {
+        bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+.umc-chat-launcher {
+    width: 3.5rem;
+    height: 3.5rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: linear-gradient(145deg, #e11d48, #be123c);
+    border: 1px solid rgb(225 29 72 / 0.35);
+    cursor: pointer;
+    box-shadow:
+        0 0 0 1px rgb(255 255 255 / 0.06),
+        0 12px 40px -8px rgb(0 0 0 / 0.55);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.umc-chat-launcher:hover {
+    transform: scale(1.04);
+}
+
+.umc-chat-launcher:focus-visible {
+    outline: 2px solid #f43f5e;
+    outline-offset: 3px;
+}
+
+.umc-chat-launcher .umc-launcher-icon-close {
+    display: none;
+}
+
+.umc-chat-launcher.is-active .umc-launcher-icon-close {
+    display: block;
+}
+
+.umc-chat-launcher.is-active .umc-launcher-icon-open {
+    display: none;
+}
+
+.umc-chat-panel {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 0.75rem);
+    width: min(100vw - 2rem, 420px);
+    max-height: min(560px, calc(100dvh - 7.5rem));
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.25rem;
+    border: 1px solid rgb(63 63 70 / 0.95);
+    background: rgb(9 9 11 / 0.98);
+    box-shadow:
+        0 0 0 1px rgb(225 29 72 / 0.08),
+        0 24px 48px -16px rgb(0 0 0 / 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+        opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.22s;
+}
+
+.umc-chat-panel.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.umc-chat-panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1rem 0.75rem;
+    border-bottom: 1px solid rgb(39 39 42 / 0.9);
+}
+
+.umc-chat-panel-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.umc-chat-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.875rem;
+    background: linear-gradient(145deg, #e11d48, #be123c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgb(225 29 72 / 0.35);
+}
+
+.umc-chat-heading {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.umc-chat-sub {
+    margin: 0.125rem 0 0;
+    font-size: 0.6875rem;
+    color: rgb(113 113 122);
+}
+
+.umc-chat-close {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(63 63 70);
+    background: rgb(24 24 27 / 0.9);
+    color: rgb(161 161 170);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.umc-chat-close:hover {
+    color: #fff;
+    border-color: rgb(82 82 91);
+    background: rgb(39 39 42 / 0.95);
+}
+
+.umc-chat-close:focus-visible {
+    outline: 2px solid #f43f5e;
+    outline-offset: 2px;
+}
+
+.umc-chat-messages {
+    flex: 1 1 auto;
+    min-height: 180px;
+    max-height: 280px;
+    overflow-y: auto;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.umc-chat-composer {
+    padding: 0.75rem 1rem 1rem;
+    border-top: 1px solid rgb(39 39 42 / 0.9);
+}
+
+.umc-chat-quick-label {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(113 113 122);
+    margin: 0 0 0.5rem;
+}
+
+.umc-chat-quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.umc-quick-reply {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border: 1px solid rgb(63 63 70);
+    background: rgb(24 24 27 / 0.95);
+    color: rgb(228 228 231);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.umc-quick-reply:hover {
+    border-color: rgb(225 29 72 / 0.45);
+    background: rgb(39 39 42 / 0.9);
+}
+
+.umc-quick-reply:focus-visible {
+    outline: 2px solid #f43f5e;
+    outline-offset: 2px;
+}
+
+.umc-chat-form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.umc-chat-input {
+    flex: 1;
+    resize: none;
+    min-height: 2.75rem;
+    max-height: 6rem;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+}
+
+.umc-chat-send {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(145deg, #e11d48, #be123c);
+    box-shadow: 0 4px 16px -4px var(--accent-glow);
+}
+
+.umc-chat-send:focus-visible {
+    outline: 2px solid #f43f5e;
+    outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
+    .umc-chat-panel {
+        transition-duration: 0.01ms !important;
+    }
+
+    .umc-chat-launcher {
+        transition: none;
+    }
+
+    .umc-chat-launcher:hover {
+        transform: none;
+    }
+
     .waitlist-success-panel,
     .booking-success-panel {
         animation: none;

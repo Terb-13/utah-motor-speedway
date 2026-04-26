@@ -2,7 +2,7 @@
 
 **Key Updates Applied:**
 - Added **Private Garage Ownership/Lease** as a major future pillar (luxury & performance car owners)
-- Added **Rocket Rally Experience** (car soccer/football with real rally cars + giant ball — inspired by the viral Las Vegas version)
+- Added **Rocket Rally Experience** (in-house car soccer with real rally cars + giant ball on UMC’s dirt arena)
 - Removed all Burt Brothers / rebrand references
 - Kept 100% of original content, specs, emails, and facts
 - Customer remains the hero throughout
@@ -98,11 +98,13 @@ Over 1 mile of “Fast Fun” with **24 different configurations** — Utah’s 
 
 ### 3. Rocket Rally Experience (NEW)
 
-**Car soccer with real rally cars and a giant 6-foot ball.**
+**Car soccer with real rally cars and a giant ball on our dirt arena.**
 
-Inspired by the viral Las Vegas Rocket Rally and Germany’s legendary Car Football leagues, our Rocket Rally Experience brings high-octane, full-contact fun to Utah Motorsports Campus.
+**Rocket Rally** is our original, in-house experience at Utah Motorsports Campus — high-octane, full-contact car soccer on our purpose-built dirt arena.
 
-Strap into a real rally car on our purpose-built dirt arena. Push, block, and score with a massive inflatable ball. Perfect for team building, bachelor parties, corporate groups, or anyone who wants the most shareable, adrenaline-fueled experience in the state.
+Strap into a real rally car. Push, block, and score with a massive ball. Perfect for team building, bachelor parties, corporate groups, or anyone who wants the most shareable, adrenaline-fueled experience in the state.
+
+**Details:** 4-hour events · $150 per person · 3v3 teams
 
 **Fast. Chaotic. Unforgettable.**
 

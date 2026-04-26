@@ -7,14 +7,14 @@ Static marketing pages (HTML, Tailwind CDN, shared [`css/site.css`](css/site.css
 - **StoryBrand copy** is aligned with `utah-motor-speedway-updated-storybrand-copy.md` on the home page and experience pages (including Rocket Rally and Private Garages).
 - **Booking modal** posts to **`POST /api/bookings`** → Supabase table **`bookings`**; success and error states are shown in the modal.
 - **Garage waitlist** on `garages/index.html` posts to **`POST /api/waitlist`** → **`garage_waitlist`**; success and error states are supported.
-- **Campus Assistant** (`chatbot.html`) calls **`POST /api/chat`**; the API key stays server-side (`XAI_API_KEY`).
+- **Campus Assistant** is a **floating chat widget** on every page (see `js/site.js` + `css/site.css`); it calls **`POST /api/chat`** with the API key server-side (`XAI_API_KEY`).
 - **Mobile sticky bar** and primary CTAs match across pages (Book Your Experience + Talk to Us).
 
 ## Project layout
 
 | Path | Purpose |
 |------|--------|
-| `index.html`, `track/`, `karting/`, `rocket-rally/`, `events/`, `garages/`, `chatbot.html` | Public pages |
+| `index.html`, `track/`, `karting/`, `rocket-rally/`, `events/`, `garages/` | Public pages |
 | `css/site.css`, `js/site.js` | Shared styles and behavior |
 | `api/*.js` | Vercel functions at `/api/*` |
 | `.env.example` | Variable names for local and Vercel |
