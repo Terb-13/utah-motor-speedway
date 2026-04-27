@@ -7,8 +7,9 @@
   },
   "scripts": {
     "vercel-build": "npm run build:admin",
-    "build:admin": "vite build --config admin/vite.config.ts",
-    "dev:admin": "vite --config admin/vite.config.ts"
+    "build": "npm run build:admin",
+    "build:admin": "vite build --config admin-ui/vite.config.ts",
+    "dev:admin": "vite --config admin-ui/vite.config.ts"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.15",

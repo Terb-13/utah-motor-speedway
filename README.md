@@ -17,7 +17,7 @@ Static marketing pages (HTML, Tailwind CDN, shared [`css/site.css`](css/site.css
 | `index.html`, `track/`, `karting/`, `rocket-rally/`, `events/`, `garages/` | Public pages |
 | `css/site.css`, `js/site.js` | Shared styles and behavior |
 | `api/*.js` | Vercel functions at `/api/*` (includes `api/admin/*` for the dashboard) |
-| `admin/` | Vite + React source for `/admin` |
+| `admin-ui/` | Vite + React source for `/admin` (not named `admin/` — that URL would be shadowed on Vercel) |
 | `admin-build/` | Build output (gitignored; produced by `npm run build:admin`) |
 | `.env.example` | Variable names for local and Vercel |
 
@@ -38,7 +38,7 @@ Copy `.env.example` to **`.env.local`** for `vercel dev`. Set real values in the
 
 ### Admin dashboard (`/admin`)
 
-React + Vite app in [`admin/`](admin/) (gold-on-charcoal UI, FullCalendar, bookings/waitlist tables). Build output goes to **`admin-build/`**; Vercel rewrites `/admin` → that bundle.
+React + Vite app in [`admin-ui/`](admin-ui/) (gold-on-charcoal UI, FullCalendar, bookings/waitlist tables). Build output goes to **`admin-build/`**; Vercel rewrites `/admin` → that bundle.
 
 - **Local UI:** `npm install` then `npm run dev:admin` (defaults API proxy to `http://127.0.0.1:3000` — run **`vercel dev`** in another terminal so `/api/admin/*` exists).
 - **Production:** set `ADMIN_DASHBOARD_PASSWORD` on Vercel; deploy runs `npm run vercel-build` (builds admin + keeps static marketing files).
