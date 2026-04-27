@@ -3,6 +3,7 @@ export function formatExperienceType(code: string): string {
     'track-day': 'Track day',
     karting: 'Karting',
     'rocket-rally': 'Rocket Rally',
+    event: 'Event',
   };
   return map[code] || code;
 }

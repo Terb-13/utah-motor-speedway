@@ -48,7 +48,47 @@ export function Dashboard() {
   }, [bookings, today]);
 
   if (loading) {
-    return <p style={{ color: 'var(--wf-text-dim)' }}>Loading dashboard…</p>;
+    return (
+      <div className="wf-dash-loading" style={{ color: 'var(--wf-text-dim)' }} aria-busy>
+        <p style={{ fontSize: '0.7rem', letterSpacing: '0.25em', textTransform: 'uppercase', margin: '0 0 0.5rem' }}>
+          Overview
+        </p>
+        <div
+          className="wf-skeleton"
+          style={{
+            height: 32,
+            maxWidth: 200,
+            borderRadius: 8,
+            marginBottom: 20,
+            animation: 'wf-shimmer 1.2s ease-in-out infinite',
+            backgroundSize: '200% 100%',
+            background: 'linear-gradient(90deg, var(--wf-elevated) 0%, rgba(255,255,255,0.08) 50%, var(--wf-elevated) 100%)',
+          }}
+        />
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+            gap: 12,
+            marginBottom: 20,
+          }}
+        >
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              style={{
+                height: 80,
+                borderRadius: 10,
+                background: 'linear-gradient(90deg, var(--wf-elevated) 0%, rgba(255,255,255,0.08) 50%, var(--wf-elevated) 100%)',
+                backgroundSize: '200% 100%',
+                animation: 'wf-shimmer 1.2s ease-in-out infinite',
+              }}
+            />
+          ))}
+        </div>
+        <p style={{ fontSize: '0.85rem' }}>Loading metrics…</p>
+      </div>
+    );
   }
   if (error) {
     return <p style={{ color: '#f87171' }}>{error}</p>;

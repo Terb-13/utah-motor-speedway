@@ -76,6 +76,10 @@
 
     if (modal && form && closeBtn && experienceSelect && dateInput && formBlock && successPanel) {
         var lastFocus = null;
+        var submitBtnDefaultLabel = 'Send booking request';
+        if (submitBtn && submitBtn.textContent) {
+            submitBtnDefaultLabel = submitBtn.textContent.replace(/\s+/g, ' ').trim() || 'Send booking request';
+        }
 
         function closeMobileMenuIfOpen() {
             var mm = document.getElementById('mobile-menu');
@@ -108,6 +112,24 @@
             errorBanner.classList.add('is-visible');
         }
 
+        function showBookingToast(message) {
+            var el = document.createElement('div');
+            el.className = 'wf-booking-toast';
+            el.setAttribute('role', 'status');
+            el.setAttribute('aria-live', 'polite');
+            el.textContent = message;
+            document.body.appendChild(el);
+            requestAnimationFrame(function () {
+                el.classList.add('is-visible');
+            });
+            setTimeout(function () {
+                el.classList.remove('is-visible');
+                setTimeout(function () {
+                    if (el.parentNode) el.parentNode.removeChild(el);
+                }, 320);
+            }, 4800);
+        }
+
         function resetBookingModalUI() {
             hideBookingError();
             formBlock.classList.remove('is-hidden');
@@ -115,6 +137,7 @@
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.removeAttribute('aria-busy');
+                submitBtn.textContent = submitBtnDefaultLabel;
             }
         }
 
@@ -145,12 +168,6 @@
             if (lastFocus && typeof lastFocus.focus === 'function') {
                 lastFocus.focus();
             }
-        }
-
-        function showBookingSuccess() {
-            formBlock.classList.add('is-hidden');
-            successPanel.classList.add('is-visible');
-            successPanel.focus();
         }
 
         openBookingWithPreset = function (preset) {
@@ -221,10 +238,13 @@
             var full_name = document.getElementById('booking-name').value.trim();
             var email = document.getElementById('booking-email').value.trim();
             var phone = document.getElementById('booking-phone').value.trim();
+            var notesEl = document.getElementById('booking-notes');
+            var notes = notesEl ? (notesEl.value || '').trim() : '';
 
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.setAttribute('aria-busy', 'true');
+                submitBtn.textContent = 'Submitting…';
             }
 
             fetch(apiBase + '/api/bookings', {
@@ -237,6 +257,7 @@
                     full_name: full_name,
                     email: email,
                     phone: phone,
+                    notes: notes.length > 0 ? notes : null,
                 }),
             })
                 .then(function (res) {
@@ -248,23 +269,36 @@
                     if (submitBtn) {
                         submitBtn.disabled = false;
                         submitBtn.removeAttribute('aria-busy');
+                        submitBtn.textContent = submitBtnDefaultLabel;
                     }
-                    if (result.ok && result.data && result.data.id) {
-                        showBookingSuccess();
-                        successPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    if (result.ok && result.data && (result.data.id != null)) {
+                        showBookingToast("Booking request received! We'll contact you shortly.");
+                        closeModal();
                         return;
                     }
+                    if (result.status === 500) {
+                        showBookingError(
+                            'We could not save your request. Please try again or contact us by email.'
+                        );
+                        return;
+                    }
+                    if (result.status === 503) {
+                        showBookingError(
+                            'Booking is temporarily unavailable. Please try again or email sales@utahmotorsportscampus.com.'
+                        );
+                        return;
+                    }
+                    var errPart = result.data && (result.data.error || result.data.details);
                     var msg =
-                        (result.data && (result.data.error || result.data.details)) ||
-                        (result.status === 503
-                            ? 'Booking is temporarily unavailable. Please try again or email sales@utahmotorsportscampus.com.'
-                            : 'Something went wrong. Please try again or contact us by email.');
-                    showBookingError(typeof msg === 'string' ? msg : 'Request failed. Please try again.');
+                        (typeof errPart === 'string' ? errPart : errPart && String(errPart)) ||
+                        'Something went wrong. Please try again or contact us by email.';
+                    showBookingError(msg);
                 })
                 .catch(function () {
                     if (submitBtn) {
                         submitBtn.disabled = false;
                         submitBtn.removeAttribute('aria-busy');
+                        submitBtn.textContent = submitBtnDefaultLabel;
                     }
                     showBookingError('Network error. Check your connection and try again.');
                 });

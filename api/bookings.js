@@ -1,3 +1,4 @@
+/** Public booking form → `bookings` table via same Supabase project as `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` in env (see `.env.example`). */
 const { createClient } = require('@supabase/supabase-js');
 const { parseJsonBody } = require('../lib/parseJsonBody');
 
@@ -34,6 +35,11 @@ module.exports = async function handler(req, res) {
   const full_name = (body.full_name || '').toString().trim();
   const email = (body.email || '').toString().trim();
   const phone = (body.phone || '').toString().trim();
+  const notesRaw = body.notes != null ? String(body.notes).trim() : '';
+  if (notesRaw.length > 4000) {
+    return res.status(400).json({ error: 'Notes are too long' });
+  }
+  const notes = notesRaw.length > 0 ? notesRaw : null;
 
   if (!experience_type || !EXPERIENCE.has(experience_type)) {
     return res.status(400).json({ error: 'Invalid experience_type' });
@@ -60,6 +66,8 @@ module.exports = async function handler(req, res) {
     full_name,
     email,
     phone,
+    notes,
+    status: 'pending',
   }).select('id').single();
 
   if (error) {
