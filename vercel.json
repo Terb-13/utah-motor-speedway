@@ -5,6 +5,12 @@
       "maxDuration": 10
     }
   },
+  "rewrites": [
+    { "source": "/admin/assets/:path*", "destination": "/admin-build/assets/:path*" },
+    { "source": "/admin", "destination": "/admin-build/index.html" },
+    { "source": "/admin/", "destination": "/admin-build/index.html" },
+    { "source": "/admin/:path*", "destination": "/admin-build/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

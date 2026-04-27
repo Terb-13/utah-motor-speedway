@@ -1,0 +1,120 @@
+:root {
+  --wf-bg: #0a0a0a;
+  --wf-surface: #0c0c0c;
+  --wf-elevated: #111111;
+  --wf-border: rgba(255, 255, 255, 0.08);
+  --wf-gold: #c5a26f;
+  --wf-gold-muted: rgba(197, 162, 111, 0.55);
+  --wf-text: #c4c4c4;
+  --wf-text-dim: rgba(255, 255, 255, 0.45);
+  --wf-heading: #f5f5f5;
+  --font: 'DM Sans', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--wf-bg);
+  color: var(--wf-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wf-nav-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--wf-text-dim);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.wf-nav-link:hover {
+  color: var(--wf-heading);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.wf-nav-link.is-active {
+  color: var(--wf-heading);
+  background: rgba(197, 162, 111, 0.12);
+  border-color: rgba(197, 162, 111, 0.25);
+}
+
+/* FullCalendar dark theme */
+.wf-calendar .fc {
+  --fc-border-color: var(--wf-border);
+  --fc-button-bg-color: var(--wf-elevated);
+  --fc-button-border-color: var(--wf-border);
+  --fc-button-hover-bg-color: rgba(197, 162, 111, 0.12);
+  --fc-button-hover-border-color: rgba(197, 162, 111, 0.35);
+  --fc-button-text-color: var(--wf-heading);
+  --fc-today-bg-color: rgba(197, 162, 111, 0.08);
+  --fc-page-bg-color: var(--wf-surface);
+  --fc-neutral-bg-color: var(--wf-elevated);
+  --fc-list-event-hover-bg-color: rgba(255, 255, 255, 0.04);
+}
+
+.wf-calendar .fc-theme-standard td,
+.wf-calendar .fc-theme-standard th {
+  border-color: var(--wf-border);
+}
+
+.wf-calendar .fc-col-header-cell-cushion,
+.wf-calendar .fc-daygrid-day-number {
+  color: var(--wf-text-dim);
+}
+
+.wf-calendar .fc-toolbar-title {
+  color: var(--wf-heading);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.wf-calendar .fc-event {
+  border: none;
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 0.75rem;
+}
+
+/* Admin layout: mobile drawer */
+@media (max-width: 899px) {
+  .wf-sidebar {
+    transform: translateX(-100%);
+    box-shadow: 8px 0 40px rgba(0, 0, 0, 0.55);
+  }
+  .wf-sidebar.is-open {
+    transform: translateX(0);
+  }
+  .wf-main-wrap {
+    margin-left: 0 !important;
+  }
+}
+
+@media (min-width: 900px) {
+  .wf-sidebar {
+    transform: none !important;
+  }
+  .wf-main-wrap {
+    margin-left: 260px;
+  }
+}

@@ -16,7 +16,9 @@ Static marketing pages (HTML, Tailwind CDN, shared [`css/site.css`](css/site.css
 |------|--------|
 | `index.html`, `track/`, `karting/`, `rocket-rally/`, `events/`, `garages/` | Public pages |
 | `css/site.css`, `js/site.js` | Shared styles and behavior |
-| `api/*.js` | Vercel functions at `/api/*` |
+| `api/*.js` | Vercel functions at `/api/*` (includes `api/admin/*` for the dashboard) |
+| `admin/` | Vite + React source for `/admin` |
+| `admin-build/` | Build output (gitignored; produced by `npm run build:admin`) |
 | `.env.example` | Variable names for local and Vercel |
 
 ## Environment variables
@@ -30,6 +32,16 @@ Copy `.env.example` to **`.env.local`** for `vercel dev`. Set real values in the
 | `XAI_API_KEY` | Server (`/api/chat`) | Grok API key |
 | `XAI_MODEL` | Optional server | Defaults to `grok-2-latest` |
 | `SITE_URL` | Optional | Canonical URL helpers |
+| `ADMIN_DASHBOARD_PASSWORD` | Server (`/api/admin/*`) | Password for `/admin` dashboard login |
+| `ADMIN_SESSION_SECRET` | Optional server | Cookie signing secret (defaults to `ADMIN_DASHBOARD_PASSWORD`) |
+| `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` | Optional (Vite dev) | Browser Supabase client for future auth/RLS features |
+
+### Admin dashboard (`/admin`)
+
+React + Vite app in [`admin/`](admin/) (gold-on-charcoal UI, FullCalendar, bookings/waitlist tables). Build output goes to **`admin-build/`**; Vercel rewrites `/admin` → that bundle.
+
+- **Local UI:** `npm install` then `npm run dev:admin` (defaults API proxy to `http://127.0.0.1:3000` — run **`vercel dev`** in another terminal so `/api/admin/*` exists).
+- **Production:** set `ADMIN_DASHBOARD_PASSWORD` on Vercel; deploy runs `npm run vercel-build` (builds admin + keeps static marketing files).
 
 ### Non-root deployments
 

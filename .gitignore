@@ -3,5 +3,6 @@
 .env.*.local
 .vercel
 node_modules/
+admin-build/
 .DS_Store
 *.log
