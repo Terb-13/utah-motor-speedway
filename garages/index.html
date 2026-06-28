@@ -335,6 +335,61 @@
             </div>
         </div>
     </div>
+
+    <div id="garage-reserve-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="garage-reserve-title">
+        <div class="booking-modal-backdrop" data-garage-reserve-close aria-hidden="true"></div>
+        <div class="booking-modal-panel garage-reserve-panel">
+            <div class="booking-modal-accent" aria-hidden="true"></div>
+            <div class="p-6 sm:p-8">
+                <div class="flex items-start justify-between gap-4 mb-6">
+                    <div class="min-w-0">
+                        <p class="text-[10px] tracking-[0.3em] uppercase text-[#c5a26f] mb-1">Founding member reservation</p>
+                        <h2 id="garage-reserve-title" class="text-xl sm:text-2xl font-bold heading-font text-white tracking-tight">Reserve your bay</h2>
+                        <p id="garage-reserve-subtitle" class="text-sm text-zinc-400 mt-1 leading-relaxed">Secure this unit with a refundable deposit — demo checkout for presentation purposes.</p>
+                    </div>
+                    <button type="button" class="shrink-0 w-11 h-11 rounded-xl border border-zinc-700 bg-zinc-900/80 text-zinc-400 hover:text-white hover:border-zinc-500 hover:bg-zinc-800 flex items-center justify-center transition" data-garage-reserve-close aria-label="Close reservation form"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
+                </div>
+
+                <div id="garage-reserve-summary" class="garage-reserve-summary mb-6" aria-live="polite"></div>
+
+                <div id="garage-reserve-error" class="booking-error-banner" role="alert" aria-live="assertive"></div>
+
+                <div id="garage-reserve-form-block">
+                    <form id="garage-reserve-form" class="space-y-5" novalidate>
+                        <fieldset class="border border-zinc-800 rounded-2xl p-4 sm:p-5 bg-zinc-950/80 space-y-4">
+                            <legend class="text-xs font-semibold tracking-widest text-zinc-500 uppercase px-1">Contact info</legend>
+                            <div><label for="garage-reserve-name" class="sr-only">Full name</label><input id="garage-reserve-name" name="full_name" type="text" class="booking-field" placeholder="Full name" required autocomplete="name"></div>
+                            <div><label for="garage-reserve-email" class="sr-only">Email</label><input id="garage-reserve-email" name="email" type="email" class="booking-field" placeholder="Email" required autocomplete="email"></div>
+                            <div><label for="garage-reserve-phone" class="sr-only">Phone</label><input id="garage-reserve-phone" name="phone" type="tel" class="booking-field" placeholder="Phone" required autocomplete="tel"></div>
+                        </fieldset>
+                        <fieldset class="border border-zinc-800 rounded-2xl p-4 sm:p-5 bg-zinc-950/80 space-y-3">
+                            <legend class="text-xs font-semibold tracking-widest text-zinc-500 uppercase px-1">Payment (demo)</legend>
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="sm:col-span-2"><input type="text" class="booking-field" value="4242 4242 4242 4242" readonly aria-label="Demo card number"></div>
+                                <input type="text" class="booking-field" value="12 / 28" readonly aria-label="Demo expiry">
+                                <input type="text" class="booking-field" value="123" readonly aria-label="Demo CVC">
+                            </div>
+                            <p class="text-[10px] text-zinc-500 leading-relaxed">Demo mode — no real charge. Your team will see this reservation in the Command Center waitlist.</p>
+                        </fieldset>
+                        <button type="submit" id="garage-reserve-submit" class="w-full min-h-[52px] rounded-xl font-semibold text-base cta-primary border-0 tracking-wide">
+                            <span id="garage-reserve-submit-label">Pay deposit &amp; reserve</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="garage-reserve-success" class="booking-success-panel" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-check text-2xl text-emerald-400" aria-hidden="true"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white heading-font">Bay reserved</h2>
+                    <p id="garage-reserve-success-msg" class="text-zinc-400 mt-3 text-sm sm:text-base leading-relaxed max-w-sm mx-auto">Your founding deposit is recorded. Our team will finalize your lease within 48 hours.</p>
+                    <p id="garage-reserve-confirmation" class="mt-4 text-xs font-mono text-[#c5a26f]/80"></p>
+                    <button type="button" id="garage-reserve-done" class="mt-8 min-h-[48px] px-6 rounded-xl font-semibold cta-primary">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/site.js" defer></script>
     <script>
         // ── Garage floorplan layout (demo) ──
@@ -352,6 +407,29 @@
             'Maintenance': 'garage-bay--maintenance'
         };
 
+        var garageByUnit = {};
+        var selectedBay = null;
+
+        var GARAGE_PRICING = {
+            Standard: { monthly: 3500, deposit: 5000 },
+            Large: { monthly: 4800, deposit: 7500 }
+        };
+
+        function getGaragePricing(size) {
+            return GARAGE_PRICING[size] || GARAGE_PRICING.Standard;
+        }
+
+        function formatMoney(amount) {
+            return '$' + amount.toLocaleString('en-US');
+        }
+
+        function getApiBase() {
+            if (window.location.protocol === 'file:') return '';
+            var path = window.location.pathname || '';
+            if (path.indexOf('/garages') !== -1) return '';
+            return '';
+        }
+
         function escapeHtml(str) {
             return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
@@ -366,8 +444,9 @@
             }
 
             var status = bay.status || 'Future Phase';
-            var canRequest = status === 'Available' || status === 'Reserved';
-            var ctaLabel = status === 'Available' ? 'Request this bay' : (status === 'Reserved' ? 'Join waitlist for this bay' : 'Join general waitlist');
+            var canReserve = status === 'Available';
+            var canWaitlist = status === 'Available' || status === 'Reserved';
+            var pricing = getGaragePricing(bay.size);
 
             panel.className = 'reveal garage-bay-detail';
             panel.innerHTML =
@@ -377,25 +456,191 @@
                     '<span class="text-xs px-2.5 py-1 rounded-full border ' + (STATUS_CLASS[status] ? 'garage-bay-status' : '') + '">' + escapeHtml(status) + '</span>' +
                     (bay.size ? '<span class="text-xs text-white/50">' + escapeHtml(bay.size) + '</span>' : '') +
                 '</div>' +
+                (canReserve
+                    ? '<div class="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3 text-sm">' +
+                        '<div class="flex justify-between text-white/80"><span>Monthly lease</span><span class="font-semibold text-white">' + formatMoney(pricing.monthly) + '</span></div>' +
+                        '<div class="flex justify-between text-white/60 mt-1"><span>Founding deposit</span><span class="font-medium text-emerald-400">' + formatMoney(pricing.deposit) + '</span></div>' +
+                      '</div>'
+                    : '') +
                 (bay.notes ? '<p class="mt-4 text-sm text-white/50 leading-relaxed font-light">' + escapeHtml(bay.notes) + '</p>' : '') +
                 '<ul class="mt-4 space-y-1.5 text-xs text-white/40">' +
                     '<li><i class="fa-solid fa-temperature-low text-[#c5a26f]/70 mr-2"></i>Climate controlled</li>' +
                     '<li><i class="fa-solid fa-road text-[#c5a26f]/70 mr-2"></i>Direct track access</li>' +
                     (bay.size === 'Large' ? '<li><i class="fa-solid fa-arrows-up-down text-[#c5a26f]/70 mr-2"></i>Extra height for lifts</li>' : '') +
                 '</ul>' +
-                (canRequest
-                    ? '<button type="button" id="garage-bay-request-btn" class="mt-6 w-full min-h-[44px] rounded-xl cta-primary border-0 text-sm font-semibold tracking-wide">' + ctaLabel + '</button>'
-                    : '<p class="mt-6 text-xs text-white/35 leading-relaxed">' + (status === 'Occupied' ? 'This bay is currently assigned to a founding member.' : status === 'Maintenance' ? 'This unit is undergoing preparation and is not available for assignment.' : 'This bay is part of a future phase.') + '</p>');
+                (canReserve
+                    ? '<button type="button" id="garage-bay-request-btn" class="mt-6 w-full min-h-[48px] rounded-xl cta-primary border-0 text-sm font-semibold tracking-wide">Reserve &amp; pay deposit</button>'
+                    : (canWaitlist
+                        ? '<button type="button" id="garage-bay-request-btn" class="mt-6 w-full min-h-[44px] rounded-xl border border-[#c5a26f]/50 text-[#c5a26f] bg-transparent text-sm font-semibold tracking-wide hover:bg-[#c5a26f]/10 transition-colors">Join waitlist for this bay</button>'
+                        : '<p class="mt-6 text-xs text-white/35 leading-relaxed">' + (status === 'Occupied' ? 'This bay is currently assigned to a founding member.' : status === 'Maintenance' ? 'This unit is undergoing preparation and is not available for assignment.' : 'This bay is part of a future phase.') + '</p>'));
         }
+
+        function openGarageReserveModal(bay) {
+            if (!bay || bay.status !== 'Available') return;
+            selectedBay = bay;
+            var modal = document.getElementById('garage-reserve-modal');
+            var summary = document.getElementById('garage-reserve-summary');
+            var formBlock = document.getElementById('garage-reserve-form-block');
+            var success = document.getElementById('garage-reserve-success');
+            var errorEl = document.getElementById('garage-reserve-error');
+            var submitLabel = document.getElementById('garage-reserve-submit-label');
+            if (!modal || !summary) return;
+
+            var pricing = getGaragePricing(bay.size);
+            if (errorEl) {
+                errorEl.textContent = '';
+                errorEl.classList.remove('is-visible');
+            }
+            if (formBlock) formBlock.classList.remove('is-hidden');
+            if (success) success.classList.remove('is-visible');
+            if (submitLabel) submitLabel.textContent = 'Pay ' + formatMoney(pricing.deposit) + ' deposit & reserve';
+
+            summary.innerHTML =
+                '<div class="flex items-start justify-between gap-4">' +
+                    '<div><div class="text-lg font-semibold text-white">' + escapeHtml(bay.unit) + '</div>' +
+                    '<div class="text-xs text-white/50 mt-0.5">' + escapeHtml(bay.size || 'Standard') + ' bay · ' + escapeHtml(bay.wingLabel || 'Garage estate') + '</div>' +
+                    (bay.notes ? '<p class="text-xs text-white/45 mt-2 leading-relaxed">' + escapeHtml(bay.notes) + '</p>' : '') +
+                    '</div>' +
+                    '<span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shrink-0">Available</span>' +
+                '</div>' +
+                '<div class="mt-4 pt-4 border-t border-white/10 grid grid-cols-2 gap-3 text-sm">' +
+                    '<div><div class="text-white/45 text-xs uppercase tracking-wider">Monthly</div><div class="text-white font-semibold mt-0.5">' + formatMoney(pricing.monthly) + '</div></div>' +
+                    '<div><div class="text-white/45 text-xs uppercase tracking-wider">Due today</div><div class="text-emerald-400 font-semibold mt-0.5">' + formatMoney(pricing.deposit) + '</div></div>' +
+                '</div>';
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            var nameInput = document.getElementById('garage-reserve-name');
+            if (nameInput) nameInput.focus({ preventScroll: true });
+        }
+
+        function closeGarageReserveModal() {
+            var modal = document.getElementById('garage-reserve-modal');
+            if (!modal) return;
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        function showGarageReserveError(msg) {
+            var errorEl = document.getElementById('garage-reserve-error');
+            if (!errorEl) return;
+            errorEl.textContent = msg;
+            errorEl.classList.add('is-visible');
+        }
+
+        function bindGarageReserveModal() {
+            var modal = document.getElementById('garage-reserve-modal');
+            var form = document.getElementById('garage-reserve-form');
+            var formBlock = document.getElementById('garage-reserve-form-block');
+            var success = document.getElementById('garage-reserve-success');
+            var doneBtn = document.getElementById('garage-reserve-done');
+            var submitBtn = document.getElementById('garage-reserve-submit');
+            if (!modal || !form) return;
+
+            modal.querySelectorAll('[data-garage-reserve-close]').forEach(function(el) {
+                el.addEventListener('click', closeGarageReserveModal);
+            });
+
+            if (doneBtn) {
+                doneBtn.addEventListener('click', function() {
+                    form.reset();
+                    closeGarageReserveModal();
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+                    closeGarageReserveModal();
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (!selectedBay) return;
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                var fd = new FormData(form);
+                var pricing = getGaragePricing(selectedBay.size);
+                var payload = {
+                    full_name: fd.get('full_name'),
+                    email: fd.get('email'),
+                    phone: fd.get('phone'),
+                    notes: 'RESERVATION (demo deposit paid): Unit ' + selectedBay.unit +
+                        (selectedBay.size ? ' (' + selectedBay.size + ')' : '') +
+                        '. Deposit ' + formatMoney(pricing.deposit) + '. Monthly ' + formatMoney(pricing.monthly) + '.'
+                };
+
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.setAttribute('aria-busy', 'true');
+                }
+                showGarageReserveError('');
+
+                var finishSuccess = function(confirmationId) {
+                    if (formBlock) formBlock.classList.add('is-hidden');
+                    if (success) {
+                        success.classList.add('is-visible');
+                        success.focus({ preventScroll: true });
+                    }
+                    var msg = document.getElementById('garage-reserve-success-msg');
+                    if (msg) {
+                        msg.textContent = 'Unit ' + selectedBay.unit + ' is held for you. Our team will finalize your founding lease within 48 hours.';
+                    }
+                    var conf = document.getElementById('garage-reserve-confirmation');
+                    if (conf) {
+                        conf.textContent = 'Confirmation #' + (confirmationId || ('WF-' + Date.now().toString(36).toUpperCase()));
+                    }
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.removeAttribute('aria-busy');
+                    }
+                };
+
+                // Brief demo payment delay
+                setTimeout(function() {
+                    fetch(getApiBase() + '/api/waitlist', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    })
+                        .then(function(r) { return r.json().then(function(data) { return { ok: r.ok, data: data }; }); })
+                        .then(function(res) {
+                            if (!res.ok) throw new Error((res.data && res.data.error) || 'Unable to complete reservation');
+                            finishSuccess(res.data && res.data.id ? String(res.data.id).slice(0, 8).toUpperCase() : null);
+                        })
+                        .catch(function(err) {
+                            if (submitBtn) {
+                                submitBtn.disabled = false;
+                                submitBtn.removeAttribute('aria-busy');
+                            }
+                            showGarageReserveError(err.message || 'Unable to complete reservation. Please try again.');
+                        });
+                }, 1200);
+            });
+        }
+
+        bindGarageReserveModal();
 
         function selectBay(bay, btn) {
             document.querySelectorAll('.garage-bay.is-selected').forEach(function(el) { el.classList.remove('is-selected'); });
             if (btn) btn.classList.add('is-selected');
             renderBayDetail(bay);
 
+            var panel = document.getElementById('garage-bay-detail');
+            if (panel) {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
             var requestBtn = document.getElementById('garage-bay-request-btn');
             if (requestBtn) {
                 requestBtn.addEventListener('click', function() {
+                    if (bay.status === 'Available') {
+                        openGarageReserveModal(bay);
+                        return;
+                    }
                     var notesEl = document.getElementById('waitlist-notes');
                     var waitlistSection = document.getElementById('garage-waitlist');
                     if (notesEl) {
@@ -407,6 +652,10 @@
                         if (nameInput) nameInput.focus({ preventScroll: true });
                     }
                 });
+            }
+
+            if (bay.status === 'Available') {
+                openGarageReserveModal(bay);
             }
         }
 
@@ -487,24 +736,40 @@
             grid.innerHTML = available.map(function(g) {
                 var unit = g.unit || g.unit_number;
                 var sizeBadge = '<span class="text-[10px] px-2 py-0.5 rounded border border-white/15 text-white/70">' + escapeHtml(g.size || 'Standard') + '</span>';
-                return '<div class="border border-white/10 bg-[#0c0c0c] rounded-xl p-5 flex flex-col">' +
+                var pricing = getGaragePricing(g.size);
+                return '<button type="button" class="garage-available-card text-left border border-white/10 bg-[#0c0c0c] rounded-xl p-5 flex flex-col hover:border-emerald-500/40 hover:bg-[#0e0e0e] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a26f]/60" data-unit="' + escapeHtml(unit) + '">' +
                     '<div class="flex items-start justify-between">' +
                         '<div><div class="font-semibold text-lg text-white tracking-tight">' + escapeHtml(unit) + '</div>' +
                         '<div class="mt-0.5">' + sizeBadge + '</div></div>' +
                         '<div class="text-right"><span class="inline-block text-xs font-medium tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Available</span></div>' +
                     '</div>' +
                     (g.notes ? '<p class="text-sm text-white/60 mt-3 leading-relaxed">' + escapeHtml(g.notes) + '</p>' : '') +
-                    '<button type="button" class="mt-4 text-xs font-semibold text-[#c5a26f] hover:text-[#e8d5b5] text-left bay-card-cta" data-unit="' + escapeHtml(unit) + '">View on floorplan →</button>' +
+                    '<div class="mt-4 text-sm text-white/70"><span class="text-white/45">From </span><span class="font-semibold text-white">' + formatMoney(pricing.monthly) + '</span><span class="text-white/45"> / mo</span></div>' +
+                    '<div class="mt-3 text-xs font-semibold text-[#c5a26f]">Reserve &amp; pay ' + formatMoney(pricing.deposit) + ' deposit →</div>' +
                     '<div class="mt-auto pt-2 text-xs text-white/40">Climate controlled • Direct track access</div>' +
-                '</div>';
+                '</button>';
             }).join('');
 
-            grid.querySelectorAll('.bay-card-cta').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    var unitId = link.getAttribute('data-unit');
+            grid.querySelectorAll('.garage-available-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var unitId = card.getAttribute('data-unit');
+                    var live = garageByUnit[unitId];
+                    if (!live) return;
+                    var wing = GARAGE_WINGS.find(function(w) { return w.units.indexOf(unitId) !== -1; });
+                    var bay = {
+                        unit: unitId,
+                        size: live.size,
+                        status: live.status,
+                        notes: live.notes,
+                        wingLabel: wing ? wing.label : ''
+                    };
                     var floorBtn = document.querySelector('.garage-bay[data-unit="' + unitId + '"]');
-                    document.getElementById('floorplan').scrollIntoView({ behavior: 'smooth' });
-                    if (floorBtn) floorBtn.click();
+                    if (floorBtn) {
+                        document.querySelectorAll('.garage-bay.is-selected').forEach(function(el) { el.classList.remove('is-selected'); });
+                        floorBtn.classList.add('is-selected');
+                        renderBayDetail(bay);
+                    }
+                    openGarageReserveModal(bay);
                 });
             });
         }
@@ -515,6 +780,11 @@
                 .then(function(r) { return r.json(); })
                 .then(function(res) {
                     var garages = (res && res.garages) || [];
+                    garageByUnit = {};
+                    garages.forEach(function(g) {
+                        var unit = g.unit || g.unit_number;
+                        if (unit) garageByUnit[unit] = g;
+                    });
                     renderInventoryStats(garages);
                     buildFloorplan(garages);
                     renderAvailableCards(garages);
