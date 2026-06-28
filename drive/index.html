@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Drive | Wildfire Raceway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="bg-[#0a0a0a] text-[#c4c4c4] pb-24 md:pb-0">
+
+    <nav class="umc-nav-shell sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between min-h-[4.5rem] sm:h-20 gap-4">
+                <a href="../index.html" class="flex items-center gap-x-3 min-w-0 shrink-0 text-inherit no-underline hover:opacity-90 transition-opacity">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl border border-[#c5a26f]/35 bg-[#0c0c0c] flex items-center justify-center shadow-[0_0_40px_-10px_rgba(197,162,111,0.4)]">
+                        <i class="fa-solid fa-flag-checkered text-[#c5a26f] text-lg sm:text-xl" aria-hidden="true"></i>
+                    </div>
+                    <div class="min-w-0 leading-tight">
+                        <span class="font-medium text-base sm:text-xl md:text-2xl tracking-[0.14em] uppercase text-white heading-font block truncate">Wildfire</span>
+                        <span class="text-[10px] sm:text-xs tracking-[0.28em] uppercase text-[#c5a26f]/90 font-normal block -mt-0.5">Raceway</span>
+                    </div>
+                </a>
+                <div class="hidden lg:flex items-center gap-x-5 xl:gap-x-7">
+                    <a href="../track/index.html" class="nav-link">The Track</a>
+                    <a href="../karting/index.html" class="nav-link">Karting</a>
+                    <a href="../rocket-rally/index.html" class="nav-link">Rocket Rally</a>
+                    <a href="index.html" class="nav-link" aria-current="page">Drive</a>
+                    <a href="../flatout-sim-racing/index.html" class="nav-link">Sim Racing</a>
+                    <a href="../events/index.html" class="nav-link">Events</a>
+                    <a href="../garages/index.html" class="nav-link">Private Garages</a>
+                    <a href="/admin" class="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-2 rounded-lg border border-[#c5a26f] text-[#c5a26f] hover:bg-[#c5a26f] hover:text-[#0a0a0a] transition-colors shrink-0">Staff Command Center</a>
+                </div>
+                <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" class="lg:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-xl text-[#c5a26f] rounded-xl border border-white/10 hover:bg-white/5 transition">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i><span class="sr-only">Open menu</span>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.06] px-4 sm:px-6 py-6 bg-[#0a0a0a]/98">
+            <div class="flex flex-col gap-y-1 text-sm font-medium tracking-wide">
+                <a href="../track/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">The Track</a>
+                <a href="../karting/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Karting</a>
+                <a href="../rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Rocket Rally</a>
+                <a href="index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f]" aria-current="page">Drive</a>
+                <a href="../flatout-sim-racing/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Sim Racing</a>
+                <a href="../events/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Events</a>
+                <a href="../garages/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Private Garages</a>
+                <a href="/admin" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f] font-semibold">Staff Command Center →</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="border-b border-white/[0.06] bg-[#0c0c0c] relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#c5a26f]/[0.06] via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-12 sm:pt-14 sm:pb-16 relative">
+            <nav class="text-sm text-zinc-500 mb-6" aria-label="Breadcrumb">
+                <a href="../index.html" class="hover:text-white transition-colors">Home</a>
+                <span class="mx-2 text-zinc-600" aria-hidden="true">/</span>
+                <span class="text-zinc-400">Drive</span>
+            </nav>
+            <p class="text-[#c5a26f] text-xs font-medium tracking-[0.35em] uppercase">Get on track</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mt-3 heading-font">Drive Experiences</h1>
+            <p class="mt-6 text-lg sm:text-xl text-white/45 font-light leading-relaxed max-w-2xl">From open track days to manufacturer programs and supercar experiences — every way to put rubber on Wildfire’s asphalt.</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Featured: WOW -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20 border-b border-white/[0.06]">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08]">
+                    <img src="../searched_images/VXGAO.jpg" alt="Aerial view of Wildfire Raceway circuit" class="w-full min-h-[260px] object-cover img-cinematic" loading="eager" width="1200" height="800">
+                </div>
+                <div class="reveal space-y-6">
+                    <p class="text-[#c5a26f] text-[10px] tracking-[0.35em] uppercase font-medium">Most popular</p>
+                    <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium leading-tight">Wide Open Wednesdays</h2>
+                    <p class="text-white/45 font-light leading-[1.85]">Drive your street or race-prepared car at speed on our circuit in a non-competitive environment. Cars release strategically so you can run at your comfort level — one of the most memorable experiences on the Mountain West calendar.</p>
+                    <ul class="text-sm text-white/50 space-y-2">
+                        <li><i class="fa-solid fa-clock text-[#c5a26f]/70 mr-2" aria-hidden="true"></i>Four 1-hour sessions every Wednesday</li>
+                        <li><i class="fa-solid fa-car text-[#c5a26f]/70 mr-2" aria-hidden="true"></i>Beginner run group · 20 cars max per session</li>
+                        <li><i class="fa-solid fa-calendar-check text-[#c5a26f]/70 mr-2" aria-hidden="true"></i>Advanced WOW+ sessions for experienced drivers</li>
+                    </ul>
+                    <button type="button" class="booking-trigger inline-flex items-center justify-center px-8 py-4 min-h-[52px] rounded-sm font-semibold cta-primary tracking-[0.12em] uppercase text-xs sm:text-sm" data-booking-preset="track-day">Inquire about WOW</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience grid -->
+        <section class="bg-[#080808] py-16 sm:py-24 border-b border-white/[0.06]" aria-label="Drive programs">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 reveal">
+                    <p class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-3">Programs &amp; partners</p>
+                    <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">Every way to drive</h2>
+                    <p class="mt-4 text-white/40 font-light leading-relaxed">Recurring track programs, club racing, manufacturer experiences, and touring supercar events on campus.</p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 reveal-stagger" id="drive-experiences-grid">
+                    <!-- Cards rendered from campus drive programs -->
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 sm:py-24">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center reveal">
+                <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">Not sure which program fits?</h2>
+                <p class="mt-5 text-white/45 font-light leading-relaxed">Our team matches you with the right experience — track day, club event, or manufacturer program.</p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+                    <button type="button" class="booking-trigger px-10 py-4 min-h-[52px] rounded-sm font-semibold cta-primary tracking-[0.12em] uppercase text-xs sm:text-sm" data-booking-preset="track-day">Request a track day</button>
+                    <a href="mailto:sales@utahmotorsportscampus.com" class="inline-flex items-center justify-center px-10 py-4 min-h-[52px] rounded-sm border border-white/15 text-white/80 hover:border-[#c5a26f]/40 hover:text-[#c5a26f] text-xs font-semibold tracking-[0.12em] uppercase transition-colors">Email sales</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#080808] border-t border-white/[0.06] py-14 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-12 gap-y-12 md:gap-y-14">
+            <div class="md:col-span-5 reveal">
+                <a href="../index.html" class="flex items-center gap-x-3 mb-6 text-inherit no-underline hover:opacity-90 transition-opacity">
+                    <div class="w-10 h-10 rounded-xl border border-[#c5a26f]/35 bg-[#0c0c0c] flex items-center justify-center"><i class="fa-solid fa-flag-checkered text-[#c5a26f]" aria-hidden="true"></i></div>
+                    <span class="font-medium text-lg tracking-[0.12em] uppercase text-white heading-font">Wildfire Raceway</span>
+                </a>
+                <div class="text-white/40 max-w-sm leading-relaxed text-sm font-light">Track days, club racing, and manufacturer experiences on Utah’s premier private circuit.</div>
+            </div>
+            <div class="md:col-span-3 reveal">
+                <div class="text-[10px] tracking-[0.25em] text-[#c5a26f]/80 uppercase mb-5 font-semibold">Navigate</div>
+                <div class="space-y-3 text-sm text-white/45 font-light">
+                    <a href="../track/index.html" class="block hover:text-[#c5a26f] py-1 transition-colors">The Track</a>
+                    <a href="index.html" class="block hover:text-[#c5a26f] py-1 transition-colors">Drive</a>
+                    <a href="../flatout-sim-racing/index.html" class="block hover:text-[#c5a26f] py-1 transition-colors">Sim Racing</a>
+                    <a href="../events/index.html" class="block hover:text-[#c5a26f] py-1 transition-colors">Events</a>
+                </div>
+            </div>
+            <div class="md:col-span-4 reveal">
+                <div class="text-[10px] tracking-[0.25em] text-[#c5a26f]/80 uppercase mb-5 font-semibold">Contact</div>
+                <a href="mailto:sales@utahmotorsportscampus.com" class="text-[#c5a26f] hover:text-[#e8d5b5] text-sm">sales@utahmotorsportscampus.com</a>
+                <div class="mt-6 text-xs text-white/30">Grantsville, Utah · 35 minutes from Salt Lake City</div>
+            </div>
+        </div>
+        <div class="text-center text-xs text-white/25 mt-16 px-4">© 2026 Wildfire Raceway. All rights reserved.</div>
+    </footer>
+
+    <div class="mobile-cta-bar md:hidden fixed bottom-0 left-0 right-0 z-40 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl" role="region" aria-label="Primary action">
+        <button type="button" class="booking-trigger flex w-full max-w-lg mx-auto min-h-[48px] items-center justify-center rounded-sm cta-primary text-xs font-semibold tracking-[0.15em] uppercase" data-booking-preset="track-day">Book a track day</button>
+    </div>
+
+    <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" aria-describedby="booking-modal-desc">
+        <div class="booking-modal-backdrop" data-booking-close tabindex="-1" aria-hidden="true"></div>
+        <div class="booking-modal-panel">
+            <div class="booking-modal-accent" aria-hidden="true"></div>
+            <div class="p-6 sm:p-8">
+                <div class="flex justify-between items-start gap-4">
+                    <div class="flex gap-3 min-w-0">
+                        <div class="w-11 h-11 shrink-0 rounded-xl border border-[#c5a26f]/40 bg-[#0c0c0c] flex items-center justify-center"><i class="fa-solid fa-flag-checkered text-[#c5a26f] text-lg" aria-hidden="true"></i></div>
+                        <div class="min-w-0">
+                            <h2 id="booking-modal-title" class="text-xl sm:text-2xl font-bold heading-font text-white tracking-tight">Book your experience</h2>
+                            <p id="booking-modal-desc" class="text-sm text-zinc-400 mt-1 leading-relaxed">Tell us what you’re after — we’ll follow up with availability and next steps.</p>
+                        </div>
+                    </div>
+                    <button type="button" id="booking-modal-close" class="shrink-0 w-11 h-11 rounded-xl border border-zinc-700 bg-zinc-900/80 text-zinc-400 hover:text-white hover:border-zinc-500 hover:bg-zinc-800 flex items-center justify-center transition" aria-label="Close booking form"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
+                </div>
+                <div id="booking-error" class="booking-error-banner" role="alert" aria-live="assertive"></div>
+                <div id="booking-form-block" class="booking-form-block">
+                <form id="booking-form" class="mt-8 space-y-5" novalidate>
+                    <div><label for="booking-experience" class="block text-xs font-semibold tracking-widest text-[#c5a26f] uppercase mb-2">Experience type</label><select id="booking-experience" name="experience-type" class="booking-field" required><option value="track-day">Track Day</option><option value="karting">Karting</option><option value="rocket-rally">Rocket Rally</option></select></div>
+                    <div><label for="booking-date" class="block text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">Date</label><input id="booking-date" name="booking-date" type="date" class="booking-field" required autocomplete="off"></div>
+                    <div><label for="booking-people" class="block text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">Number of people</label><input id="booking-people" name="booking-people" type="number" class="booking-field" min="1" max="999" value="1" required inputmode="numeric"></div>
+                    <fieldset class="border border-zinc-800 rounded-2xl p-4 sm:p-5 bg-zinc-950/80 space-y-4">
+                        <legend class="text-xs font-semibold tracking-widest text-zinc-500 uppercase px-1">Contact info</legend>
+                        <div><label for="booking-name" class="sr-only">Full name</label><input id="booking-name" name="contact-name" type="text" class="booking-field" placeholder="Full name" required autocomplete="name"></div>
+                        <div><label for="booking-email" class="sr-only">Email</label><input id="booking-email" name="contact-email" type="email" class="booking-field" placeholder="Email" required autocomplete="email"></div>
+                        <div><label for="booking-phone" class="sr-only">Phone</label><input id="booking-phone" name="contact-phone" type="tel" class="booking-field" placeholder="Phone" required autocomplete="tel"></div>
+                    </fieldset>
+                    <div><label for="booking-notes" class="block text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">Notes <span class="text-zinc-600 normal-case tracking-normal font-normal text-xs">(optional)</span></label><textarea id="booking-notes" name="notes" class="booking-field" placeholder="Program interest, vehicle type, or questions…" rows="3" autocomplete="off"></textarea></div>
+                    <button type="submit" id="booking-submit-btn" class="w-full min-h-[52px] rounded-xl font-semibold text-base cta-primary">Send booking request</button>
+                </form>
+                </div>
+                <div id="booking-success" class="booking-success-panel" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-check text-2xl text-emerald-400" aria-hidden="true"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white heading-font">Request received</h2>
+                    <p class="text-zinc-400 mt-3 text-sm sm:text-base leading-relaxed max-w-sm mx-auto">Thank you. Our team will reach out soon with availability and next steps.</p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:justify-center">
+                        <button type="button" id="booking-success-close" class="min-h-[48px] px-6 rounded-xl font-semibold cta-primary">Done</button>
+                        <button type="button" id="booking-another-btn" class="min-h-[48px] px-6 rounded-2xl border border-zinc-600 bg-zinc-900/80 text-zinc-200 font-semibold cta-secondary hover:bg-zinc-800">Submit another request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/site.js" defer></script>
+    <script>
+        // Drive experience cards — sourced from Utah Motorsports Campus drive programs
+        (function renderDriveExperiences() {
+            var grid = document.getElementById('drive-experiences-grid');
+            if (!grid) return;
+
+            var programs = [
+                { icon: 'fa-calendar-day', tag: 'Weekly', title: 'Wide Open Wednesdays', desc: 'Non-competitive open track laps for street and race-prepared cars. Four beginner sessions every Wednesday.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-gauge-high', tag: 'Advanced', title: 'WOW+', desc: 'Advanced Wide Open Wednesdays for experienced drivers ready for faster pace and passing zones.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-road', tag: 'Drag', title: 'UMC Roll Racing', desc: 'Roll racing on the front stretch — high-speed matchups in a controlled environment.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-flag-checkered', tag: 'Club', title: 'NASA Utah', desc: 'National Auto Sport Association wheel-to-wheel racing and HPDE programs on multiple configurations.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-motorcycle', tag: 'Club', title: 'Utah SuperBikes', desc: 'USBK superbike and supermoto events on the full circuit and kart track configurations.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-car', tag: 'Club', title: 'SCCA Utah', desc: 'Sports Car Club of America road racing, time trials, and triple-header weekends.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-p', tag: 'Manufacturer', title: 'IRPCA / Porsche', desc: 'Intermountain Region Porsche Club of America track events and manufacturer driving programs.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-stopwatch', tag: 'Track day', title: 'APEXtrackdays', desc: 'Organized high-performance driver education and open lapping days.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-bolt', tag: 'Supercar', title: 'Xtreme Xperience', desc: 'Drive Ferrari, Lamborghini, Porsche & more on circuit with a pro instructor. Touring event — book dates at Xtreme Xperience.', cta: 'link', href: 'https://www.thextremexperience.com/events', label: 'View dates' },
+                { icon: 'fa-mountain-sun', tag: 'Experience', title: 'Volant Vivere', desc: 'Curated automotive lifestyle experience weekends on campus.', cta: 'book', preset: 'track-day', label: 'Inquire' },
+                { icon: 'fa-steering-wheel', tag: 'Experience', title: 'Autostrada', desc: 'Premium driving events on the outer track configuration — refined pace for enthusiast groups.', cta: 'book', preset: 'track-day', label: 'Inquire' }
+            ];
+
+            grid.innerHTML = programs.map(function(p) {
+                var action = p.cta === 'link'
+                    ? '<a href="' + p.href + '" target="_blank" rel="noopener noreferrer" class="drive-card-cta">' + p.label + ' <span aria-hidden="true">→</span></a>'
+                    : '<button type="button" class="drive-card-cta booking-trigger" data-booking-preset="' + p.preset + '" data-drive-program="' + p.title.replace(/"/g, '') + '">' + p.label + ' <span aria-hidden="true">→</span></button>';
+                return '<article class="racing-card drive-experience-card border border-white/[0.08] bg-[#0c0c0c] p-6 sm:p-7 rounded-sm flex flex-col">' +
+                    '<div class="flex items-start justify-between gap-3 mb-4">' +
+                        '<i class="fa-solid ' + p.icon + ' text-2xl text-[#c5a26f]/85" aria-hidden="true"></i>' +
+                        '<span class="text-[10px] tracking-[0.2em] uppercase text-white/35 border border-white/10 px-2 py-0.5 rounded-full shrink-0">' + p.tag + '</span>' +
+                    '</div>' +
+                    '<h3 class="text-lg text-white heading-font font-medium leading-snug">' + p.title + '</h3>' +
+                    '<p class="mt-3 text-sm text-white/45 font-light leading-relaxed flex-grow">' + p.desc + '</p>' +
+                    '<div class="mt-5 pt-4 border-t border-white/[0.06]">' + action + '</div>' +
+                '</article>';
+            }).join('');
+
+            grid.querySelectorAll('.booking-trigger[data-drive-program]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var program = btn.getAttribute('data-drive-program');
+                    window.setTimeout(function() {
+                        var notes = document.getElementById('booking-notes');
+                        if (notes && program) notes.value = 'Interested in: ' + program + '.';
+                    }, 400);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

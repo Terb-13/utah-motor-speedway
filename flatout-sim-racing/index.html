@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Flatout Sim Racing | Wildfire Raceway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="bg-[#0a0a0a] text-[#c4c4c4] pb-24 md:pb-0">
+
+    <nav class="umc-nav-shell sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between min-h-[4.5rem] sm:h-20 gap-4">
+                <a href="../index.html" class="flex items-center gap-x-3 min-w-0 shrink-0 text-inherit no-underline hover:opacity-90 transition-opacity">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl border border-[#c5a26f]/35 bg-[#0c0c0c] flex items-center justify-center shadow-[0_0_40px_-10px_rgba(197,162,111,0.4)]">
+                        <i class="fa-solid fa-flag-checkered text-[#c5a26f] text-lg sm:text-xl" aria-hidden="true"></i>
+                    </div>
+                    <div class="min-w-0 leading-tight">
+                        <span class="font-medium text-base sm:text-xl md:text-2xl tracking-[0.14em] uppercase text-white heading-font block truncate">Wildfire</span>
+                        <span class="text-[10px] sm:text-xs tracking-[0.28em] uppercase text-[#c5a26f]/90 font-normal block -mt-0.5">Raceway</span>
+                    </div>
+                </a>
+                <div class="hidden lg:flex items-center gap-x-5 xl:gap-x-7">
+                    <a href="../track/index.html" class="nav-link">The Track</a>
+                    <a href="../karting/index.html" class="nav-link">Karting</a>
+                    <a href="../rocket-rally/index.html" class="nav-link">Rocket Rally</a>
+                    <a href="../drive/index.html" class="nav-link">Drive</a>
+                    <a href="index.html" class="nav-link" aria-current="page">Sim Racing</a>
+                    <a href="../events/index.html" class="nav-link">Events</a>
+                    <a href="../garages/index.html" class="nav-link">Private Garages</a>
+                    <a href="/admin" class="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-2 rounded-lg border border-[#c5a26f] text-[#c5a26f] hover:bg-[#c5a26f] hover:text-[#0a0a0a] transition-colors shrink-0">Staff Command Center</a>
+                </div>
+                <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" class="lg:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-xl text-[#c5a26f] rounded-xl border border-white/10 hover:bg-white/5 transition">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i><span class="sr-only">Open menu</span>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.06] px-4 sm:px-6 py-6 bg-[#0a0a0a]/98">
+            <div class="flex flex-col gap-y-1 text-sm font-medium tracking-wide">
+                <a href="../track/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">The Track</a>
+                <a href="../karting/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Karting</a>
+                <a href="../rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Rocket Rally</a>
+                <a href="../drive/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Drive</a>
+                <a href="index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f]" aria-current="page">Sim Racing</a>
+                <a href="../events/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Events</a>
+                <a href="../garages/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Private Garages</a>
+                <a href="/admin" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f] font-semibold">Staff Command Center →</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="border-b border-white/[0.06] bg-[#0c0c0c]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-12 sm:pt-14 sm:pb-16">
+            <nav class="text-sm text-zinc-500 mb-6" aria-label="Breadcrumb">
+                <a href="../index.html" class="hover:text-white transition-colors">Home</a>
+                <span class="mx-2 text-zinc-600" aria-hidden="true">/</span>
+                <span class="text-zinc-400">Flatout Sim Racing</span>
+            </nav>
+            <p class="text-[#c5a26f] text-xs font-medium tracking-[0.35em] uppercase">LVRY × Flatout</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mt-3 heading-font">Full-Motion<br>Sim Racing</h1>
+            <p class="mt-6 text-lg sm:text-xl text-white/45 font-light leading-relaxed max-w-2xl">Racing continues beyond the asphalt — immersive simulators inside LVRY at Wildfire Raceway, powered by iRacing and full-motion rigs.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+            <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="reveal order-2 md:order-1 space-y-6">
+                    <h2 class="text-2xl sm:text-3xl text-white heading-font font-medium leading-tight">Flatout Sim Racing × LVRY</h2>
+                    <p class="text-base sm:text-lg text-white/45 font-light leading-[1.85]">Located inside <strong class="text-white/80 font-medium">LVRY</strong> at Wildfire Raceway, Flatout delivers a high-end virtual racing experience that puts you behind the wheel in a whole new way. Advanced full-motion simulators let you take on iconic cars and tracks with realism that mirrors real-world performance.</p>
+                    <p class="text-base sm:text-lg text-white/45 font-light leading-[1.85]">Whether you’re learning the basics or chasing faster lap times, Flatout offers an interactive environment where anyone can step into the role of a driver — a natural extension of the campus experience.</p>
+                    <ul class="space-y-3 text-sm text-white/50">
+                        <li class="flex gap-3"><i class="fa-solid fa-gamepad text-[#c5a26f] mt-0.5" aria-hidden="true"></i><span><strong class="text-white/70">160+ race cars</strong> — Formula, NASCAR, IndyCar, GT, sports cars &amp; more</span></li>
+                        <li class="flex gap-3"><i class="fa-solid fa-road text-[#c5a26f] mt-0.5" aria-hidden="true"></i><span><strong class="text-white/70">World-class tracks</strong> — COTA, Daytona, Le Mans, Spa, Monza &amp; hundreds more via iRacing</span></li>
+                        <li class="flex gap-3"><i class="fa-solid fa-arrows-up-down-left-right text-[#c5a26f] mt-0.5" aria-hidden="true"></i><span><strong class="text-white/70">Full-motion rigs</strong> — feel every corner, curb, and straightaway blast</span></li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <a href="https://driveflatout.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-8 py-4 min-h-[52px] rounded-sm font-semibold cta-primary tracking-[0.12em] uppercase text-xs sm:text-sm">
+                            Book at Flatout <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.utahmotorsportscampus.com/lvry/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 min-h-[52px] rounded-sm border border-white/15 text-white/80 hover:border-[#c5a26f]/40 hover:text-[#c5a26f] text-xs font-semibold tracking-[0.12em] uppercase transition-colors">
+                            Visit LVRY
+                        </a>
+                    </div>
+                </div>
+                <div class="relative order-1 md:order-2 reveal">
+                    <div class="rounded-sm overflow-hidden border border-white/[0.08] shadow-[0_48px_100px_-48px_rgba(0,0,0,0.9)] img-cinematic-wrap">
+                        <img src="../searched_images/Hm4yP.jpg" alt="Racing simulator cockpit at Wildfire Raceway campus" class="w-full aspect-[16/10] object-cover img-cinematic" loading="eager" width="960" height="600">
+                    </div>
+                    <div class="mt-4 sm:absolute sm:-bottom-6 sm:-left-4 bg-[#0c0c0c] border border-white/[0.08] p-5 sm:p-6 rounded-sm max-w-[280px] shadow-xl">
+                        <div class="text-[#c5a26f] text-[10px] tracking-[0.28em] uppercase mb-1">On campus</div>
+                        <div class="text-white heading-font text-lg font-medium leading-snug">512 S Sheep Lane · Grantsville</div>
+                        <div class="text-xs text-white/40 mt-1">Inside LVRY at Wildfire Raceway</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#080808] border-t border-white/[0.06] py-16 sm:py-20">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+                    <p class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-3">The experience</p>
+                    <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">More than a video game</h2>
+                    <p class="mt-4 text-white/40 font-light leading-relaxed">Podium-grade motion platforms and wrap-around displays put you in the cockpit — closer to karting than console racing.</p>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-4 reveal-stagger">
+                    <div class="racing-card border border-white/[0.08] bg-[#0c0c0c] p-6 sm:p-8 rounded-sm text-center">
+                        <i class="fa-solid fa-vr-cardboard text-3xl text-[#c5a26f]/90 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg text-white heading-font font-medium mb-2">Immersive cockpits</h3>
+                        <p class="text-sm text-white/40 font-light leading-relaxed">180° wrap-around displays and motion that mirrors real g-forces through corners.</p>
+                    </div>
+                    <div class="racing-card border border-white/[0.08] bg-[#0c0c0c] p-6 sm:p-8 rounded-sm text-center">
+                        <i class="fa-solid fa-flag-checkered text-3xl text-[#c5a26f]/90 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg text-white heading-font font-medium mb-2">iRacing software</h3>
+                        <p class="text-sm text-white/40 font-light leading-relaxed">The industry standard for realism — laser-scanned tracks and pro-level physics.</p>
+                    </div>
+                    <div class="racing-card border border-white/[0.08] bg-[#0c0c0c] p-6 sm:p-8 rounded-sm text-center sm:col-span-1 col-span-full">
+                        <i class="fa-solid fa-users text-3xl text-[#c5a26f]/90 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg text-white heading-font font-medium mb-2">All skill levels</h3>
+                        <p class="text-sm text-white/40 font-light leading-relaxed">First-timers welcome. Serious racers use Flatout to sharpen lines before track days.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-t border-white/[0.06] py-16 sm:py-20">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                <div class="reveal border border-white/[0.08] rounded-sm overflow-hidden bg-[#0c0c0c]">
+                    <div class="px-6 sm:px-8 py-5 border-b border-white/[0.06] bg-[#080808]">
+                        <h2 class="text-xl text-white heading-font font-medium">Flatout Sim Racing hours</h2>
+                        <p class="text-sm text-white/40 mt-1 font-light">Grantsville campus · inside LVRY</p>
+                    </div>
+                    <ul class="divide-y divide-white/[0.06] text-sm">
+                        <li class="flex justify-between px-6 sm:px-8 py-3.5"><span class="text-white/70">Sunday</span><span class="text-white font-medium">10 AM – 10 PM</span></li>
+                        <li class="flex justify-between px-6 sm:px-8 py-3.5"><span class="text-white/70">Monday – Thursday</span><span class="text-white font-medium">2 PM – 10 PM</span></li>
+                        <li class="flex justify-between px-6 sm:px-8 py-3.5"><span class="text-white/70">Friday – Saturday</span><span class="text-white font-medium">10 AM – 10 PM</span></li>
+                    </ul>
+                    <div class="px-6 sm:px-8 py-5 border-t border-white/[0.06] bg-[#080808]/50">
+                        <p class="text-xs text-white/35 leading-relaxed">Also visit Flatout’s Salt Lake City location. Book online or call <a href="tel:8016619885" class="text-[#c5a26f] hover:text-[#e8d5b5]">801-661-9885</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#080808] border-t border-white/[0.06] py-14 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-12 gap-y-12 md:gap-y-14">
+            <div class="md:col-span-5 reveal">
+                <a href="../index.html" class="flex items-center gap-x-3 mb-6 text-inherit no-underline hover:opacity-90 transition-opacity">
+                    <div class="w-10 h-10 rounded-xl border border-[#c5a26f]/35 bg-[#0c0c0c] flex items-center justify-center"><i class="fa-solid fa-flag-checkered text-[#c5a26f]" aria-hidden="true"></i></div>
+                    <span class="font-medium text-lg tracking-[0.12em] uppercase text-white heading-font">Wildfire Raceway</span>
+                </a>
+                <div class="text-white/40 max-w-sm leading-relaxed text-sm font-light">Full-motion sim racing on campus — where the paddock meets the virtual grid.</div>
+            </div>
+            <div class="md:col-span-3 reveal">
+                <div class="text-[10px] tracking-[0.25em] text-[#c5a26f]/80 uppercase mb-5 font-semibold">Navigate</div>
+                <div class="space-y-3 text-sm text-white/45 font-light">
+                    <a href="../track/index.html" class="block hover:text-[#c5a26f] py-1 transition-colors">The Track</a>
+                    <a href="../drive/index.html" class="block hover:text-[#c5a26f] py-1 transition-colors">Drive</a>
+                    <a href="index.html" class="block hover:text-[#c5a26f] py-1 transition-colors">Sim Racing</a>
+                    <a href="../garages/index.html" class="block hover:text-[#c5a26f] py-1 transition-colors">Private Garages</a>
+                </div>
+            </div>
+            <div class="md:col-span-4 reveal">
+                <div class="text-[10px] tracking-[0.25em] text-[#c5a26f]/80 uppercase mb-5 font-semibold">Book sim time</div>
+                <a href="https://driveflatout.com/" target="_blank" rel="noopener noreferrer" class="text-[#c5a26f] hover:text-[#e8d5b5] text-sm break-all">driveflatout.com</a>
+                <div class="mt-6 text-xs text-white/30">Grantsville, Utah · 35 minutes from Salt Lake City</div>
+            </div>
+        </div>
+        <div class="text-center text-xs text-white/25 mt-16 px-4">© 2026 Wildfire Raceway. All rights reserved.</div>
+    </footer>
+
+    <div class="mobile-cta-bar md:hidden fixed bottom-0 left-0 right-0 z-40 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl" role="region" aria-label="Primary action">
+        <a href="https://driveflatout.com/" target="_blank" rel="noopener noreferrer" class="flex w-full max-w-lg mx-auto min-h-[48px] items-center justify-center rounded-sm cta-primary text-xs font-semibold tracking-[0.15em] uppercase">Book Sim Racing</a>
+    </div>
+
+    <script src="../js/site.js" defer></script>
+</body>
+</html>

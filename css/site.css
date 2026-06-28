@@ -107,6 +107,43 @@ body {
     box-shadow: 0 28px 56px -20px rgba(197, 162, 111, 0.12), 0 0 0 1px rgba(197, 162, 111, 0.12);
 }
 
+.drive-experience-card {
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.drive-experience-card:hover {
+    border-color: rgba(197, 162, 111, 0.28);
+}
+
+.drive-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--umc-gold);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.drive-card-cta:hover {
+    color: #e8d5b5;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .umc-nav-shell .nav-link {
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+    }
+}
+
 .nav-link {
     transition: color 0.2s ease;
     position: relative;
