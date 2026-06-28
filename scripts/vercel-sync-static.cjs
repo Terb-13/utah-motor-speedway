@@ -13,6 +13,8 @@ const toCopy = [
   'track',
   'karting',
   'rocket-rally',
+  'drive',
+  'flatout-sim-racing',
   'events',
   'garages',
   'css',
