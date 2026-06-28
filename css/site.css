@@ -775,6 +775,24 @@ textarea.booking-field {
     align-items: flex-end;
 }
 
+.umc-draft-btn {
+    margin-top: 6px;
+    width: 100%;
+    background: rgba(197, 162, 111, 0.12);
+    border: 1px solid rgba(197, 162, 111, 0.45);
+    color: #c5a26f;
+    font-size: 0.78rem;
+    padding: 7px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+}
+.umc-draft-btn:hover {
+    background: rgba(197, 162, 111, 0.2);
+    border-color: #c5a26f;
+}
+
 .umc-chat-input {
     flex: 1;
     resize: none;

@@ -439,7 +439,9 @@
             '<label for="umc-chat-input" class="sr-only">Message</label>' +
             '<textarea id="umc-chat-input" class="umc-chat-input booking-field" rows="1" placeholder="Message the assistant…" autocomplete="off"></textarea>' +
             '<button type="submit" class="umc-chat-send" aria-label="Send message"><i class="fa-solid fa-paper-plane text-lg" aria-hidden="true"></i></button>' +
-            '</form></div></div>' +
+            '</form>' +
+            '<button type="button" id="umc-draft-booking-btn" class="umc-draft-btn">Draft Booking →</button>' +
+            '</div></div>' +
             '<button type="button" id="umc-trigger-book-karting" class="booking-trigger sr-only" tabindex="-1" data-booking-preset="karting" aria-hidden="true">Book Karting</button>' +
             '<button type="button" id="umc-trigger-book-rocket" class="booking-trigger sr-only" tabindex="-1" data-booking-preset="rocket-rally" aria-hidden="true">Book Rocket Rally</button>';
 
@@ -453,6 +455,7 @@
         var chatInput = document.getElementById('umc-chat-input');
         var triggerKarting = document.getElementById('umc-trigger-book-karting');
         var triggerRocket = document.getElementById('umc-trigger-book-rocket');
+        var draftBtn = document.getElementById('umc-draft-booking-btn');
 
         function escapeHtml(s) {
             var d = document.createElement('div');
@@ -599,7 +602,7 @@
         appendBubble(
             'assistant',
             formatAssistantMarkdown(
-                'Welcome to **Wildfire Raceway**. Ask about membership, the circuit, karting, our in-house **Rocket Rally** experience, private events, or **Private Garages**. Quick replies can open booking for you.'
+                'Welcome to **Wildfire Raceway**. Ask me about availability, track days, karting, **Rocket Rally**, or garages. When you’re ready I can help you **create a draft booking** — use the button below or say what experience you want.'
             ),
             '',
             false
@@ -638,5 +641,22 @@
                 }
             });
         });
+
+        // Draft Booking button — opens the existing booking modal (pre-fills nothing but allows immediate selection)
+        if (draftBtn) {
+            draftBtn.addEventListener('click', function () {
+                // Prefer the global set by booking modal code
+                if (typeof openBookingWithPreset === 'function') {
+                    openBookingWithPreset('track-day');
+                } else if (triggerKarting) {
+                    // fallback: simulate click on a trigger
+                    triggerKarting.click();
+                }
+                // Helpful follow-up
+                setTimeout(function () {
+                    appendBubble('assistant', formatAssistantMarkdown('Opening the booking form. Pick your experience and preferred date — I can help with questions while you fill it out.'), '', false);
+                }, 650);
+            });
+        }
     })();
 })();

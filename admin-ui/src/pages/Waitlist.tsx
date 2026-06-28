@@ -1,27 +1,53 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { fetchWaitlist, type WaitlistRow } from '../lib/api';
+import { fetchWaitlist, patchWaitlist, type WaitlistRow } from '../lib/api';
+import { normalizeInquiryStatus } from '../lib/format';
 
 export function Waitlist() {
   const [rows, setRows] = useState<WaitlistRow[]>([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [busyId, setBusyId] = useState<string | null>(null);
+
+  const load = async () => {
+    setLoading(true);
+    try {
+      const w = await fetchWaitlist();
+      setRows(w);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed to load');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const w = await fetchWaitlist();
-        if (!cancelled) setRows(w);
-      } catch (e) {
-        if (!cancelled) setError(e instanceof Error ? e.message : 'Failed to load');
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
+    void load();
   }, []);
+
+  async function saveStatus(id: string, status: string) {
+    setBusyId(id);
+    try {
+      const u = await patchWaitlist({ id, status });
+      setRows((prev) => prev.map((r) => (r.id === id ? { ...r, status: u.status } : r)));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed');
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  async function saveNote(id: string, notes: string) {
+    setBusyId(id);
+    try {
+      const n = notes.trim() || null;
+      const u = await patchWaitlist({ id, notes: n });
+      setRows((prev) => prev.map((r) => (r.id === id ? { ...r, notes: u.notes } : r)));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed');
+    } finally {
+      setBusyId(null);
+    }
+  }
 
   if (loading) return <p style={{ color: 'var(--wf-text-dim)' }}>Loading waitlist…</p>;
   if (error) return <p style={{ color: '#f87171' }}>{error}</p>;
@@ -39,9 +65,9 @@ export function Waitlist() {
           <thead>
             <tr style={{ background: 'var(--wf-elevated)', textAlign: 'left' }}>
               <th style={th}>Name</th>
-              <th style={th}>Email</th>
-              <th style={th}>Phone</th>
-              <th style={th}>Notes</th>
+              <th style={th}>Email / Phone</th>
+              <th style={th}>Status</th>
+              <th style={{ ...th, minWidth: 200 }}>Notes</th>
             </tr>
           </thead>
           <tbody>
@@ -54,16 +80,42 @@ export function Waitlist() {
             ) : (
               rows.map((row) => (
                 <tr key={row.id} style={{ borderTop: '1px solid var(--wf-border)' }}>
-                  <td style={td}>{row.full_name}</td>
-                  <td style={td}>{row.email}</td>
-                  <td style={td}>{row.phone}</td>
-                  <td style={{ ...td, color: 'var(--wf-text-dim)', maxWidth: 280 }}>{row.notes || '—'}</td>
+                  <td style={td}><strong>{row.full_name}</strong></td>
+                  <td style={td}>
+                    <div>{row.email}</div>
+                    <div style={{ color: 'var(--wf-text-dim)', fontSize: '0.8rem' }}>{row.phone}</div>
+                  </td>
+                  <td style={td}>
+                    <select
+                      className="wf-input-dark wf-input-compact"
+                      value={normalizeInquiryStatus(row.status)}
+                      disabled={busyId === row.id}
+                      onChange={(e) => void saveStatus(row.id, e.target.value)}
+                    >
+                      {['New', 'Contacted', 'Qualified', 'Booked', 'Closed'].map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </td>
+                  <td style={td}>
+                    <textarea
+                      className="wf-input-dark"
+                      defaultValue={row.notes || ''}
+                      rows={2}
+                      style={{ width: '100%', fontSize: '0.82rem' }}
+                      disabled={busyId === row.id}
+                      onBlur={(e) => void saveNote(row.id, e.target.value)}
+                    />
+                  </td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
       </div>
+      <p style={{ marginTop: '0.75rem', fontSize: '0.75rem', color: 'var(--wf-text-dim)' }}>
+        Prefer the unified view? Use the <a href="/" style={{ color: 'var(--wf-gold)' }}>Command Center</a>.
+      </p>
     </div>
   );
 }

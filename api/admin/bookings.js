@@ -3,7 +3,10 @@ const { parseJsonBody } = require('../../lib/parseJsonBody');
 const { isAdminSessionValid } = require('../../lib/adminSession');
 const { sendBookingStatusEmailIfNeeded } = require('../../lib/bookingStatusEmail');
 
-const STATUS = new Set(['pending', 'confirmed', 'cancelled']);
+// Support both legacy statuses (for existing Bookings page) and new pipeline statuses
+const LEGACY_STATUS = new Set(['pending', 'confirmed', 'cancelled']);
+const PIPELINE_STATUS = new Set(['New', 'Contacted', 'Qualified', 'Booked', 'Closed']);
+const STATUS = new Set([...LEGACY_STATUS, ...PIPELINE_STATUS]);
 
 function getSupabase() {
   const url = process.env.SUPABASE_URL;
@@ -69,7 +72,7 @@ module.exports = async function handler(req, res) {
     if (body.status !== undefined && body.status !== null) {
       const st = (body.status || '').toString().toLowerCase().trim();
       if (!STATUS.has(st)) {
-        return res.status(400).json({ error: 'status must be pending, confirmed, or cancelled' });
+        return res.status(400).json({ error: 'Invalid status. Use New, Contacted, Qualified, Booked, Closed or legacy pending/confirmed/cancelled' });
       }
       patch.status = st;
     }

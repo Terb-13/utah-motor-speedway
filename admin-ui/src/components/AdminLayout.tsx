@@ -3,17 +3,17 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const nav = [
-  { to: '/', label: 'Dashboard', end: true },
+  { to: '/', label: 'Command Center', end: true },
   { to: '/bookings', label: 'Bookings' },
   { to: '/calendar', label: 'Calendar' },
-  { to: '/waitlist', label: 'Waitlist' },
+  { to: '/waitlist', label: 'Garage Waitlist' },
 ];
 
 const pageTitle: Record<string, string> = {
-  '/': 'Dashboard',
+  '/': 'Command Center',
   '/bookings': 'Bookings',
   '/calendar': 'Calendar',
-  '/waitlist': 'Waitlist',
+  '/waitlist': 'Garage Waitlist',
 };
 
 export function AdminLayout() {
@@ -74,7 +74,7 @@ export function AdminLayout() {
               marginBottom: '0.35rem',
             }}
           >
-            Wildfire Raceway
+            WILDFIRE RACEWAY
           </div>
           <div
             style={{
@@ -84,7 +84,7 @@ export function AdminLayout() {
               letterSpacing: '0.04em',
             }}
           >
-            Admin
+            Command Center
           </div>
         </div>
         <nav style={{ padding: '1rem 0.75rem', flex: 1 }}>

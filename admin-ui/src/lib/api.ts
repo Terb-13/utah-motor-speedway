@@ -38,6 +38,24 @@ export type BookingRow = {
   created_at?: string;
 };
 
+// Unified inquiry type for the Command Center pipeline (client-side merge)
+export type InquirySource = 'booking' | 'waitlist';
+
+export type Inquiry = {
+  id: string; // original id
+  source: InquirySource;
+  // unified fields
+  date: string; // preferred_date or created_at (YYYY-MM-DD)
+  displayDate: string;
+  name: string;
+  email: string;
+  phone: string;
+  type: string; // 'Track Day' | 'Karting' | 'Rocket Rally' | 'Garage Waitlist'
+  status: string;
+  notes: string | null;
+  raw: BookingRow | WaitlistRow;
+};
+
 export type BookingStatus = 'pending' | 'confirmed' | 'cancelled';
 
 export async function fetchBookings(): Promise<BookingRow[]> {
@@ -81,6 +99,23 @@ export async function updateBookingStatus(
   return patchBooking({ id, status });
 }
 
+// Pipeline-friendly: mark status quickly for either source
+export async function setInquiryStatus(source: InquirySource, id: string, status: string): Promise<void> {
+  if (source === 'booking') {
+    await patchBooking({ id, status: status as BookingStatus });
+  } else {
+    await patchWaitlist({ id, status });
+  }
+}
+
+export async function setInquiryNotes(source: InquirySource, id: string, notes: string | null): Promise<BookingRow | WaitlistRow> {
+  if (source === 'booking') {
+    return patchBooking({ id, notes });
+  } else {
+    return patchWaitlist({ id, notes });
+  }
+}
+
 export async function bulkSetBookingStatus(
   ids: string[],
   status: BookingStatus
@@ -106,6 +141,7 @@ export type WaitlistRow = {
   email: string;
   phone: string;
   notes?: string | null;
+  status?: string | null;
   created_at?: string;
 };
 
@@ -116,4 +152,28 @@ export async function fetchWaitlist(): Promise<WaitlistRow[]> {
     throw new Error((data as { error?: string }).error || 'Failed to load waitlist');
   }
   return (data as { entries?: WaitlistRow[] }).entries || [];
+}
+
+export type PatchWaitlistInput = {
+  id: string;
+  status?: string;
+  notes?: string | null;
+};
+
+export async function patchWaitlist(input: PatchWaitlistInput): Promise<WaitlistRow> {
+  const res = await fetch('/api/admin/waitlist', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(input),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(
+      (data as { error?: string; details?: string }).error ||
+        (data as { details?: string }).details ||
+        'Failed to update waitlist entry'
+    );
+  }
+  return (data as { entry: WaitlistRow }).entry;
 }
