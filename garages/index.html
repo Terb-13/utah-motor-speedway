@@ -71,9 +71,10 @@
             <p class="mt-10 text-lg sm:text-xl text-white/45 font-light leading-[1.85] max-w-2xl mx-auto">
                 A restrained collection of bays designed for machines that deserve silence, climate, and a straight sightline to the circuit — with curated living and office space above, so the club is never just where you store the car. It is where you plan the next season.
             </p>
-            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
                 <a href="#floorplan" class="cta-primary inline-flex items-center justify-center min-h-[48px] px-8 rounded-xl text-sm font-semibold tracking-wide">Explore Live Floorplan</a>
-                <a href="#garage-waitlist" class="inline-flex items-center justify-center min-h-[48px] px-8 rounded-xl text-sm font-semibold tracking-wide border border-[#c5a26f]/50 text-[#c5a26f] hover:bg-[#c5a26f]/10 transition-colors">Join Waitlist</a>
+                <a href="#daily-rental" class="inline-flex items-center justify-center min-h-[48px] px-8 rounded-xl text-sm font-semibold tracking-wide border border-white/20 text-white hover:bg-white/5 transition-colors">Book by the Day — $25</a>
+                <a href="#garage-waitlist" class="inline-flex items-center justify-center min-h-[48px] px-8 rounded-xl text-sm font-semibold tracking-wide border border-[#c5a26f]/50 text-[#c5a26f] hover:bg-[#c5a26f]/10 transition-colors">Long-Term Waitlist</a>
             </div>
         </div>
     </header>
@@ -104,7 +105,18 @@
                 <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 reveal">
                     <div class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-3">Live Inventory Map</div>
                     <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium mb-4">Explore the Garage Estate</h2>
-                    <p class="text-white/40 font-light leading-relaxed">Click any bay to view details. Available units can be requested via the waitlist — we’ll prioritize your preferred bay when applications open.</p>
+                    <p class="text-white/40 font-light leading-relaxed">Click any bay to compare daily ($25/day) and long-term founding leases.</p>
+                </div>
+
+                <div class="garage-rental-tabs reveal mb-8 sm:mb-10" role="tablist" aria-label="Garage rental type">
+                    <button type="button" class="garage-rental-tab is-active" data-rental-tab="daily" role="tab" aria-selected="true">
+                        <span class="garage-rental-tab-label">Daily rental</span>
+                        <span class="garage-rental-tab-price">$25 / day · $150 / week</span>
+                    </button>
+                    <button type="button" class="garage-rental-tab" data-rental-tab="longterm" role="tab" aria-selected="false">
+                        <span class="garage-rental-tab-label">Long-term lease</span>
+                        <span class="garage-rental-tab-price">Founding member · monthly</span>
+                    </button>
                 </div>
 
                 <div class="grid lg:grid-cols-[1fr_320px] gap-6 lg:gap-8 items-start">
@@ -138,7 +150,8 @@
                 <div class="flex items-end justify-between mb-8">
                     <div>
                         <div class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-2">Current Inventory</div>
-                        <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">Available Garages</h2>
+                        <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">Long-Term Leases</h2>
+                        <p class="text-white/45 text-sm mt-2 max-w-lg">Founding member bays — climate-controlled storage with direct circuit access. Reserve with a deposit or join the waitlist.</p>
                     </div>
                     <a href="#floorplan" class="hidden sm:inline text-sm text-[#c5a26f] hover:text-[#e8d5b5] underline underline-offset-4">View interactive floorplan →</a>
                 </div>
@@ -147,7 +160,64 @@
                     <div class="col-span-full text-white/50 text-sm py-8 text-center">Loading available units…</div>
                 </div>
 
-                <p class="mt-6 text-center text-xs text-white/40">Availability is shown in real time for demo purposes. Actual units are limited and assigned by founding membership.</p>
+                <p class="mt-6 text-center text-xs text-white/40">Long-term availability is shown in real time for demo purposes. Need just a day or a week on site? See daily rental below.</p>
+            </div>
+        </section>
+
+        <!-- Daily Garage Rental -->
+        <section class="border-b border-white/[0.06] bg-[#080808] py-16 sm:py-24 scroll-mt-24" id="daily-rental" aria-label="Daily garage rental">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                <div class="text-center mb-10 sm:mb-12 reveal">
+                    <div class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-3">Track day · event · overflow</div>
+                    <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium mb-4">Book a Garage by the Day</h2>
+                    <p class="text-white/40 font-light leading-relaxed max-w-xl mx-auto">Secure climate-controlled paddock storage for the days you need it — ideal for track weekends, events, or trying a bay before a long-term lease.</p>
+                </div>
+
+                <div class="garage-daily-card reveal">
+                    <div class="garage-daily-rates" aria-label="Daily rental pricing">
+                        <div class="garage-daily-rate">
+                            <span class="garage-daily-rate-value">$25</span>
+                            <span class="garage-daily-rate-label">per day</span>
+                        </div>
+                        <div class="garage-daily-rate-divider" aria-hidden="true"></div>
+                        <div class="garage-daily-rate">
+                            <span class="garage-daily-rate-value">$150</span>
+                            <span class="garage-daily-rate-label">7-day week <span class="text-emerald-400/90">(save $25)</span></span>
+                        </div>
+                    </div>
+
+                    <form id="garage-daily-inline-form" class="space-y-5 mt-8" novalidate>
+                        <div>
+                            <label class="waitlist-label" for="daily-unit">Garage unit</label>
+                            <select id="daily-unit" name="unit" class="booking-field" required>
+                                <option value="">Select an available unit…</option>
+                            </select>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="waitlist-label" for="daily-start">Start date</label>
+                                <input id="daily-start" name="start_date" type="date" class="booking-field" required autocomplete="off">
+                            </div>
+                            <div>
+                                <label class="waitlist-label" for="daily-end">End date</label>
+                                <input id="daily-end" name="end_date" type="date" class="booking-field" required autocomplete="off">
+                            </div>
+                        </div>
+                        <div id="daily-price-summary" class="garage-daily-price-summary" aria-live="polite">
+                            <p class="text-sm text-white/45">Select dates to see your total.</p>
+                        </div>
+                        <div id="daily-longterm-nudge" class="garage-daily-longterm-nudge is-hidden" role="region" aria-live="polite">
+                            <p class="text-sm text-white/80 leading-relaxed"><strong class="text-[#c5a26f] font-medium">30+ days selected.</strong> At this length, a founding long-term lease may offer better value than daily rates.</p>
+                            <div class="flex flex-col sm:flex-row gap-3 mt-4">
+                                <button type="button" id="daily-switch-longterm" class="min-h-[44px] px-5 rounded-xl cta-primary border-0 text-sm font-semibold">Explore long-term lease</button>
+                                <button type="button" id="daily-continue-short" class="min-h-[44px] px-5 rounded-xl border border-white/15 text-white/80 text-sm font-semibold hover:bg-white/5 transition-colors">Continue with daily rental</button>
+                            </div>
+                        </div>
+                        <button type="button" id="daily-checkout-btn" class="w-full min-h-[52px] rounded-xl font-semibold text-base cta-primary border-0 tracking-wide" disabled>
+                            Continue to checkout
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
 
@@ -343,9 +413,9 @@
             <div class="p-6 sm:p-8">
                 <div class="flex items-start justify-between gap-4 mb-6">
                     <div class="min-w-0">
-                        <p class="text-[10px] tracking-[0.3em] uppercase text-[#c5a26f] mb-1">Founding member reservation</p>
+                        <p class="text-[10px] tracking-[0.3em] uppercase text-[#c5a26f] mb-1">Long-term founding lease</p>
                         <h2 id="garage-reserve-title" class="text-xl sm:text-2xl font-bold heading-font text-white tracking-tight">Reserve your bay</h2>
-                        <p id="garage-reserve-subtitle" class="text-sm text-zinc-400 mt-1 leading-relaxed">Secure this unit with a refundable deposit — demo checkout for presentation purposes.</p>
+                        <p id="garage-reserve-subtitle" class="text-sm text-zinc-400 mt-1 leading-relaxed">Monthly founding membership with a refundable deposit — demo checkout for presentation purposes.</p>
                     </div>
                     <button type="button" class="shrink-0 w-11 h-11 rounded-xl border border-zinc-700 bg-zinc-900/80 text-zinc-400 hover:text-white hover:border-zinc-500 hover:bg-zinc-800 flex items-center justify-center transition" data-garage-reserve-close aria-label="Close reservation form"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
                 </div>
@@ -390,6 +460,58 @@
         </div>
     </div>
 
+    <div id="garage-daily-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="garage-daily-title">
+        <div class="booking-modal-backdrop" data-garage-daily-close aria-hidden="true"></div>
+        <div class="booking-modal-panel garage-reserve-panel">
+            <div class="booking-modal-accent" aria-hidden="true"></div>
+            <div class="p-6 sm:p-8">
+                <div class="flex items-start justify-between gap-4 mb-6">
+                    <div class="min-w-0">
+                        <p class="text-[10px] tracking-[0.3em] uppercase text-[#c5a26f] mb-1">Daily garage rental</p>
+                        <h2 id="garage-daily-title" class="text-xl sm:text-2xl font-bold heading-font text-white tracking-tight">Complete your booking</h2>
+                        <p class="text-sm text-zinc-400 mt-1 leading-relaxed">$25/day · $150/week — demo checkout, no real charge.</p>
+                    </div>
+                    <button type="button" class="shrink-0 w-11 h-11 rounded-xl border border-zinc-700 bg-zinc-900/80 text-zinc-400 hover:text-white hover:border-zinc-500 hover:bg-zinc-800 flex items-center justify-center transition" data-garage-daily-close aria-label="Close daily booking"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
+                </div>
+
+                <div id="garage-daily-summary" class="garage-reserve-summary mb-6" aria-live="polite"></div>
+                <div id="garage-daily-error" class="booking-error-banner" role="alert" aria-live="assertive"></div>
+
+                <div id="garage-daily-form-block">
+                    <form id="garage-daily-form" class="space-y-5" novalidate>
+                        <fieldset class="border border-zinc-800 rounded-2xl p-4 sm:p-5 bg-zinc-950/80 space-y-4">
+                            <legend class="text-xs font-semibold tracking-widest text-zinc-500 uppercase px-1">Contact info</legend>
+                            <div><label for="garage-daily-name" class="sr-only">Full name</label><input id="garage-daily-name" name="full_name" type="text" class="booking-field" placeholder="Full name" required autocomplete="name"></div>
+                            <div><label for="garage-daily-email" class="sr-only">Email</label><input id="garage-daily-email" name="email" type="email" class="booking-field" placeholder="Email" required autocomplete="email"></div>
+                            <div><label for="garage-daily-phone" class="sr-only">Phone</label><input id="garage-daily-phone" name="phone" type="tel" class="booking-field" placeholder="Phone" required autocomplete="tel"></div>
+                        </fieldset>
+                        <fieldset class="border border-zinc-800 rounded-2xl p-4 sm:p-5 bg-zinc-950/80 space-y-3">
+                            <legend class="text-xs font-semibold tracking-widest text-zinc-500 uppercase px-1">Payment (demo)</legend>
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="sm:col-span-2"><input type="text" class="booking-field" value="4242 4242 4242 4242" readonly aria-label="Demo card number"></div>
+                                <input type="text" class="booking-field" value="12 / 28" readonly aria-label="Demo expiry">
+                                <input type="text" class="booking-field" value="123" readonly aria-label="Demo CVC">
+                            </div>
+                        </fieldset>
+                        <button type="submit" id="garage-daily-submit" class="w-full min-h-[52px] rounded-xl font-semibold text-base cta-primary border-0 tracking-wide">
+                            <span id="garage-daily-submit-label">Pay &amp; confirm</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="garage-daily-success" class="booking-success-panel" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-check text-2xl text-emerald-400" aria-hidden="true"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white heading-font">Daily rental confirmed</h2>
+                    <p id="garage-daily-success-msg" class="text-zinc-400 mt-3 text-sm sm:text-base leading-relaxed max-w-sm mx-auto"></p>
+                    <p id="garage-daily-confirmation" class="mt-4 text-xs font-mono text-[#c5a26f]/80"></p>
+                    <button type="button" id="garage-daily-done" class="mt-8 min-h-[48px] px-6 rounded-xl font-semibold cta-primary">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/site.js" defer></script>
     <script>
         // ── Garage floorplan layout (demo) ──
@@ -415,12 +537,57 @@
             Large: { monthly: 4800, deposit: 7500 }
         };
 
+        var DAILY_RATE = 25;
+        var WEEK_RATE = 150;
+        var LONGTERM_NUDGE_DAYS = 30;
+
+        var dailyBookingDraft = null;
+        var dailyLongtermAcknowledged = false;
+
         function getGaragePricing(size) {
             return GARAGE_PRICING[size] || GARAGE_PRICING.Standard;
         }
 
         function formatMoney(amount) {
             return '$' + amount.toLocaleString('en-US');
+        }
+
+        function parseIsoDate(str) {
+            return new Date(str + 'T12:00:00');
+        }
+
+        function countInclusiveDays(startStr, endStr) {
+            if (!startStr || !endStr) return 0;
+            var start = parseIsoDate(startStr);
+            var end = parseIsoDate(endStr);
+            if (end < start) return 0;
+            return Math.round((end - start) / 86400000) + 1;
+        }
+
+        function calcDailyTotal(days) {
+            if (days < 1) return { days: 0, total: 0, savings: 0, weeks: 0 };
+            var weeks = Math.floor(days / 7);
+            var remainder = days % 7;
+            var total = weeks * WEEK_RATE + remainder * DAILY_RATE;
+            var savings = days * DAILY_RATE - total;
+            return { days: days, total: total, savings: savings, weeks: weeks };
+        }
+
+        function formatShortDate(str) {
+            return parseIsoDate(str).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function bayFromUnit(unitId) {
+            var live = garageByUnit[unitId];
+            if (!live) return null;
+            var wing = GARAGE_WINGS.find(function(w) { return w.units.indexOf(unitId) !== -1; });
+            return {
+                unit: unitId,
+                size: live.size,
+                status: live.status,
+                notes: live.notes,
+                wingLabel: wing ? wing.label : ''
+            };
         }
 
         function getApiBase() {
@@ -457,9 +624,10 @@
                     (bay.size ? '<span class="text-xs text-white/50">' + escapeHtml(bay.size) + '</span>' : '') +
                 '</div>' +
                 (canReserve
-                    ? '<div class="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3 text-sm">' +
-                        '<div class="flex justify-between text-white/80"><span>Monthly lease</span><span class="font-semibold text-white">' + formatMoney(pricing.monthly) + '</span></div>' +
-                        '<div class="flex justify-between text-white/60 mt-1"><span>Founding deposit</span><span class="font-medium text-emerald-400">' + formatMoney(pricing.deposit) + '</span></div>' +
+                    ? '<div class="mt-4 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-sm space-y-2">' +
+                        '<div class="flex justify-between text-white/70"><span>Daily rental</span><span class="font-semibold text-white">' + formatMoney(DAILY_RATE) + '/day</span></div>' +
+                        '<div class="flex justify-between text-white/50 text-xs"><span>Weekly rate</span><span>' + formatMoney(WEEK_RATE) + ' (save $25)</span></div>' +
+                        '<div class="flex justify-between text-white/70 pt-1 border-t border-white/10"><span>Long-term lease</span><span class="font-semibold text-white">from ' + formatMoney(pricing.monthly) + '/mo</span></div>' +
                       '</div>'
                     : '') +
                 (bay.notes ? '<p class="mt-4 text-sm text-white/50 leading-relaxed font-light">' + escapeHtml(bay.notes) + '</p>' : '') +
@@ -469,7 +637,10 @@
                     (bay.size === 'Large' ? '<li><i class="fa-solid fa-arrows-up-down text-[#c5a26f]/70 mr-2"></i>Extra height for lifts</li>' : '') +
                 '</ul>' +
                 (canReserve
-                    ? '<button type="button" id="garage-bay-request-btn" class="mt-6 w-full min-h-[48px] rounded-xl cta-primary border-0 text-sm font-semibold tracking-wide">Reserve &amp; pay deposit</button>'
+                    ? '<div class="mt-6 space-y-3">' +
+                        '<button type="button" id="garage-bay-daily-btn" class="w-full min-h-[48px] rounded-xl cta-primary border-0 text-sm font-semibold tracking-wide">Book by the day</button>' +
+                        '<button type="button" id="garage-bay-longterm-btn" class="w-full min-h-[44px] rounded-xl border border-[#c5a26f]/50 text-[#c5a26f] bg-transparent text-sm font-semibold tracking-wide hover:bg-[#c5a26f]/10 transition-colors">Long-term lease — pay deposit</button>' +
+                      '</div>'
                     : (canWaitlist
                         ? '<button type="button" id="garage-bay-request-btn" class="mt-6 w-full min-h-[44px] rounded-xl border border-[#c5a26f]/50 text-[#c5a26f] bg-transparent text-sm font-semibold tracking-wide hover:bg-[#c5a26f]/10 transition-colors">Join waitlist for this bay</button>'
                         : '<p class="mt-6 text-xs text-white/35 leading-relaxed">' + (status === 'Occupied' ? 'This bay is currently assigned to a founding member.' : status === 'Maintenance' ? 'This unit is undergoing preparation and is not available for assignment.' : 'This bay is part of a future phase.') + '</p>'));
@@ -624,6 +795,293 @@
 
         bindGarageReserveModal();
 
+        function populateDailyUnitSelect(garages) {
+            var select = document.getElementById('daily-unit');
+            if (!select) return;
+            var available = (garages || []).filter(function(g) { return g.status === 'Available'; });
+            var current = select.value;
+            select.innerHTML = '<option value="">Select an available unit…</option>' +
+                available.map(function(g) {
+                    var unit = g.unit || g.unit_number;
+                    return '<option value="' + escapeHtml(unit) + '">' + escapeHtml(unit) + ' · ' + escapeHtml(g.size || 'Standard') + '</option>';
+                }).join('');
+            if (current && garageByUnit[current] && garageByUnit[current].status === 'Available') {
+                select.value = current;
+            }
+        }
+
+        function updateDailyPriceSummary() {
+            var startEl = document.getElementById('daily-start');
+            var endEl = document.getElementById('daily-end');
+            var unitEl = document.getElementById('daily-unit');
+            var summaryEl = document.getElementById('daily-price-summary');
+            var nudgeEl = document.getElementById('daily-longterm-nudge');
+            var checkoutBtn = document.getElementById('daily-checkout-btn');
+            if (!summaryEl) return;
+
+            var start = startEl ? startEl.value : '';
+            var end = endEl ? endEl.value : '';
+            var unit = unitEl ? unitEl.value : '';
+            var days = countInclusiveDays(start, end);
+            var pricing = calcDailyTotal(days);
+
+            dailyLongtermAcknowledged = days < LONGTERM_NUDGE_DAYS;
+
+            if (nudgeEl) {
+                nudgeEl.classList.toggle('is-hidden', days < LONGTERM_NUDGE_DAYS);
+            }
+
+            if (!unit || days < 1) {
+                summaryEl.innerHTML = '<p class="text-sm text-white/45">' +
+                    (days < 1 && start && end ? 'End date must be on or after the start date.' : 'Select a unit and dates to see your total.') +
+                    '</p>';
+                if (checkoutBtn) checkoutBtn.disabled = true;
+                dailyBookingDraft = null;
+                return;
+            }
+
+            var savingsLine = pricing.savings > 0
+                ? '<p class="text-xs text-emerald-400/90 mt-2"><i class="fa-solid fa-tag mr-1" aria-hidden="true"></i>Weekly discount applied — you save ' + formatMoney(pricing.savings) + '</p>'
+                : (days >= 7 ? '' : '<p class="text-xs text-white/35 mt-2">Book 7 days for ' + formatMoney(WEEK_RATE) + ' and save $25.</p>');
+
+            summaryEl.innerHTML =
+                '<div class="flex items-end justify-between gap-4">' +
+                    '<div><div class="text-2xl font-semibold text-white heading-font">' + formatMoney(pricing.total) + '</div>' +
+                    '<div class="text-sm text-white/50 mt-0.5">' + days + ' day' + (days === 1 ? '' : 's') + ' · ' + formatShortDate(start) + ' – ' + formatShortDate(end) + '</div></div>' +
+                    '<div class="text-right text-xs text-white/45">' + (pricing.weeks ? pricing.weeks + ' wk' + (pricing.weeks > 1 ? 's' : '') + ' @ ' + formatMoney(WEEK_RATE) : '') +
+                    (pricing.weeks && days % 7 ? ' + ' : '') +
+                    (days % 7 ? (days % 7) + ' × ' + formatMoney(DAILY_RATE) : '') +
+                    '</div>' +
+                '</div>' + savingsLine;
+
+            dailyBookingDraft = { unit: unit, start: start, end: end, days: days, total: pricing.total, savings: pricing.savings };
+
+            var canCheckout = days >= 1 && (days < LONGTERM_NUDGE_DAYS || dailyLongtermAcknowledged);
+            if (checkoutBtn) checkoutBtn.disabled = !canCheckout;
+        }
+
+        function openGarageDailyModal(draft) {
+            if (!draft || !draft.unit || draft.days < 1) return;
+            dailyBookingDraft = draft;
+            var modal = document.getElementById('garage-daily-modal');
+            var summary = document.getElementById('garage-daily-summary');
+            var formBlock = document.getElementById('garage-daily-form-block');
+            var success = document.getElementById('garage-daily-success');
+            var errorEl = document.getElementById('garage-daily-error');
+            var submitLabel = document.getElementById('garage-daily-submit-label');
+            var bay = bayFromUnit(draft.unit);
+            if (!modal || !summary) return;
+
+            if (errorEl) {
+                errorEl.textContent = '';
+                errorEl.classList.remove('is-visible');
+            }
+            if (formBlock) formBlock.classList.remove('is-hidden');
+            if (success) success.classList.remove('is-visible');
+            if (submitLabel) submitLabel.textContent = 'Pay ' + formatMoney(draft.total) + ' & confirm';
+
+            summary.innerHTML =
+                '<div class="flex items-start justify-between gap-4">' +
+                    '<div><div class="text-lg font-semibold text-white">Unit ' + escapeHtml(draft.unit) + '</div>' +
+                    '<div class="text-xs text-white/50 mt-0.5">' + escapeHtml(bay && bay.size ? bay.size : 'Standard') + ' bay · Daily rental</div>' +
+                    '<div class="text-xs text-white/45 mt-2">' + formatShortDate(draft.start) + ' → ' + formatShortDate(draft.end) + ' (' + draft.days + ' days)</div></div>' +
+                    '<div class="text-right"><div class="text-xl font-semibold text-emerald-400">' + formatMoney(draft.total) + '</div>' +
+                    (draft.savings ? '<div class="text-[10px] text-emerald-400/80 mt-0.5">Saved ' + formatMoney(draft.savings) + '</div>' : '') +
+                    '</div></div>';
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            var nameInput = document.getElementById('garage-daily-name');
+            if (nameInput) nameInput.focus({ preventScroll: true });
+        }
+
+        function closeGarageDailyModal() {
+            var modal = document.getElementById('garage-daily-modal');
+            if (!modal) return;
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        function showGarageDailyError(msg) {
+            var errorEl = document.getElementById('garage-daily-error');
+            if (!errorEl) return;
+            errorEl.textContent = msg;
+            errorEl.classList.add('is-visible');
+        }
+
+        function startDailyFlowForBay(bay) {
+            if (!bay || bay.status !== 'Available') return;
+            var section = document.getElementById('daily-rental');
+            var unitEl = document.getElementById('daily-unit');
+            if (unitEl) unitEl.value = bay.unit;
+            updateDailyPriceSummary();
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (unitEl) unitEl.focus({ preventScroll: true });
+        }
+
+        function bindGarageDailyFlow() {
+            var startEl = document.getElementById('daily-start');
+            var endEl = document.getElementById('daily-end');
+            var unitEl = document.getElementById('daily-unit');
+            var checkoutBtn = document.getElementById('daily-checkout-btn');
+            var switchLongtermBtn = document.getElementById('daily-switch-longterm');
+            var continueShortBtn = document.getElementById('daily-continue-short');
+            var modal = document.getElementById('garage-daily-modal');
+            var form = document.getElementById('garage-daily-form');
+            var formBlock = document.getElementById('garage-daily-form-block');
+            var success = document.getElementById('garage-daily-success');
+            var doneBtn = document.getElementById('garage-daily-done');
+            var submitBtn = document.getElementById('garage-daily-submit');
+
+            var today = new Date().toISOString().slice(0, 10);
+            if (startEl) startEl.min = today;
+            if (endEl) endEl.min = today;
+
+            [startEl, endEl, unitEl].forEach(function(el) {
+                if (el) el.addEventListener('change', updateDailyPriceSummary);
+            });
+
+            if (startEl && endEl) {
+                startEl.addEventListener('change', function() {
+                    if (endEl.value && endEl.value < startEl.value) endEl.value = startEl.value;
+                    endEl.min = startEl.value || today;
+                });
+            }
+
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    if (!dailyBookingDraft) return;
+                    if (dailyBookingDraft.days >= LONGTERM_NUDGE_DAYS && !dailyLongtermAcknowledged) return;
+                    openGarageDailyModal(dailyBookingDraft);
+                });
+            }
+
+            if (switchLongtermBtn) {
+                switchLongtermBtn.addEventListener('click', function() {
+                    var unit = unitEl ? unitEl.value : '';
+                    var bay = unit ? bayFromUnit(unit) : null;
+                    if (bay) openGarageReserveModal(bay);
+                    else document.getElementById('availability').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            if (continueShortBtn) {
+                continueShortBtn.addEventListener('click', function() {
+                    dailyLongtermAcknowledged = true;
+                    updateDailyPriceSummary();
+                });
+            }
+
+            if (modal) {
+                modal.querySelectorAll('[data-garage-daily-close]').forEach(function(el) {
+                    el.addEventListener('click', closeGarageDailyModal);
+                });
+            }
+
+            if (doneBtn && form) {
+                doneBtn.addEventListener('click', function() {
+                    form.reset();
+                    closeGarageDailyModal();
+                    updateDailyPriceSummary();
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
+                    closeGarageDailyModal();
+                }
+            });
+
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    if (!dailyBookingDraft) return;
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    var fd = new FormData(form);
+                    var payload = {
+                        experience_type: 'garage-daily',
+                        preferred_date: dailyBookingDraft.start,
+                        party_size: dailyBookingDraft.days,
+                        full_name: fd.get('full_name'),
+                        email: fd.get('email'),
+                        phone: fd.get('phone'),
+                        notes: 'DAILY RENTAL (demo paid): Unit ' + dailyBookingDraft.unit +
+                            '. Dates ' + dailyBookingDraft.start + ' to ' + dailyBookingDraft.end +
+                            ' (' + dailyBookingDraft.days + ' days). Total ' + formatMoney(dailyBookingDraft.total) +
+                            (dailyBookingDraft.savings ? '. Weekly savings ' + formatMoney(dailyBookingDraft.savings) + '.' : '.')
+                    };
+
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.setAttribute('aria-busy', 'true');
+                    }
+                    showGarageDailyError('');
+
+                    setTimeout(function() {
+                        fetch(getApiBase() + '/api/bookings', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        })
+                            .then(function(r) { return r.json().then(function(data) { return { ok: r.ok, data: data }; }); })
+                            .then(function(res) {
+                                if (!res.ok) throw new Error((res.data && res.data.error) || 'Unable to complete booking');
+                                if (formBlock) formBlock.classList.add('is-hidden');
+                                if (success) {
+                                    success.classList.add('is-visible');
+                                    success.focus({ preventScroll: true });
+                                }
+                                var msg = document.getElementById('garage-daily-success-msg');
+                                if (msg) {
+                                    msg.textContent = 'Unit ' + dailyBookingDraft.unit + ' is booked for ' + dailyBookingDraft.days + ' day' +
+                                        (dailyBookingDraft.days === 1 ? '' : 's') + '. Access details will be emailed before your start date.';
+                                }
+                                var conf = document.getElementById('garage-daily-confirmation');
+                                if (conf) {
+                                    conf.textContent = 'Confirmation #' + (res.data && res.data.id ? String(res.data.id).slice(0, 8).toUpperCase() : ('WF-' + Date.now().toString(36).toUpperCase()));
+                                }
+                                if (submitBtn) {
+                                    submitBtn.disabled = false;
+                                    submitBtn.removeAttribute('aria-busy');
+                                }
+                            })
+                            .catch(function(err) {
+                                if (submitBtn) {
+                                    submitBtn.disabled = false;
+                                    submitBtn.removeAttribute('aria-busy');
+                                }
+                                showGarageDailyError(err.message || 'Unable to complete booking. Please try again.');
+                            });
+                    }, 1200);
+                });
+            }
+        }
+
+        function bindGarageRentalTabs() {
+            document.querySelectorAll('[data-rental-tab]').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    var target = tab.getAttribute('data-rental-tab');
+                    document.querySelectorAll('[data-rental-tab]').forEach(function(t) {
+                        var active = t.getAttribute('data-rental-tab') === target;
+                        t.classList.toggle('is-active', active);
+                        t.setAttribute('aria-selected', active ? 'true' : 'false');
+                    });
+                    if (target === 'daily') {
+                        document.getElementById('daily-rental').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        document.getElementById('availability').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
+        bindGarageDailyFlow();
+        bindGarageRentalTabs();
+
         function selectBay(bay, btn) {
             document.querySelectorAll('.garage-bay.is-selected').forEach(function(el) { el.classList.remove('is-selected'); });
             if (btn) btn.classList.add('is-selected');
@@ -634,13 +1092,23 @@
                 panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
 
+            var dailyBtn = document.getElementById('garage-bay-daily-btn');
+            if (dailyBtn) {
+                dailyBtn.addEventListener('click', function() {
+                    startDailyFlowForBay(bay);
+                });
+            }
+
+            var longtermBtn = document.getElementById('garage-bay-longterm-btn');
+            if (longtermBtn) {
+                longtermBtn.addEventListener('click', function() {
+                    openGarageReserveModal(bay);
+                });
+            }
+
             var requestBtn = document.getElementById('garage-bay-request-btn');
             if (requestBtn) {
                 requestBtn.addEventListener('click', function() {
-                    if (bay.status === 'Available') {
-                        openGarageReserveModal(bay);
-                        return;
-                    }
                     var notesEl = document.getElementById('waitlist-notes');
                     var waitlistSection = document.getElementById('garage-waitlist');
                     if (notesEl) {
@@ -652,10 +1120,6 @@
                         if (nameInput) nameInput.focus({ preventScroll: true });
                     }
                 });
-            }
-
-            if (bay.status === 'Available') {
-                openGarageReserveModal(bay);
             }
         }
 
@@ -737,32 +1201,42 @@
                 var unit = g.unit || g.unit_number;
                 var sizeBadge = '<span class="text-[10px] px-2 py-0.5 rounded border border-white/15 text-white/70">' + escapeHtml(g.size || 'Standard') + '</span>';
                 var pricing = getGaragePricing(g.size);
-                return '<button type="button" class="garage-available-card text-left border border-white/10 bg-[#0c0c0c] rounded-xl p-5 flex flex-col hover:border-emerald-500/40 hover:bg-[#0e0e0e] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a26f]/60" data-unit="' + escapeHtml(unit) + '">' +
+                return '<div class="garage-available-card-wrap border border-white/10 bg-[#0c0c0c] rounded-xl p-5 flex flex-col">' +
                     '<div class="flex items-start justify-between">' +
                         '<div><div class="font-semibold text-lg text-white tracking-tight">' + escapeHtml(unit) + '</div>' +
                         '<div class="mt-0.5">' + sizeBadge + '</div></div>' +
                         '<div class="text-right"><span class="inline-block text-xs font-medium tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Available</span></div>' +
                     '</div>' +
                     (g.notes ? '<p class="text-sm text-white/60 mt-3 leading-relaxed">' + escapeHtml(g.notes) + '</p>' : '') +
-                    '<div class="mt-4 text-sm text-white/70"><span class="text-white/45">From </span><span class="font-semibold text-white">' + formatMoney(pricing.monthly) + '</span><span class="text-white/45"> / mo</span></div>' +
-                    '<div class="mt-3 text-xs font-semibold text-[#c5a26f]">Reserve &amp; pay ' + formatMoney(pricing.deposit) + ' deposit →</div>' +
-                    '<div class="mt-auto pt-2 text-xs text-white/40">Climate controlled • Direct track access</div>' +
-                '</button>';
+                    '<div class="mt-4 text-sm text-white/70"><span class="text-[#c5a26f] font-semibold">' + formatMoney(DAILY_RATE) + '/day</span><span class="text-white/35 mx-2">·</span><span class="text-white/50">Lease from ' + formatMoney(pricing.monthly) + '/mo</span></div>' +
+                    '<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">' +
+                        '<button type="button" class="garage-card-daily min-h-[44px] rounded-xl cta-primary border-0 text-xs font-semibold" data-unit="' + escapeHtml(unit) + '">Book by the day</button>' +
+                        '<button type="button" class="garage-card-longterm min-h-[44px] rounded-xl border border-[#c5a26f]/50 text-[#c5a26f] text-xs font-semibold hover:bg-[#c5a26f]/10 transition-colors" data-unit="' + escapeHtml(unit) + '">Long-term lease</button>' +
+                    '</div>' +
+                    '<div class="mt-3 text-xs text-white/40">Climate controlled • Direct track access</div>' +
+                '</div>';
             }).join('');
 
-            grid.querySelectorAll('.garage-available-card').forEach(function(card) {
-                card.addEventListener('click', function() {
-                    var unitId = card.getAttribute('data-unit');
-                    var live = garageByUnit[unitId];
-                    if (!live) return;
-                    var wing = GARAGE_WINGS.find(function(w) { return w.units.indexOf(unitId) !== -1; });
-                    var bay = {
-                        unit: unitId,
-                        size: live.size,
-                        status: live.status,
-                        notes: live.notes,
-                        wingLabel: wing ? wing.label : ''
-                    };
+            grid.querySelectorAll('.garage-card-daily').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var unitId = btn.getAttribute('data-unit');
+                    var bay = bayFromUnit(unitId);
+                    if (!bay) return;
+                    var floorBtn = document.querySelector('.garage-bay[data-unit="' + unitId + '"]');
+                    if (floorBtn) {
+                        document.querySelectorAll('.garage-bay.is-selected').forEach(function(el) { el.classList.remove('is-selected'); });
+                        floorBtn.classList.add('is-selected');
+                        renderBayDetail(bay);
+                    }
+                    startDailyFlowForBay(bay);
+                });
+            });
+
+            grid.querySelectorAll('.garage-card-longterm').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var unitId = btn.getAttribute('data-unit');
+                    var bay = bayFromUnit(unitId);
+                    if (!bay) return;
                     var floorBtn = document.querySelector('.garage-bay[data-unit="' + unitId + '"]');
                     if (floorBtn) {
                         document.querySelectorAll('.garage-bay.is-selected').forEach(function(el) { el.classList.remove('is-selected'); });
@@ -786,6 +1260,8 @@
                         if (unit) garageByUnit[unit] = g;
                     });
                     renderInventoryStats(garages);
+                    populateDailyUnitSelect(garages);
+                    updateDailyPriceSummary();
                     buildFloorplan(garages);
                     renderAvailableCards(garages);
                 })

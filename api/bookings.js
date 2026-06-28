@@ -2,7 +2,7 @@
 const { createClient } = require('@supabase/supabase-js');
 const { parseJsonBody } = require('../lib/parseJsonBody');
 
-const EXPERIENCE = new Set(['track-day', 'karting', 'rocket-rally']);
+const EXPERIENCE = new Set(['track-day', 'karting', 'rocket-rally', 'garage-daily']);
 
 module.exports = async function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
