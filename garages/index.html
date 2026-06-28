@@ -71,55 +71,36 @@
             <p class="mt-10 text-lg sm:text-xl text-white/45 font-light leading-[1.85] max-w-2xl mx-auto">
                 A restrained collection of bays designed for machines that deserve silence, climate, and a straight sightline to the circuit — with curated living and office space above, so the club is never just where you store the car. It is where you plan the next season.
             </p>
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#floorplan" class="cta-primary inline-flex items-center justify-center min-h-[48px] px-8 rounded-xl text-sm font-semibold tracking-wide">Explore Live Floorplan</a>
+                <a href="#garage-waitlist" class="inline-flex items-center justify-center min-h-[48px] px-8 rounded-xl text-sm font-semibold tracking-wide border border-[#c5a26f]/50 text-[#c5a26f] hover:bg-[#c5a26f]/10 transition-colors">Join Waitlist</a>
+            </div>
         </div>
     </header>
 
     <main>
-        <section class="bg-[#0a0a0a] border-b border-white/[0.06]" aria-label="Private garages vision">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-20 sm:pb-28">
-                <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] shadow-[0_48px_100px_-48px_rgba(0,0,0,0.9)]">
-                    <img src="../searched_images/nate_feedback/IMG_1983.jpg" alt="Private garage estate and motorsports architecture at Wildfire Raceway" class="w-full h-[min(72vh,820px)] min-h-[280px] sm:min-h-[420px] object-cover img-cinematic" loading="eager" width="1600" height="1000">
-                </div>
-
-                <div class="mt-20 sm:mt-28 max-w-3xl mx-auto text-center reveal space-y-8">
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl text-white heading-font font-medium leading-tight">Built for the intersection of collection and competition</h2>
-                    <p class="text-base sm:text-lg text-white/40 font-light leading-[1.9]">
-                        Whether your stable centers on road-going supercars or dedicated race hardware, the vision is the same: a private, climate-controlled sanctuary steps from the track — and a second level reserved for how you actually live and lead when you are not in the seat.
-                    </p>
-                </div>
-
-                <div class="mt-16 sm:mt-20 grid md:grid-cols-2 gap-4 sm:gap-5 max-w-6xl mx-auto">
-                    <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[16/11]">
-                        <img src="../searched_images/nate_feedback/IMG_1987.jpg" alt="Wildfire Raceway private garage and pit architecture" class="w-full h-full object-cover img-cinematic" loading="lazy" width="1200" height="825">
-                    </div>
-                    <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[16/11]">
-                        <img src="../searched_images/nate_feedback/IMG_1981.jpg" alt="Premium garage environment and club facilities at Wildfire Raceway" class="w-full h-full object-cover img-cinematic" loading="lazy" width="1200" height="825">
-                    </div>
-                </div>
-
-                <ul class="mt-24 sm:mt-32 max-w-4xl mx-auto space-y-12 sm:space-y-16 reveal-stagger text-left list-none p-0 m-0">
-                    <li class="border-t border-white/[0.08] pt-10 sm:pt-12">
-                        <p class="text-[10px] font-semibold tracking-[0.35em] uppercase text-[#c5a26f] mb-4">Access</p>
-                        <h3 class="text-xl sm:text-2xl text-white heading-font font-medium mb-3">Direct track access</h3>
-                        <p class="text-white/40 font-light leading-[1.85] max-w-2xl">From climate-controlled bay to circuit entry — no trailers, no compromise. Your cars wake up where they were meant to run.</p>
-                    </li>
-                    <li class="border-t border-white/[0.08] pt-10 sm:pt-12">
-                        <p class="text-[10px] font-semibold tracking-[0.35em] uppercase text-[#c5a26f] mb-4">Environment</p>
-                        <h3 class="text-xl sm:text-2xl text-white heading-font font-medium mb-3">Climate-controlled precision</h3>
-                        <p class="text-white/40 font-light leading-[1.85] max-w-2xl">Engineered for high-value machinery and the details collectors notice — stable air, refined finishes, and discretion by design.</p>
-                    </li>
-                    <li class="border-t border-white/[0.08] pt-10 sm:pt-12">
-                        <p class="text-[10px] font-semibold tracking-[0.35em] uppercase text-[#c5a26f] mb-4">Exclusivity</p>
-                        <h3 class="text-xl sm:text-2xl text-white heading-font font-medium mb-3">Limited availability for founding members</h3>
-                        <p class="text-white/40 font-light leading-[1.85] max-w-2xl">This is not a mass offering. Founding memberships will be intentionally capped — priority for those who intend to build a long-term relationship with the club.</p>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Interactive Garage Floorplan -->
-        <section class="border-t border-white/[0.06] bg-[#080808] py-16 sm:py-24" id="floorplan" aria-label="Interactive garage floorplan">
+        <!-- Interactive Garage Floorplan (primary CTA — above the fold) -->
+        <section class="border-b border-white/[0.06] bg-[#080808] py-12 sm:py-20 scroll-mt-24" id="floorplan" aria-label="Interactive garage floorplan">
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div id="garage-inventory-stats" class="garage-inventory-stats reveal mb-8 sm:mb-10" aria-live="polite">
+                    <div class="garage-inventory-stat garage-inventory-stat--available">
+                        <span class="garage-inventory-stat-value" data-stat="available">—</span>
+                        <span class="garage-inventory-stat-label">Available</span>
+                    </div>
+                    <div class="garage-inventory-stat garage-inventory-stat--reserved">
+                        <span class="garage-inventory-stat-value" data-stat="reserved">—</span>
+                        <span class="garage-inventory-stat-label">Reserved</span>
+                    </div>
+                    <div class="garage-inventory-stat garage-inventory-stat--occupied">
+                        <span class="garage-inventory-stat-value" data-stat="occupied">—</span>
+                        <span class="garage-inventory-stat-label">Occupied</span>
+                    </div>
+                    <div class="garage-inventory-stat garage-inventory-stat--maintenance">
+                        <span class="garage-inventory-stat-value" data-stat="maintenance">—</span>
+                        <span class="garage-inventory-stat-label">Maintenance</span>
+                    </div>
+                </div>
+
                 <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 reveal">
                     <div class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-3">Live Inventory Map</div>
                     <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium mb-4">Explore the Garage Estate</h2>
@@ -152,7 +133,7 @@
         </section>
 
         <!-- Available Garages -->
-        <section class="border-t border-white/[0.06] bg-[#0a0a0a] py-16 sm:py-20" id="availability">
+        <section class="border-b border-white/[0.06] bg-[#0a0a0a] py-16 sm:py-20" id="availability">
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
                 <div class="flex items-end justify-between mb-8">
                     <div>
@@ -163,7 +144,6 @@
                 </div>
 
                 <div id="garage-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Populated by JS from /api/garages -->
                     <div class="col-span-full text-white/50 text-sm py-8 text-center">Loading available units…</div>
                 </div>
 
@@ -171,11 +151,11 @@
             </div>
         </section>
 
-        <section class="bg-[#080808] py-20 sm:py-28 border-t border-white/[0.06] relative overflow-hidden">
+        <section class="bg-[#080808] py-16 sm:py-24 border-b border-white/[0.06] relative overflow-hidden" id="garage-waitlist-section">
             <div class="absolute inset-0 bg-gradient-to-b from-[#c5a26f]/[0.05] via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
             <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative">
                 <div class="max-w-3xl mx-auto">
-                    <p class="text-white/35 text-sm font-light leading-relaxed mb-10 sm:mb-12 reveal max-w-xl mx-auto">When applications open, founding members will be contacted in order of interest. One step secures your place in line.</p>
+                    <p class="text-white/35 text-sm font-light leading-relaxed mb-8 sm:mb-10 reveal max-w-xl mx-auto">When applications open, founding members will be contacted in order of interest. One step secures your place in line.</p>
 
                     <div id="garage-waitlist" class="max-w-xl mx-auto reveal scroll-mt-28">
                         <div class="waitlist-card overflow-hidden">
@@ -224,6 +204,48 @@
             </div>
         </section>
 
+        <section class="bg-[#0a0a0a] border-b border-white/[0.06]" aria-label="Private garages vision">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-20 sm:pb-28">
+                <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] shadow-[0_48px_100px_-48px_rgba(0,0,0,0.9)]">
+                    <img src="../searched_images/nate_feedback/IMG_1983.jpg" alt="Private garage estate and motorsports architecture at Wildfire Raceway" class="w-full h-[min(72vh,820px)] min-h-[280px] sm:min-h-[420px] object-cover img-cinematic" loading="lazy" width="1600" height="1000">
+                </div>
+
+                <div class="mt-20 sm:mt-28 max-w-3xl mx-auto text-center reveal space-y-8">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl text-white heading-font font-medium leading-tight">Built for the intersection of collection and competition</h2>
+                    <p class="text-base sm:text-lg text-white/40 font-light leading-[1.9]">
+                        Whether your stable centers on road-going supercars or dedicated race hardware, the vision is the same: a private, climate-controlled sanctuary steps from the track — and a second level reserved for how you actually live and lead when you are not in the seat.
+                    </p>
+                </div>
+
+                <div class="mt-16 sm:mt-20 grid md:grid-cols-2 gap-4 sm:gap-5 max-w-6xl mx-auto">
+                    <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[16/11]">
+                        <img src="../searched_images/nate_feedback/IMG_1987.jpg" alt="Wildfire Raceway private garage and pit architecture" class="w-full h-full object-cover img-cinematic" loading="lazy" width="1200" height="825">
+                    </div>
+                    <div class="reveal img-cinematic-wrap rounded-sm overflow-hidden border border-white/[0.08] aspect-[16/11]">
+                        <img src="../searched_images/nate_feedback/IMG_1981.jpg" alt="Premium garage environment and club facilities at Wildfire Raceway" class="w-full h-full object-cover img-cinematic" loading="lazy" width="1200" height="825">
+                    </div>
+                </div>
+
+                <ul class="mt-24 sm:mt-32 max-w-4xl mx-auto space-y-12 sm:space-y-16 reveal-stagger text-left list-none p-0 m-0">
+                    <li class="border-t border-white/[0.08] pt-10 sm:pt-12">
+                        <p class="text-[10px] font-semibold tracking-[0.35em] uppercase text-[#c5a26f] mb-4">Access</p>
+                        <h3 class="text-xl sm:text-2xl text-white heading-font font-medium mb-3">Direct track access</h3>
+                        <p class="text-white/40 font-light leading-[1.85] max-w-2xl">From climate-controlled bay to circuit entry — no trailers, no compromise. Your cars wake up where they were meant to run.</p>
+                    </li>
+                    <li class="border-t border-white/[0.08] pt-10 sm:pt-12">
+                        <p class="text-[10px] font-semibold tracking-[0.35em] uppercase text-[#c5a26f] mb-4">Environment</p>
+                        <h3 class="text-xl sm:text-2xl text-white heading-font font-medium mb-3">Climate-controlled precision</h3>
+                        <p class="text-white/40 font-light leading-[1.85] max-w-2xl">Engineered for high-value machinery and the details collectors notice — stable air, refined finishes, and discretion by design.</p>
+                    </li>
+                    <li class="border-t border-white/[0.08] pt-10 sm:pt-12">
+                        <p class="text-[10px] font-semibold tracking-[0.35em] uppercase text-[#c5a26f] mb-4">Exclusivity</p>
+                        <h3 class="text-xl sm:text-2xl text-white heading-font font-medium mb-3">Limited availability for founding members</h3>
+                        <p class="text-white/40 font-light leading-[1.85] max-w-2xl">This is not a mass offering. Founding memberships will be intentionally capped — priority for those who intend to build a long-term relationship with the club.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
     </main>
 
     <footer class="bg-[#080808] border-t border-white/[0.06] py-14 sm:py-16">
@@ -264,7 +286,7 @@
     </footer>
 
     <div class="mobile-cta-bar md:hidden fixed bottom-0 left-0 right-0 z-40 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl" role="region" aria-label="Primary action">
-        <a href="#garage-waitlist" class="flex w-full max-w-lg mx-auto min-h-[48px] items-center justify-center rounded-sm border border-[#c5a26f]/60 text-[#c5a26f] text-xs font-semibold tracking-[0.15em] uppercase hover:bg-[#c5a26f]/10 transition-colors">Join the Waitlist</a>
+        <a href="#floorplan" class="flex w-full max-w-lg mx-auto min-h-[48px] items-center justify-center rounded-sm border border-[#c5a26f]/60 text-[#c5a26f] text-xs font-semibold tracking-[0.15em] uppercase hover:bg-[#c5a26f]/10 transition-colors">Explore Floorplan</a>
     </div>
 
     <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" aria-describedby="booking-modal-desc">
@@ -437,6 +459,23 @@
             });
         }
 
+        function renderInventoryStats(garages) {
+            var el = document.getElementById('garage-inventory-stats');
+            if (!el) return;
+            var counts = { available: 0, reserved: 0, occupied: 0, maintenance: 0 };
+            (garages || []).forEach(function(g) {
+                var key = (g.status || '').toLowerCase();
+                if (key === 'available') counts.available++;
+                else if (key === 'reserved') counts.reserved++;
+                else if (key === 'occupied') counts.occupied++;
+                else if (key === 'maintenance') counts.maintenance++;
+            });
+            el.querySelectorAll('[data-stat]').forEach(function(node) {
+                var stat = node.getAttribute('data-stat');
+                if (counts[stat] !== undefined) node.textContent = String(counts[stat]);
+            });
+        }
+
         function renderAvailableCards(garages) {
             var grid = document.getElementById('garage-grid');
             if (!grid) return;
@@ -476,6 +515,7 @@
                 .then(function(r) { return r.json(); })
                 .then(function(res) {
                     var garages = (res && res.garages) || [];
+                    renderInventoryStats(garages);
                     buildFloorplan(garages);
                     renderAvailableCards(garages);
                 })

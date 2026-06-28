@@ -1050,6 +1050,52 @@ textarea.booking-field {
 }
 
 /* ── Interactive garage floorplan (Private Garages page) ── */
+.garage-inventory-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    background: rgba(12, 12, 12, 0.85);
+    padding: 1rem;
+}
+
+@media (min-width: 640px) {
+    .garage-inventory-stats {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+    }
+}
+
+.garage-inventory-stat {
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+}
+
+.garage-inventory-stat-value {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.1;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.garage-inventory-stat-label {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+}
+
+.garage-inventory-stat--available .garage-inventory-stat-value { color: #6ee7b7; }
+.garage-inventory-stat--reserved .garage-inventory-stat-value { color: #fcd34d; }
+.garage-inventory-stat--occupied .garage-inventory-stat-value { color: #fca5a5; }
+.garage-inventory-stat--maintenance .garage-inventory-stat-value { color: #a1a1aa; }
+
 .garage-floorplan-wrap {
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.08);
