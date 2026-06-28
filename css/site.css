@@ -466,6 +466,124 @@ textarea.booking-field {
     display: block;
 }
 
+/* Booking modal — Check Availability */
+.booking-availability-panel {
+    margin-top: -0.25rem;
+}
+
+.booking-check-btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(197, 162, 111, 0.35);
+    background: rgba(197, 162, 111, 0.08);
+    color: var(--umc-gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.booking-check-btn:hover:not(:disabled) {
+    background: rgba(197, 162, 111, 0.14);
+    border-color: rgba(197, 162, 111, 0.55);
+}
+
+.booking-check-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.booking-availability-result {
+    margin-top: 0.75rem;
+}
+
+.booking-avail-msg {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    padding: 0.75rem 0.85rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+.booking-avail-msg i {
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+}
+
+.booking-avail-msg strong {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+}
+
+.booking-avail-msg p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.booking-avail-msg--open {
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.22);
+    color: #6ee7b7;
+}
+
+.booking-avail-msg--limited {
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.22);
+    color: #fcd34d;
+}
+
+.booking-avail-msg--closed {
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    color: #fca5a5;
+}
+
+.booking-avail-msg--muted {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.booking-avail-alts {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.booking-avail-alts-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin-right: 0.25rem;
+}
+
+.booking-avail-alt-btn {
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+    border: 1px solid rgba(197, 162, 111, 0.35);
+    background: transparent;
+    color: var(--umc-gold);
+    font-size: 0.72rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.booking-avail-alt-btn:hover {
+    background: rgba(197, 162, 111, 0.12);
+}
+
 .wf-booking-toast {
     position: fixed;
     z-index: 200;
@@ -890,6 +1008,228 @@ textarea.booking-field {
     .cta-primary:hover,
     .cta-secondary:hover,
     .cta-ghost-light:hover {
+        transform: none;
+    }
+}
+
+/* ── Interactive garage floorplan (Private Garages page) ── */
+.garage-floorplan-wrap {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
+    overflow: hidden;
+}
+
+.garage-floorplan-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(197, 162, 111, 0.2);
+    background: rgba(197, 162, 111, 0.06);
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(197, 162, 111, 0.85);
+    font-weight: 600;
+}
+
+.garage-floorplan-track i {
+    font-size: 0.75rem;
+}
+
+.garage-floorplan-body {
+    padding: 1.25rem 1rem 1.5rem;
+}
+
+.garage-wing {
+    margin-bottom: 1.25rem;
+}
+
+.garage-wing:last-child {
+    margin-bottom: 0;
+}
+
+.garage-wing-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(197, 162, 111, 0.7);
+    margin-bottom: 0.65rem;
+    font-weight: 600;
+}
+
+.garage-wing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+@media (max-width: 639px) {
+    .garage-wing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.garage-bay {
+    position: relative;
+    min-height: 4.5rem;
+    padding: 0.65rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    font-family: inherit;
+    color: inherit;
+}
+
+.garage-bay:hover:not(:disabled) {
+    border-color: rgba(197, 162, 111, 0.45);
+    box-shadow: 0 0 24px -8px rgba(197, 162, 111, 0.35);
+    transform: translateY(-1px);
+}
+
+.garage-bay:focus-visible {
+    outline: 2px solid var(--umc-gold);
+    outline-offset: 2px;
+}
+
+.garage-bay.is-selected {
+    border-color: var(--umc-gold);
+    box-shadow: 0 0 0 1px rgba(197, 162, 111, 0.4), 0 8px 32px -12px rgba(197, 162, 111, 0.45);
+}
+
+.garage-bay.is-future {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-style: dashed;
+}
+
+.garage-bay-unit {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.04em;
+}
+
+.garage-bay-size {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.15rem;
+}
+
+.garage-bay-status {
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.garage-bay--available {
+    border-color: rgba(52, 211, 153, 0.25);
+    background: rgba(52, 211, 153, 0.04);
+}
+
+.garage-bay--available .garage-bay-status {
+    background: rgba(52, 211, 153, 0.12);
+    color: #6ee7b7;
+    border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.garage-bay--occupied {
+    border-color: rgba(248, 113, 113, 0.2);
+    background: rgba(248, 113, 113, 0.03);
+}
+
+.garage-bay--occupied .garage-bay-status {
+    background: rgba(248, 113, 113, 0.1);
+    color: #fca5a5;
+    border: 1px solid rgba(248, 113, 113, 0.2);
+}
+
+.garage-bay--reserved {
+    border-color: rgba(251, 191, 36, 0.25);
+    background: rgba(251, 191, 36, 0.04);
+}
+
+.garage-bay--reserved .garage-bay-status {
+    background: rgba(251, 191, 36, 0.12);
+    color: #fcd34d;
+    border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.garage-bay--maintenance {
+    border-color: rgba(161, 161, 170, 0.2);
+    background: rgba(161, 161, 170, 0.04);
+}
+
+.garage-bay--maintenance .garage-bay-status {
+    background: rgba(161, 161, 170, 0.12);
+    color: #a1a1aa;
+    border: 1px solid rgba(161, 161, 170, 0.2);
+}
+
+.garage-bay--future .garage-bay-status {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.garage-floorplan-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.garage-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.garage-legend-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+}
+
+.garage-bay-detail {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    background: #0c0c0c;
+    padding: 1.25rem 1.5rem;
+    min-height: 12rem;
+}
+
+.garage-bay-detail.is-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .garage-bay {
+        transition: none;
+    }
+
+    .garage-bay:hover:not(:disabled) {
         transform: none;
     }
 }

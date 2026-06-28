@@ -99,6 +99,101 @@
             }
         }
 
+        // ── Check Availability panel (injected into booking modal) ──
+        var availabilityPanel = null;
+        var availabilityCache = null;
+
+        function ensureAvailabilityPanel() {
+            if (availabilityPanel) return availabilityPanel;
+            var dateWrap = dateInput.closest('div');
+            if (!dateWrap) return null;
+            availabilityPanel = document.createElement('div');
+            availabilityPanel.id = 'booking-availability-panel';
+            availabilityPanel.className = 'booking-availability-panel';
+            availabilityPanel.setAttribute('aria-live', 'polite');
+            availabilityPanel.innerHTML =
+                '<button type="button" id="booking-check-availability" class="booking-check-btn">Check availability</button>' +
+                '<div id="booking-availability-result" class="booking-availability-result"></div>';
+            dateWrap.insertAdjacentElement('afterend', availabilityPanel);
+
+            var checkBtn = document.getElementById('booking-check-availability');
+            if (checkBtn) {
+                checkBtn.addEventListener('click', runAvailabilityCheck);
+            }
+            experienceSelect.addEventListener('change', clearAvailabilityResult);
+            dateInput.addEventListener('change', clearAvailabilityResult);
+            return availabilityPanel;
+        }
+
+        function clearAvailabilityResult() {
+            var resultEl = document.getElementById('booking-availability-result');
+            if (resultEl) resultEl.innerHTML = '';
+        }
+
+        function formatExpLabel(key) {
+            return String(key || '').replace(/-/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+        }
+
+        function renderAvailabilityResult(check, experience, dateStr) {
+            var resultEl = document.getElementById('booking-availability-result');
+            if (!resultEl) return;
+            if (!check) {
+                resultEl.innerHTML = '<p class="booking-avail-msg booking-avail-msg--muted">Could not check availability. You can still submit your request.</p>';
+                return;
+            }
+            var statusClass = check.available
+                ? (check.reason === 'limited' ? 'booking-avail-msg--limited' : 'booking-avail-msg--open')
+                : 'booking-avail-msg--closed';
+            var icon = check.available ? (check.reason === 'limited' ? 'fa-circle-half-stroke' : 'fa-circle-check') : 'fa-circle-xmark';
+            var html = '<div class="booking-avail-msg ' + statusClass + '">' +
+                '<i class="fa-solid ' + icon + '" aria-hidden="true"></i>' +
+                '<div><strong>' + formatExpLabel(experience) + ' · ' + dateStr + '</strong>' +
+                '<p>' + check.message + '</p></div></div>';
+            if (!check.available && check.alternatives && check.alternatives.length) {
+                html += '<div class="booking-avail-alts"><span class="booking-avail-alts-label">Suggested dates:</span> ';
+                html += check.alternatives.map(function (d) {
+                    return '<button type="button" class="booking-avail-alt-btn" data-alt-date="' + d + '">' + d + '</button>';
+                }).join('');
+                html += '</div>';
+            }
+            resultEl.innerHTML = html;
+            resultEl.querySelectorAll('.booking-avail-alt-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    dateInput.value = btn.getAttribute('data-alt-date') || '';
+                    runAvailabilityCheck();
+                });
+            });
+        }
+
+        function runAvailabilityCheck() {
+            ensureAvailabilityPanel();
+            var experience = experienceSelect.value;
+            var dateStr = dateInput.value;
+            if (!experience || !dateStr) {
+                showBookingError('Select an experience and date to check availability.');
+                return;
+            }
+            hideBookingError();
+            var resultEl = document.getElementById('booking-availability-result');
+            if (resultEl) {
+                resultEl.innerHTML = '<p class="booking-avail-msg booking-avail-msg--muted"><i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Checking schedule…</p>';
+            }
+            var checkBtn = document.getElementById('booking-check-availability');
+            if (checkBtn) checkBtn.disabled = true;
+
+            fetch(apiBase + '/api/availability?experience=' + encodeURIComponent(experience) + '&date=' + encodeURIComponent(dateStr))
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    if (checkBtn) checkBtn.disabled = false;
+                    availabilityCache = data;
+                    renderAvailabilityResult(data.check, experience, dateStr);
+                })
+                .catch(function () {
+                    if (checkBtn) checkBtn.disabled = false;
+                    renderAvailabilityResult(null, experience, dateStr);
+                });
+        }
+
         function hideBookingError() {
             if (errorBanner) {
                 errorBanner.textContent = '';
@@ -151,6 +246,8 @@
             var allowed = ['track-day', 'karting', 'rocket-rally'];
             var key = allowed.indexOf(preset) !== -1 ? preset : 'track-day';
             experienceSelect.value = key;
+            ensureAvailabilityPanel();
+            clearAvailabilityResult();
             modal.classList.add('is-open');
             modal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';

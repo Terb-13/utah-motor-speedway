@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Command Center — DEMO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #c4c4c4; }
+        .demo-btn {
+            background: linear-gradient(180deg, #d4b487, #c5a26f);
+            color: #0a0a0a;
+            font-weight: 700;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            width: 100%;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(197, 162, 111, 0.3);
+        }
+        .demo-btn:hover { filter: brightness(1.05); }
+    </style>
+</head>
+<body>
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;">
+        <div style="width: 100%; max-width: 420px; padding: 2.5rem 2.5rem 2.75rem; border-radius: 16px; border: 1px solid #222; background: #0c0c0c; box-shadow: 0 40px 80px -40px rgba(0,0,0,0.85);">
+            
+            <div style="margin-bottom: 1.5rem; text-align: center;">
+                <div style="font-size: 0.65rem; letter-spacing: 0.32em; text-transform: uppercase; color: #c5a26f; margin-bottom: 8px;">
+                    Wildfire Raceway — DEMO
+                </div>
+                <h1 style="margin: 0; font-size: 1.6rem; font-weight: 600; color: #f5f5f5;">
+                    Staff Command Center
+                </h1>
+                <p style="margin: 0.75rem 0 0; font-size: 0.95rem; color: #777; font-weight: 300;">
+                    Full internal operating dashboard for the CEO demo.
+                </p>
+            </div>
+
+            <button onclick="enterDemo()" class="demo-btn">
+                ENTER DEMO COMMAND CENTER
+            </button>
+
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.7rem; color: #666;">
+                No password required — direct access for this demo.
+            </p>
+
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #222; font-size: 0.75rem; color: #555; text-align: center;">
+                <strong>What you can do inside:</strong><br>
+                • Unified Inquiries Pipeline (bookings + garage waitlist)<br>
+                • Garage Inventory management<br>
+                • Utilization Snapshot<br>
+                • Today’s Schedule
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function enterDemo() {
+            // Simulate successful login and show a mock Command Center
+            document.body.innerHTML = `
+                <div style="padding: 20px; max-width: 1100px; margin: 0 auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 12px;">
+                        <div>
+                            <div style="color: #c5a26f; font-size: 0.7rem; letter-spacing: 2px;">WILDFIRE RACEWAY</div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #fff;">Command Center</div>
+                        </div>
+                        <div>
+                            <button onclick="location.reload()" style="background: transparent; border: 1px solid #333; color: #888; padding: 8px 16px; border-radius: 6px; cursor: pointer;">Sign Out</button>
+                        </div>
+                    </div>
+
+                    <div style="background: #111; padding: 16px; border-radius: 12px; margin-bottom: 20px;">
+                        <strong style="color: #c5a26f;">DEMO NOTE:</strong> This is a visual preview of the Staff Command Center. 
+                        In the real deployed version you will have full interactive tables for Inquiries, Garage Inventory, etc.
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 30px;">
+                        <div style="background: #0c0c0c; border: 1px solid #222; padding: 16px; border-radius: 10px;">
+                            <div style="font-size: 0.7rem; color: #666;">INQUIRIES THIS MONTH</div>
+                            <div style="font-size: 2rem; font-weight: 600; color: #fff;">47</div>
+                        </div>
+                        <div style="background: #0c0c0c; border: 1px solid #222; padding: 16px; border-radius: 10px;">
+                            <div style="font-size: 0.7rem; color: #666;">AVAILABLE GARAGES</div>
+                            <div style="font-size: 2rem; font-weight: 600; color: #fff;">4</div>
+                        </div>
+                        <div style="background: #0c0c0c; border: 1px solid #222; padding: 16px; border-radius: 10px;">
+                            <div style="font-size: 0.7rem; color: #666;">GARAGE WAITLIST</div>
+                            <div style="font-size: 2rem; font-weight: 600; color: #fff;">12</div>
+                        </div>
+                        <div style="background: #0c0c0c; border: 1px solid #222; padding: 16px; border-radius: 10px;">
+                            <div style="font-size: 0.7rem; color: #666;">CONVERSION</div>
+                            <div style="font-size: 2rem; font-weight: 600; color: #fff;">34%</div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #fff; margin-bottom: 12px;">Garage Inventory (Demo View)</h3>
+                    <table style="width: 100%; background: #111; border-radius: 8px; overflow: hidden; border: 1px solid #222;">
+                        <thead>
+                            <tr style="background: #1a1a1a;">
+                                <th style="padding: 12px; text-align: left; color: #888; font-weight: 500;">Unit</th>
+                                <th style="padding: 12px; text-align: left; color: #888; font-weight: 500;">Status</th>
+                                <th style="padding: 12px; text-align: left; color: #888; font-weight: 500;">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-top: 1px solid #222;">
+                                <td style="padding: 12px; color: #fff;">A-01</td>
+                                <td style="padding: 12px;"><span style="background:#052e16; color:#4ade80; padding:2px 8px; border-radius:999px; font-size:0.75rem;">Available</span></td>
+                                <td style="padding: 12px; color: #666;">Corner unit, direct circuit access</td>
+                            </tr>
+                            <tr style="border-top: 1px solid #222;">
+                                <td style="padding: 12px; color: #fff;">B-05</td>
+                                <td style="padding: 12px;"><span style="background:#052e16; color:#4ade80; padding:2px 8px; border-radius:999px; font-size:0.75rem;">Available</span></td>
+                                <td style="padding: 12px; color: #666;">Extra height for lifts</td>
+                            </tr>
+                            <tr style="border-top: 1px solid #222;">
+                                <td style="padding: 12px; color: #fff;">C-12</td>
+                                <td style="padding: 12px;"><span style="background:#052e16; color:#4ade80; padding:2px 8px; border-radius:999px; font-size:0.75rem;">Available</span></td>
+                                <td style="padding: 12px; color: #666;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top: 30px; font-size: 0.8rem; color: #555;">
+                        This is a static preview. The real version at /admin has live data, editable fields, and full Inquiries Pipeline.
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

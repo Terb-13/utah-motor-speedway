@@ -16,14 +16,15 @@ import {
 } from '../lib/api';
 import {
   formatDate,
-  formatExperienceType,
   formatShortDate,
   normalizeInquiryStatus,
   getInquiryTypeLabel,
 } from '../lib/format';
-
-const PIPELINE_STATUSES = ['New', 'Contacted', 'Qualified', 'Booked', 'Closed'] as const;
-type PipelineStatus = (typeof PIPELINE_STATUSES)[number];
+import {
+  InquiryNotesField,
+  InquiryStatusSelect,
+  PIPELINE_STATUSES,
+} from '../components/InquiryFieldEditors';
 
 const TYPE_FILTERS = ['All', 'Track Day', 'Karting', 'Rocket Rally', 'Garage Waitlist'] as const;
 
@@ -35,6 +36,11 @@ function todayIso(): string {
 function getMonthStart(): string {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-01`;
+}
+
+function createdOnOrAfter(iso: string | undefined, start: string): boolean {
+  if (!iso) return false;
+  return iso.slice(0, 10) >= start;
 }
 
 function toInquiry(b?: BookingRow, w?: WaitlistRow): Inquiry | null {
@@ -81,6 +87,7 @@ export function Dashboard() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [actionBusy, setActionBusy] = useState<string | null>(null);
+  const [lastRefreshedAt, setLastRefreshedAt] = useState<Date | null>(null);
 
   // New garage form state
   const [newUnit, setNewUnit] = useState('');
@@ -90,7 +97,7 @@ export function Dashboard() {
   // Filters & view
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState<(typeof TYPE_FILTERS)[number]>('All');
-  const [statusFilter, setStatusFilter] = useState<'All' | PipelineStatus>('All');
+  const [statusFilter, setStatusFilter] = useState<'All' | (typeof PIPELINE_STATUSES)[number]>('All');
   const [view, setView] = useState<'pipeline' | 'schedule' | 'garage' | 'units'>('pipeline');
 
   const load = useCallback(async () => {
@@ -101,6 +108,7 @@ export function Dashboard() {
       setBookings(b || []);
       setWaitlist(w || []);
       setGarages(g || []);
+      setLastRefreshedAt(new Date());
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to load data');
     } finally {
@@ -130,35 +138,23 @@ export function Dashboard() {
   }, [bookings, waitlist]);
 
   const metrics = useMemo(() => {
-    const thisMonth = inquiries.filter((i) => i.date >= monthStart).length;
-
-    const expCounts: Record<string, number> = {};
-    bookings.forEach((b) => {
-      const t = getInquiryTypeLabel(b.experience_type);
-      expCounts[t] = (expCounts[t] || 0) + 1;
-    });
-    let topExp = '—';
-    let topCount = 0;
-    Object.entries(expCounts).forEach(([k, v]) => {
-      if (v > topCount) {
-        topCount = v;
-        topExp = k;
-      }
-    });
-
-    const garageCount = waitlist.length;
-    const availableGarages = garages.filter((g) => g.status === 'Available').length;
-    const booked = inquiries.filter((i) => i.status === 'Booked' || i.status === 'confirmed').length;
-    const conv = inquiries.length > 0 ? Math.round((booked / inquiries.length) * 100) : 0;
+    const bookingsThisMonth = bookings.filter((b) => createdOnOrAfter(b.created_at, monthStart)).length;
+    const waitlistThisMonth = waitlist.filter((w) => createdOnOrAfter(w.created_at, monthStart)).length;
+    const totalInquiriesThisMonth = bookingsThisMonth + waitlistThisMonth;
+    const garageWaitlistCount = waitlist.length;
+    const bookedCount = inquiries.filter((i) => i.status === 'Booked').length;
+    const conversionPct =
+      inquiries.length > 0 ? Math.round((bookedCount / inquiries.length) * 100) : 0;
 
     return {
-      thisMonth,
-      topExp: topExp || '—',
-      garageCount,
-      availableGarages,
-      conversion: `${conv}%`,
+      totalInquiriesThisMonth,
+      garageWaitlistCount,
+      bookingsThisMonth,
+      conversionPct,
+      bookedCount,
+      totalInquiries: inquiries.length,
     };
-  }, [inquiries, bookings, waitlist, garages]);
+  }, [bookings, waitlist, inquiries, monthStart]);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -233,14 +229,15 @@ export function Dashboard() {
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Could not save note');
+      throw e;
     } finally {
       setActionBusy(null);
     }
   }
 
-  function handleNotesBlur(e: React.FocusEvent<HTMLTextAreaElement>, inq: Inquiry) {
-    void saveNotes(inq, e.target.value);
-  }
+  const refreshedLabel = lastRefreshedAt
+    ? lastRefreshedAt.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })
+    : null;
 
   // Garage inventory handlers
   async function addNewGarage(e?: React.FormEvent) {
@@ -337,29 +334,33 @@ export function Dashboard() {
         </p>
       </div>
 
-      {/* Utilization Snapshot */}
-      <div style={{ marginBottom: '1.5rem' }}>
-        <div style={{ fontSize: '0.7rem', letterSpacing: '0.2em', color: 'var(--wf-gold-muted)', marginBottom: 8, textTransform: 'uppercase' }}>
-          Utilization Snapshot
-        </div>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(158px, 1fr))',
-            gap: 12,
-          }}
-        >
-          <SnapshotCard label="Inquiries this month" value={metrics.thisMonth} />
-          <SnapshotCard label="Top requested" value={metrics.topExp} sub="experience" />
-          <SnapshotCard label="Available garages" value={metrics.availableGarages} />
-          <SnapshotCard label="Garage waitlist" value={metrics.garageCount} />
-          <SnapshotCard label="Conversion" value={metrics.conversion} sub="Booked / inquiries" />
-        </div>
+      {/* Utilization stats — pulled from Supabase via bookings + waitlist */}
+      <div className="wf-stats-row">
+        <StatCard
+          label="Total inquiries"
+          value={metrics.totalInquiriesThisMonth}
+          sub="This month"
+        />
+        <StatCard
+          label="Garage waitlist"
+          value={metrics.garageWaitlistCount}
+          sub="Active entries"
+        />
+        <StatCard
+          label="Bookings"
+          value={metrics.bookingsThisMonth}
+          sub="New this month"
+        />
+        <StatCard
+          label="Conversion rate"
+          value={`${metrics.conversionPct}%`}
+          sub={`${metrics.bookedCount} booked · ${metrics.totalInquiries} total`}
+        />
       </div>
 
       {/* Controls */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
-        <div style={{ fontSize: '0.7rem', color: 'var(--wf-gold-muted)', marginRight: 8 }}>VIEW</div>
+      <div className="wf-command-toolbar">
+        <div style={{ fontSize: '0.7rem', color: 'var(--wf-gold-muted)', marginRight: 4 }}>VIEW</div>
         {(['pipeline', 'schedule', 'garage', 'units'] as const).map((v) => (
           <button
             key={v}
@@ -377,10 +378,20 @@ export function Dashboard() {
 
         <div style={{ flex: 1 }} />
 
-        <button onClick={() => void load()} disabled={loading} style={refreshBtn}>
-          {loading ? 'Refreshing…' : 'Refresh'}
+        {refreshedLabel ? (
+          <span className="wf-command-toolbar-meta">Updated {refreshedLabel}</span>
+        ) : null}
+        <button
+          type="button"
+          className="wf-btn-refresh"
+          onClick={() => void load()}
+          disabled={loading}
+        >
+          {loading ? 'Refreshing…' : '↻ Refresh data'}
         </button>
-        <Link to="/bookings" style={{ fontSize: '0.8rem', color: 'var(--wf-gold)' }}>Full Bookings →</Link>
+        <Link to="/bookings" style={{ fontSize: '0.8rem', color: 'var(--wf-gold)' }}>
+          Full Bookings →
+        </Link>
       </div>
 
       {/* Filters (hidden for schedule and units) */}
@@ -443,20 +454,26 @@ export function Dashboard() {
 
       {/* Main table or Garage Inventory */}
       <div style={{ border: '1px solid var(--wf-border)', borderRadius: 12, overflow: 'hidden', background: 'var(--wf-surface)' }}>
-        <div style={{ padding: '12px 14px', borderBottom: '1px solid var(--wf-border)', background: 'var(--wf-elevated)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="wf-panel-header">
           <div>
             <div style={{ fontSize: '0.75rem', letterSpacing: '0.12em', color: 'var(--wf-text-dim)', textTransform: 'uppercase' }}>
-              {view === 'pipeline' && 'ALL INQUIRIES'}
-              {view === 'schedule' && "TODAY + NEXT 7 DAYS"}
-              {view === 'garage' && 'GARAGE WAITLIST INTEREST'}
-              {view === 'units' && 'GARAGE INVENTORY'}
+              {view === 'pipeline' && 'Unified inquiries pipeline'}
+              {view === 'schedule' && "Today's schedule + 7 days"}
+              {view === 'garage' && 'Garage waitlist interest'}
+              {view === 'units' && 'Garage inventory'}
             </div>
             <div style={{ color: 'var(--wf-heading)', fontWeight: 500, fontSize: '1.02rem' }}>
-              {view === 'pipeline' ? `${activeList.length} inquiries` : view === 'schedule' ? `${activeList.length} upcoming` : view === 'garage' ? `${activeList.length} interested` : `${garages.length} units`}
+              {view === 'pipeline'
+                ? `${filtered.length} of ${inquiries.length} inquiries`
+                : view === 'schedule'
+                  ? `${activeList.length} upcoming`
+                  : view === 'garage'
+                    ? `${activeList.length} interested`
+                    : `${garages.length} units`}
             </div>
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--wf-text-dim)' }}>
-            {activeList.length} shown
+            Bookings + garage waitlist in one view
           </div>
         </div>
 
@@ -539,19 +556,19 @@ export function Dashboard() {
             </table>
           </div>
         ) : (
-          /* Regular Inquiries / Schedule / Garage Interest Table */
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.86rem' }}>
+          /* Unified pipeline — bookings + garage waitlist */
+          <div className="wf-pipeline-table-wrap">
+            <table className="wf-pipeline-table">
               <thead>
-                <tr style={{ background: 'var(--wf-elevated)' }}>
-                  <th style={thCell}>Date</th>
-                  <th style={thCell}>Name</th>
-                  <th style={thCell}>Email</th>
-                  <th style={thCell}>Phone</th>
-                  <th style={thCell}>Type</th>
-                  <th style={thCell}>Status</th>
-                  <th style={{ ...thCell, minWidth: 220 }}>Notes</th>
-                  <th style={thCell}>Actions</th>
+                <tr>
+                  <th>Date</th>
+                  <th>Source</th>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th style={{ minWidth: 220 }}>Internal notes</th>
+                  <th>Quick actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -565,47 +582,58 @@ export function Dashboard() {
                   activeList.map((inq) => {
                     const busy = actionBusy === inq.id;
                     return (
-                      <tr key={`${inq.source}-${inq.id}`} style={{ borderTop: '1px solid var(--wf-border)' }}>
-                        <td style={tdCell}>{inq.displayDate}</td>
-                        <td style={tdCell}><strong>{inq.name}</strong></td>
-                        <td style={tdCell}>
-                          <a href={`mailto:${inq.email}`} style={{ color: 'var(--wf-gold)' }}>{inq.email}</a>
+                      <tr key={`${inq.source}-${inq.id}`} className={busy ? 'is-busy' : undefined}>
+                        <td>{inq.displayDate}</td>
+                        <td>
+                          <span
+                            className={`wf-source-pill wf-source-pill--${inq.source === 'booking' ? 'booking' : 'waitlist'}`}
+                          >
+                            {inq.source === 'booking' ? 'Booking' : 'Waitlist'}
+                          </span>
                         </td>
-                        <td style={tdCell}>{inq.phone}</td>
-                        <td style={tdCell}><span style={typePill}>{inq.type}</span></td>
-                        <td style={tdCell}>
-                          <select
+                        <td>
+                          <strong style={{ color: 'var(--wf-heading)' }}>{inq.name}</strong>
+                        </td>
+                        <td>
+                          <div>
+                            <a href={`mailto:${inq.email}`} style={{ color: 'var(--wf-gold)', fontSize: '0.82rem' }}>
+                              {inq.email}
+                            </a>
+                          </div>
+                          <div style={{ fontSize: '0.78rem', color: 'var(--wf-text-dim)', marginTop: 2 }}>{inq.phone}</div>
+                        </td>
+                        <td>
+                          <span className="wf-type-pill">{inq.type}</span>
+                        </td>
+                        <td>
+                          <InquiryStatusSelect
                             value={inq.status}
                             disabled={busy}
-                            onChange={(e) => void updateStatus(inq, e.target.value)}
-                            className="wf-input-dark wf-input-compact"
-                            style={{ minWidth: 108, fontSize: '0.8rem' }}
-                          >
-                            {PIPELINE_STATUSES.map((s) => (
-                              <option key={s} value={s}>{s}</option>
-                            ))}
-                          </select>
-                        </td>
-                        <td style={{ ...tdCell, minWidth: 220 }}>
-                          <textarea
-                            defaultValue={inq.notes || ''}
-                            onBlur={(e) => handleNotesBlur(e, inq)}
-                            disabled={busy}
-                            rows={2}
-                            placeholder="Internal notes…"
-                            className="wf-input-dark"
-                            style={{ width: '100%', fontSize: '0.8rem', resize: 'vertical', minHeight: 42 }}
+                            onChange={(st) => void updateStatus(inq, st)}
                           />
                         </td>
-                        <td style={tdCell}>
+                        <td>
+                          <InquiryNotesField inquiry={inq} disabled={busy} onSave={saveNotes} />
+                        </td>
+                        <td>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                            <button disabled={busy} onClick={() => void quickMark(inq, 'Contacted')} style={miniAction}>
+                            <button
+                              type="button"
+                              disabled={busy}
+                              onClick={() => void quickMark(inq, 'Contacted')}
+                              style={miniAction}
+                            >
                               Mark Contacted
                             </button>
                             <button
+                              type="button"
                               disabled={busy}
                               onClick={() => void quickMark(inq, 'Booked')}
-                              style={{ ...miniAction, background: 'rgba(52,211,153,0.1)', borderColor: 'rgba(52,211,153,0.4)' }}
+                              style={{
+                                ...miniAction,
+                                background: 'rgba(52,211,153,0.1)',
+                                borderColor: 'rgba(52,211,153,0.4)',
+                              }}
                             >
                               Mark Booked
                             </button>
@@ -624,7 +652,7 @@ export function Dashboard() {
       <div style={{ marginTop: '1.25rem', fontSize: '0.75rem', color: 'var(--wf-text-dim)' }}>
         {view === 'units' 
           ? 'Garage statuses: Available → Occupied / Reserved / Maintenance. Use Team Access at the bottom of the public site to reach this Command Center.'
-          : 'Status pipeline: New → Contacted → Qualified → Booked / Closed. Notes autosave on blur.'}
+          : 'Pipeline: New → Contacted → Qualified → Booked / Closed. Status updates save immediately. Notes autosave on blur or via Save note.'}
       </div>
 
       <div style={{ marginTop: 20, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
@@ -635,24 +663,15 @@ export function Dashboard() {
   );
 }
 
-function SnapshotCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
+function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
-    <div style={snapCard}>
-      <div style={snapLabel}>{label}</div>
-      <div style={snapValue}>{value}</div>
-      {sub && <div style={{ fontSize: '0.7rem', color: 'var(--wf-text-dim)', marginTop: 2 }}>{sub}</div>}
+    <div className="wf-stat-card">
+      <div className="wf-stat-label">{label}</div>
+      <div className="wf-stat-value">{value}</div>
+      {sub ? <div className="wf-stat-sub">{sub}</div> : null}
     </div>
   );
 }
-
-const snapCard: CSSProperties = {
-  padding: '14px 16px',
-  background: 'var(--wf-surface)',
-  border: '1px solid var(--wf-border)',
-  borderRadius: 10,
-};
-const snapLabel: CSSProperties = { fontSize: '0.68rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--wf-text-dim)' };
-const snapValue: CSSProperties = { fontSize: '1.55rem', fontWeight: 600, color: 'var(--wf-heading)', marginTop: 2, lineHeight: 1.1 };
 
 const thCell: CSSProperties = {
   padding: '10px 12px',
@@ -670,16 +689,6 @@ const tdCell: CSSProperties = {
   color: 'var(--wf-text)',
   verticalAlign: 'top',
   fontSize: '0.875rem',
-};
-
-const typePill: CSSProperties = {
-  display: 'inline-block',
-  fontSize: '0.72rem',
-  padding: '1px 8px',
-  borderRadius: 999,
-  background: 'rgba(197,162,111,0.12)',
-  color: 'var(--wf-gold)',
-  border: '1px solid rgba(197,162,111,0.25)',
 };
 
 const filterBar: CSSProperties = {

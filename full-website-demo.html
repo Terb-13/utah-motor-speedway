@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildfire Raceway | Full Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap');
+        
+        :root {
+            --wf-bg: #0a0a0a;
+            --wf-surface: #0c0c0c;
+            --wf-gold: #c5a26f;
+        }
+        
+        body {
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-feature-settings: "tnum";
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            transition: color 0.15s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white;
+        }
+        
+        .umc-nav-shell {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+        }
+        
+        .cta-primary {
+            background: #c5a26f;
+            color: #0a0a0a;
+            font-weight: 600;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .demo-bar {
+            background: linear-gradient(90deg, #c5a26f, #e8d5b5);
+            color: #0a0a0a;
+        }
+        
+        .staff-btn {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            padding: 0.5rem 1rem;
+            border: 1px solid #c5a26f;
+            color: #c5a26f;
+            transition: all 0.2s;
+        }
+        
+        .staff-btn:hover {
+            background: #c5a26f;
+            color: #0a0a0a;
+        }
+        
+        .section-header {
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+        }
+        
+        .cinematic {
+            box-shadow: 0 48px 100px -48px rgba(0,0,0,0.9);
+        }
+        
+        .nav-active {
+            color: #c5a26f !important;
+            font-weight: 500;
+        }
+        
+        .mock-table th {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .wf-card {
+            background: #0c0c0c;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0a] text-[#c4c4c4]">
+
+    <!-- DEMO BAR - Always visible -->
+    <div class="demo-bar text-center py-2.5 text-sm font-bold tracking-wider flex items-center justify-center gap-2 z-[100] relative">
+        <span>🚀</span> 
+        <span class="hidden sm:inline">DEMO MODE — </span>
+        <a href="#" onclick="showPage('admin')" class="underline hover:no-underline font-extrabold">OPEN STAFF COMMAND CENTER</a>
+        <span class="text-xs opacity-70 ml-1">(no password)</span>
+    </div>
+
+    <!-- NAV -->
+    <nav class="umc-nav-shell sticky top-0 z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" onclick="showPage('home')" class="flex items-center gap-x-3">
+                    <div class="w-10 h-10 rounded-xl border border-[#c5a26f]/40 bg-[#0c0c0c] flex items-center justify-center">
+                        <i class="fa-solid fa-flag-checkered text-[#c5a26f] text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-xl tracking-[0.12em] text-white heading-font">Wildfire</div>
+                        <div class="text-[10px] text-[#c5a26f]/70 -mt-1 tracking-[0.28em]">RACEWAY</div>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-x-8 text-sm">
+                    <a href="#" onclick="showPage('home')" class="nav-link px-1">Home</a>
+                    <a href="#" onclick="showPage('track')" class="nav-link px-1">The Track</a>
+                    <a href="#" onclick="showPage('karting')" class="nav-link px-1">Karting</a>
+                    <a href="#" onclick="showPage('rocket')" class="nav-link px-1">Rocket Rally</a>
+                    <a href="#" onclick="showPage('events')" class="nav-link px-1">Events</a>
+                    <a href="#" onclick="showPage('garages')" class="nav-link px-1">Private Garages</a>
+                    <a href="#" onclick="showPage('schedule')" class="nav-link px-1">Schedule</a>
+                    
+                    <a href="#" onclick="showPage('admin')" 
+                       class="staff-btn rounded-xl font-semibold flex items-center gap-1.5 ml-2 hover:bg-[#c5a26f] hover:text-[#0a0a0a]">
+                        <i class="fa-solid fa-user-tie text-xs"></i>
+                        <span>Staff Command Center</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" 
+                        class="md:hidden w-11 h-11 flex items-center justify-center text-xl text-[#c5a26f] border border-white/10 rounded-xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-[#0a0a0a]">
+            <div class="px-4 py-4 flex flex-col text-sm">
+                <a href="#" onclick="showPage('home'); toggleMobileMenu()" class="py-3 px-2">Home</a>
+                <a href="#" onclick="showPage('track'); toggleMobileMenu()" class="py-3 px-2">The Track</a>
+                <a href="#" onclick="showPage('karting'); toggleMobileMenu()" class="py-3 px-2">Karting</a>
+                <a href="#" onclick="showPage('rocket'); toggleMobileMenu()" class="py-3 px-2">Rocket Rally</a>
+                <a href="#" onclick="showPage('events'); toggleMobileMenu()" class="py-3 px-2">Events</a>
+                <a href="#" onclick="showPage('garages'); toggleMobileMenu()" class="py-3 px-2">Private Garages</a>
+                <a href="#" onclick="showPage('schedule'); toggleMobileMenu()" class="py-3 px-2">Schedule</a>
+                <a href="#" onclick="showPage('admin'); toggleMobileMenu()" class="py-3 px-2 text-[#c5a26f] font-semibold flex items-center gap-2">
+                    <i class="fa-solid fa-user-tie"></i> Staff Command Center
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ====================== HOME PAGE ====================== -->
+    <div id="page-home" class="page active">
+        <!-- Hero -->
+        <header class="min-h-[100dvh] flex flex-col justify-end relative overflow-hidden bg-[#0a0a0a]">
+            <div class="relative z-10 max-w-4xl mx-auto px-6 pb-28 pt-20 text-left md:text-center">
+                <p class="text-[#c5a26f] text-xs tracking-[0.4em] uppercase mb-6 font-medium">Utah’s Premier Private Racing Club</p>
+                <h1 class="text-5xl sm:text-6xl md:text-7xl text-white heading-font font-medium leading-[1.05] tracking-tighter mb-6">
+                    Full circuit gravity.<br>
+                    <span class="text-[#c5a26f]">Invitation-only access.</span>
+                </h1>
+                <p class="max-w-2xl md:mx-auto text-xl text-white/55 leading-relaxed mb-10">
+                    Wildfire Raceway is a billionaire’s playground in the Mountain West — a private racing club where founding members shape the calendar.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button onclick="document.getElementById('schedule').scrollIntoView({behavior:'smooth'})" 
+                            class="px-9 py-4 bg-[#c5a26f] text-[#0a0a0a] font-semibold rounded-xl text-sm tracking-widest hover:bg-[#d4b487]">
+                        VIEW CURRENT SCHEDULE
+                    </button>
+                    <button onclick="showPage('garages')" 
+                            class="px-9 py-4 border border-white/30 rounded-xl text-sm tracking-widest hover:bg-white/5">
+                        EXPLORE PRIVATE GARAGES
+                    </button>
+                </div>
+            </div>
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-xs tracking-[3px] text-white/40">SCROLL TO EXPLORE</div>
+        </header>
+
+        <!-- The Standard -->
+        <section class="py-20 px-6 border-t border-white/10">
+            <div class="max-w-5xl mx-auto text-center">
+                <p class="text-[#c5a26f] text-xs tracking-[0.3em] mb-4">THE STANDARD</p>
+                <h2 class="text-4xl heading-font text-white font-medium">Benchmark venues define a lane.<br>Wildfire occupies the one above it.</h2>
+            </div>
+        </section>
+
+        <!-- Experiences -->
+        <section id="experiences" class="px-6 py-12 border-t border-white/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-16">
+                    <!-- Track -->
+                    <div class="space-y-4">
+                        <div class="text-[#c5a26f] text-xs tracking-[0.3em]">THE TRACK</div>
+                        <h3 class="text-3xl text-white font-medium">World-class private circuit.</h3>
+                        <p class="text-white/50">2.1 miles. 17 turns. Elevation changes that reward commitment.</p>
+                        <button onclick="showPage('track')" class="text-sm text-[#c5a26f] flex items-center gap-2">Explore the track →</button>
+                    </div>
+                    
+                    <!-- Other experiences abbreviated -->
+                    <div class="space-y-8 text-sm">
+                        <div>
+                            <div class="font-semibold">KARTING</div>
+                            <div class="text-white/50">Outdoor arrive-and-drive + private sessions</div>
+                            <button onclick="showPage('karting')" class="text-[#c5a26f] text-xs mt-1">→</button>
+                        </div>
+                        <div>
+                            <div class="font-semibold">ROCKET RALLY</div>
+                            <div class="text-white/50">Wildfire’s signature car-soccer experience</div>
+                            <button onclick="showPage('rocket')" class="text-[#c5a26f] text-xs mt-1">→</button>
+                        </div>
+                        <div>
+                            <div class="font-semibold">EVENTS</div>
+                            <div class="text-white/50">Corporate, private, and large-scale</div>
+                            <button onclick="showPage('events')" class="text-[#c5a26f] text-xs mt-1">→</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE NEW SCHEDULE SECTION -->
+        <section id="schedule" class="bg-[#111] py-16 border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <div class="text-[#c5a26f] text-xs tracking-widest mb-1">LIVE DATA</div>
+                        <h2 class="text-4xl text-white font-medium">Current Schedule &amp; Availability</h2>
+                    </div>
+                    <button onclick="refreshScheduleDemo()" class="text-xs px-4 py-2 border border-white/20 rounded-full hover:bg-white/5">Refresh Data</button>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Track Bookings -->
+                    <div class="wf-card rounded-2xl p-6">
+                        <div class="font-semibold mb-4 flex items-center justify-between">
+                            <span>Track &amp; Experience Bookings</span>
+                            <span class="text-emerald-400 text-xs">8 upcoming</span>
+                        </div>
+                        <div id="demo-bookings" class="space-y-2 text-sm">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Garages -->
+                    <div class="wf-card rounded-2xl p-6">
+                        <div class="font-semibold mb-4 flex items-center justify-between">
+                            <span>Private Garages — Available Now</span>
+                            <span class="text-emerald-400 text-xs">4 units</span>
+                        </div>
+                        <div id="demo-garages" class="grid grid-cols-2 gap-3 text-sm">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center text-xs text-white/40">
+                    Sales teams: Use the <span onclick="showPage('admin')" class="text-[#c5a26f] cursor-pointer">Staff Command Center</span> for full CRM tools and to book for clients.
+                </div>
+            </div>
+        </section>
+        
+        <footer class="py-10 px-6 border-t border-white/10 text-center text-xs text-white/40">
+            Wildfire Raceway Demo • All pages functional in this single file
+        </footer>
+    </div>
+
+    <!-- ====================== TRACK PAGE ====================== -->
+    <div id="page-track" class="page">
+        <div class="max-w-4xl mx-auto px-6 py-12">
+            <div class="mb-8">
+                <a href="#" onclick="showPage('home')" class="text-xs text-[#c5a26f]">← Back to Home</a>
+            </div>
+            <h1 class="text-5xl font-medium">The Track</h1>
+            <p class="mt-3 text-xl text-white/60">2.1-mile private circuit designed for serious driving.</p>
+            
+            <div class="mt-10 grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold mb-2">Key Features</h3>
+                    <ul class="space-y-2 text-sm text-white/70">
+                        <li>• 17 challenging turns</li>
+                        <li>• 120 ft elevation change</li>
+                        <li>• FIA-grade safety standards</li>
+                        <li>• Full paddock and timing system</li>
+                    </ul>
+                </div>
+                <div class="bg-[#111] p-6 rounded-xl text-sm">
+                    <div class="text-[#c5a26f] mb-1 text-xs">CURRENT STATUS</div>
+                    <div class="font-semibold">Open for private track days</div>
+                    <div class="text-white/50 mt-4 text-xs">See availability in the <a href="#" onclick="showPage('schedule')" class="underline">Schedule</a> above.</div>
+                </div>
+            </div>
+
+            <button onclick="openBookingModal('track-day')" class="mt-8 px-8 py-3 bg-[#c5a26f] text-black font-semibold rounded-xl">Book a Track Day</button>
+        </div>
+    </div>
+
+    <!-- ====================== KARTING ====================== -->
+    <div id="page-karting" class="page">
+        <div class="max-w-4xl mx-auto px-6 py-12">
+            <a href="#" onclick="showPage('home')" class="text-xs text-[#c5a26f]">← Back</a>
+            <h1 class="text-5xl mt-4 font-medium">Karting</h1>
+            <p class="mt-4">Outdoor arrive-and-drive and private kart sessions on a purpose-built track.</p>
+            
+            <div class="mt-8">
+                <button onclick="openBookingModal('karting')" class="px-7 py-3 bg-[#c5a26f] text-sm font-semibold text-black rounded-xl">Book Karting Session</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================== ROCKET RALLY ====================== -->
+    <div id="page-rocket" class="page">
+        <div class="max-w-4xl mx-auto px-6 py-12">
+            <a href="#" onclick="showPage('home')" class="text-xs text-[#c5a26f]">← Back</a>
+            <h1 class="text-5xl mt-4 font-medium">Rocket Rally</h1>
+            <p class="mt-4">Wildfire’s signature experience. Real rally cars. Giant ball. 4-hour sessions.</p>
+            
+            <button onclick="openBookingModal('rocket-rally')" class="mt-6 px-7 py-3 bg-[#c5a26f] text-sm font-semibold text-black rounded-xl">Book Rocket Rally</button>
+        </div>
+    </div>
+
+    <!-- ====================== EVENTS ====================== -->
+    <div id="page-events" class="page">
+        <div class="max-w-4xl mx-auto px-6 py-12">
+            <a href="#" onclick="showPage('home')" class="text-xs text-[#c5a26f]">← Back</a>
+            <h1 class="text-5xl mt-4 font-medium">Events</h1>
+            <p class="text-xl mt-3">Corporate days, private events, and large-scale productions.</p>
+            <button onclick="showPage('garages')" class="mt-8 text-sm px-6 py-3 border border-[#c5a26f] rounded-xl">Inquire about hosting</button>
+        </div>
+    </div>
+
+    <!-- ====================== GARAGES ====================== -->
+    <div id="page-garages" class="page">
+        <div class="max-w-5xl mx-auto px-6 py-12">
+            <a href="#" onclick="showPage('home')" class="text-xs text-[#c5a26f]">← Back</a>
+            <h1 class="text-5xl mt-3 font-medium">Private Garages</h1>
+            <p class="mt-2 max-w-md">Climate-controlled bays with direct track access for founding members.</p>
+
+            <div class="mt-10">
+                <h3 class="font-semibold mb-4">Currently Available</h3>
+                <div id="garages-page-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- JS populated -->
+                </div>
+            </div>
+
+            <div class="mt-12 border-t border-white/10 pt-10">
+                <h3 class="font-semibold">Join the Waitlist</h3>
+                <form id="demo-waitlist-form" class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg">
+                    <input class="bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-sm" placeholder="Full name" required>
+                    <input class="bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-sm" placeholder="Email" type="email" required>
+                    <input class="bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-sm" placeholder="Phone" required>
+                    <button type="submit" class="bg-[#c5a26f] text-black font-semibold rounded-xl">Submit to Waitlist</button>
+                </form>
+                <div id="waitlist-success" class="hidden mt-4 text-emerald-400 text-sm">Thank you. We'll be in touch.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================== SCHEDULE PAGE ====================== -->
+    <div id="page-schedule" class="page">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <a href="#" onclick="showPage('home')" class="text-xs text-[#c5a26f]">← Back to Home</a>
+            <h1 class="text-4xl font-medium mt-3 mb-2">Full Schedule &amp; Availability</h1>
+            <p class="text-white/60">What’s booked. What’s open. Updated for demo.</p>
+            
+            <div class="mt-8 grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold mb-3">Track Bookings (Next 30 Days)</h4>
+                    <div id="full-schedule-bookings" class="space-y-2 text-sm"></div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Private Garages</h4>
+                    <div id="full-schedule-garages" class="grid grid-cols-2 gap-3 text-sm"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================== ADMIN / STAFF COMMAND CENTER ====================== -->
+    <div id="page-admin" class="page">
+        <div class="max-w-6xl mx-auto p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <div class="text-[#c5a26f] text-xs tracking-widest">WILDFIRE RACEWAY</div>
+                    <div class="text-3xl font-semibold text-white">Command Center</div>
+                </div>
+                <button onclick="showPage('home')" class="text-xs px-4 py-2 border border-white/20 rounded-lg">Exit Demo</button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex gap-1 border-b border-white/10 mb-6">
+                <button onclick="switchAdminTab(0)" class="admin-tab px-5 py-2 text-sm font-medium active">Inquiries Pipeline</button>
+                <button onclick="switchAdminTab(1)" class="admin-tab px-5 py-2 text-sm font-medium">Today’s Schedule</button>
+                <button onclick="switchAdminTab(2)" class="admin-tab px-5 py-2 text-sm font-medium">Garage Inventory</button>
+            </div>
+
+            <!-- Tab 0: Inquiries -->
+            <div id="admin-tab-0" class="admin-tab-content">
+                <div class="bg-[#111] rounded-2xl p-5">
+                    <h3 class="font-semibold mb-4">Combined Inquiries (Bookings + Garage Waitlist)</h3>
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-white/50 text-xs border-b border-white/10">
+                                <th class="pb-2">Date</th><th>Name</th><th>Type</th><th>Status</th><th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiries-table" class="text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 1: Schedule -->
+            <div id="admin-tab-1" class="admin-tab-content hidden">
+                <div class="bg-[#111] rounded-2xl p-5">
+                    <h3 class="font-semibold">Today + Next 7 Days</h3>
+                    <div id="admin-schedule" class="mt-3 text-sm space-y-2"></div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Garage Inventory -->
+            <div id="admin-tab-2" class="admin-tab-content hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold">Garage Inventory Management</h3>
+                    <button onclick="addDemoGarage()" class="text-xs px-3 py-1.5 bg-[#c5a26f] text-black rounded-lg font-medium">+ Add New Unit</button>
+                </div>
+                <div id="admin-garages" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm"></div>
+            </div>
+
+            <div class="mt-8 text-xs text-white/40">Demo version — changes are temporary in this browser session.</div>
+        </div>
+    </div>
+
+    <!-- BOOKING MODAL -->
+    <div id="booking-modal" onclick="if (event.target.id === 'booking-modal') closeBookingModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" class="bg-[#0c0c0c] border border-white/10 rounded-2xl w-full max-w-md p-6">
+            <div class="flex justify-between">
+                <h3 class="font-semibold text-lg">Book Your Experience</h3>
+                <button onclick="closeBookingModal()" class="text-xl leading-none">×</button>
+            </div>
+            
+            <form id="demo-booking-form" onsubmit="submitDemoBooking(event)" class="mt-5 space-y-4">
+                <div>
+                    <label class="text-xs text-white/50">Experience</label>
+                    <select id="booking-experience" class="w-full bg-[#111] border border-white/10 p-3 rounded-xl text-sm">
+                        <option value="track-day">Track Day</option>
+                        <option value="karting">Karting</option>
+                        <option value="rocket-rally">Rocket Rally</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs text-white/50">Preferred Date</label>
+                        <input type="date" id="booking-date" class="w-full bg-[#111] border border-white/10 p-3 rounded-xl text-sm" required>
+                    </div>
+                    <div>
+                        <label class="text-xs text-white/50">Party Size</label>
+                        <input type="number" value="2" class="w-full bg-[#111] border border-white/10 p-3 rounded-xl text-sm" required>
+                    </div>
+                </div>
+                
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3.5 bg-[#c5a26f] text-black font-semibold rounded-xl">Submit Inquiry</button>
+                </div>
+            </form>
+            
+            <div id="booking-success" class="hidden mt-5 text-center text-emerald-400 text-sm">
+                Inquiry received! The team will follow up shortly.<br>
+                <button onclick="closeBookingModal()" class="text-xs mt-2 underline">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind script
+        function initTailwind() {
+            // Already using CDN script tag
+        }
+        
+        // Page switching
+        let currentPage = 'home';
+        
+        function showPage(page) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            
+            // Show target
+            const target = document.getElementById('page-' + page);
+            if (target) {
+                target.classList.add('active');
+                currentPage = page;
+            }
+            
+            // Special init
+            if (page === 'garages') initGaragesDemo();
+            if (page === 'schedule') initFullScheduleDemo();
+            if (page === 'admin') initAdminDemo();
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // Demo Data
+        let demoBookings = [
+            {date: "2026-07-15", type: "track-day", name: "Private Track Day"},
+            {date: "2026-07-18", type: "karting", name: "Corporate Karting"},
+            {date: "2026-07-22", type: "rocket-rally", name: "Rocket Rally Group"},
+            {date: "2026-07-29", type: "track-day", name: "Club Track Day"},
+        ];
+        
+        let demoGarages = [
+            {unit: "A-01", size: "Large", status: "Available", notes: "Corner unit"},
+            {unit: "B-05", size: "Standard", status: "Available", notes: ""},
+            {unit: "C-12", size: "Large", status: "Available", notes: "High ceiling"},
+            {unit: "D-03", size: "Standard", status: "Occupied", notes: "Alex Rivera"},
+        ];
+        
+        let demoInquiries = [
+            {id:1, date:"2026-07-10", name:"Jordan Hale", type:"Track Day", status:"New"},
+            {id:2, date:"2026-07-12", name:"Morgan Lee", type:"Garage Waitlist", status:"Contacted"},
+            {id:3, date:"2026-07-14", name:"Chris Patel", type:"Karting", status:"Qualified"},
+        ];
+        
+        function refreshScheduleDemo() {
+            const bookingsContainer = document.getElementById('demo-bookings');
+            const garagesContainer = document.getElementById('demo-garages');
+            
+            if (!bookingsContainer || !garagesContainer) return;
+            
+            bookingsContainer.innerHTML = demoBookings.map(b => `
+                <div class="flex justify-between border-b border-white/10 pb-1 text-xs">
+                    <span>${b.date}</span> 
+                    <span class="text-white/60">${b.type}</span>
+                </div>
+            `).join('');
+            
+            const avail = demoGarages.filter(g => g.status === 'Available');
+            garagesContainer.innerHTML = avail.map(g => `
+                <div class="border border-white/10 p-2.5 rounded-xl bg-[#111]">
+                    <div class="font-medium">${g.unit}</div>
+                    <div class="text-emerald-400 text-xs">${g.size} • Available</div>
+                </div>
+            `).join('');
+        }
+        
+        function initFullScheduleDemo() {
+            const b = document.getElementById('full-schedule-bookings');
+            const g = document.getElementById('full-schedule-garages');
+            
+            b.innerHTML = demoBookings.map(item => `
+                <div class="flex justify-between items-center py-1 border-b border-white/10 text-xs">
+                    <div><span class="font-medium">${item.date}</span> — ${item.type}</div>
+                    <div class="text-amber-400">Booked</div>
+                </div>
+            `).join('');
+            
+            g.innerHTML = demoGarages.map(item => `
+                <div class="border border-white/10 p-3 rounded-xl">
+                    <div class="flex justify-between">
+                        <span class="font-medium">${item.unit}</span>
+                        <span class="${item.status === 'Available' ? 'text-emerald-400' : 'text-red-400'} text-xs">${item.status}</span>
+                    </div>
+                    <div class="text-xs text-white/50">${item.size}</div>
+                </div>
+            `).join('');
+        }
+        
+        // Garage page demo
+        function initGaragesDemo() {
+            const container = document.getElementById('garages-page-grid');
+            if (!container) return;
+            
+            container.innerHTML = demoGarages.map(g => `
+                <div class="border border-white/10 bg-[#0c0c0c] p-4 rounded-2xl">
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="font-semibold">${g.unit}</div>
+                            <div class="text-xs text-white/60">${g.size}</div>
+                        </div>
+                        <span class="text-xs px-3 h-fit py-0.5 rounded-full ${g.status === 'Available' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'}">${g.status}</span>
+                    </div>
+                    ${g.notes ? `<div class="text-xs mt-3 text-white/50">${g.notes}</div>` : ''}
+                </div>
+            `).join('');
+            
+            // Attach waitlist demo
+            const form = document.getElementById('demo-waitlist-form');
+            if (form) {
+                form.onsubmit = function(e) {
+                    e.preventDefault();
+                    document.getElementById('waitlist-success').classList.remove('hidden');
+                    form.style.display = 'none';
+                    setTimeout(() => {
+                        alert('Thank you! Your waitlist entry has been recorded for the demo.');
+                    }, 600);
+                };
+            }
+        }
+        
+        // Booking modal
+        window.openBookingModal = function(type = 'track-day') {
+            const modal = document.getElementById('booking-modal');
+            const select = document.getElementById('booking-experience');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            if (type) select.value = type;
+            
+            // Reset success
+            document.getElementById('booking-success').classList.add('hidden');
+            document.getElementById('demo-booking-form').style.display = 'block';
+        };
+        
+        window.closeBookingModal = function() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        };
+        
+        window.submitDemoBooking = function(e) {
+            e.preventDefault();
+            
+            const form = document.getElementById('demo-booking-form');
+            const success = document.getElementById('booking-success');
+            
+            form.style.display = 'none';
+            success.classList.remove('hidden');
+            
+            // Add to demo bookings
+            const date = document.getElementById('booking-date').value || '2026-08-10';
+            const exp = document.getElementById('booking-experience').value;
+            
+            demoBookings.unshift({date: date, type: exp, name: 'New Inquiry'});
+            
+            // Refresh if schedule is visible
+            setTimeout(() => {
+                if (document.getElementById('page-schedule').classList.contains('active')) {
+                    initFullScheduleDemo();
+                }
+            }, 300);
+        };
+        
+        // Admin demo
+        let currentAdminTab = 0;
+        
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-tab-content').forEach((el, i) => {
+                el.classList.toggle('hidden', i !== tab);
+            });
+            
+            document.querySelectorAll('.admin-tab').forEach((el, i) => {
+                el.classList.toggle('active', i === tab);
+                if (i === tab) el.style.borderBottom = '2px solid #c5a26f';
+                else el.style.borderBottom = 'none';
+            });
+            
+            currentAdminTab = tab;
+            
+            if (tab === 0) renderInquiries();
+            if (tab === 2) renderAdminGarages();
+        }
+        
+        function renderInquiries() {
+            const tbody = document.getElementById('inquiries-table');
+            tbody.innerHTML = demoInquiries.map((inq, index) => `
+                <tr class="border-b border-white/10">
+                    <td class="py-2">${inq.date}</td>
+                    <td>${inq.name}</td>
+                    <td class="text-xs">${inq.type}</td>
+                    <td>
+                        <span class="px-2 py-px rounded text-[10px] ${inq.status === 'New' ? 'bg-amber-500/20 text-amber-400' : inq.status === 'Contacted' ? 'bg-blue-500/20 text-blue-400' : 'bg-emerald-500/20 text-emerald-400'}">${inq.status}</span>
+                    </td>
+                    <td>
+                        <button onclick="updateInquiryStatus(${index}, 'Contacted')" class="text-[10px] text-[#c5a26f]">Mark Contacted</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function updateInquiryStatus(index, newStatus) {
+            demoInquiries[index].status = newStatus;
+            renderInquiries();
+        }
+        
+        function renderAdminGarages() {
+            const container = document.getElementById('admin-garages');
+            container.innerHTML = demoGarages.map((g, i) => `
+                <div class="bg-[#111] border border-white/10 p-4 rounded-2xl">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="font-semibold">${g.unit}</div>
+                        <select onchange="changeGarageStatus(${i}, this.value)" class="bg-[#222] text-xs px-2 py-1 rounded border border-white/10">
+                            <option ${g.status === 'Available' ? 'selected' : ''}>Available</option>
+                            <option ${g.status === 'Occupied' ? 'selected' : ''}>Occupied</option>
+                            <option ${g.status === 'Reserved' ? 'selected' : ''}>Reserved</option>
+                        </select>
+                    </div>
+                    <div class="text-xs text-white/50">${g.size} • ${g.notes || 'No notes'}</div>
+                    <div class="text-[10px] text-emerald-400 mt-2 cursor-pointer" onclick="markGarageSold(${i})">Mark as Sold</div>
+                </div>
+            `).join('');
+        }
+        
+        function changeGarageStatus(index, status) {
+            demoGarages[index].status = status;
+            renderAdminGarages();
+            // also refresh public if visible
+            if (document.getElementById('page-schedule').classList.contains('active')) {
+                initFullScheduleDemo();
+            }
+        }
+        
+        function markGarageSold(index) {
+            demoGarages[index].status = 'Occupied';
+            renderAdminGarages();
+            alert('Marked as sold. This would update the CRM in the real system.');
+        }
+        
+        function addDemoGarage() {
+            const unit = prompt('New unit number (e.g. E-09):', 'E-09');
+            if (!unit) return;
+            demoGarages.push({unit: unit, size: 'Standard', status: 'Available', notes: 'Newly listed'});
+            renderAdminGarages();
+        }
+        
+        function initAdminDemo() {
+            // Show first tab
+            document.querySelectorAll('.admin-tab-content').forEach((el, i) => el.classList.toggle('hidden', i !== 0));
+            document.querySelectorAll('.admin-tab').forEach((el, i) => {
+                el.style.borderBottom = i === 0 ? '2px solid #c5a26f' : 'none';
+            });
+            
+            renderInquiries();
+            renderAdminGarages();
+            
+            // Show schedule in admin tab too
+            setTimeout(() => {
+                const sched = document.getElementById('admin-schedule');
+                if (sched) {
+                    sched.innerHTML = demoBookings.slice(0, 3).map(b => `
+                        <div class="flex justify-between py-1 border-b border-white/10">
+                            <span>${b.date}</span> <span class="text-white/50">${b.type}</span>
+                        </div>
+                    `).join('');
+                }
+            }, 50);
+        }
+        
+        function initScheduleData() {
+            // Initial population for home schedule
+            setTimeout(() => {
+                refreshScheduleDemo();
+                
+                // Also populate garages page if needed
+                const gGrid = document.getElementById('garages-page-grid');
+                if (gGrid && gGrid.innerHTML.includes('Loading')) {
+                    initGaragesDemo();
+                }
+            }, 400);
+        }
+        
+        function initDemo() {
+            initTailwind();
+            
+            // Show home by default
+            showPage('home');
+            
+            // Initialize schedule demo data
+            initScheduleData();
+            
+            // Pre-populate some availability on load
+            setTimeout(() => {
+                const homeBookings = document.getElementById('demo-bookings');
+                if (homeBookings && homeBookings.children.length === 0) {
+                    refreshScheduleDemo();
+                }
+            }, 600);
+            
+            // Make booking modal close on escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape") {
+                    const modal = document.getElementById('booking-modal');
+                    if (!modal.classList.contains('hidden')) closeBookingModal();
+                }
+            });
+            
+            // Bonus: seed a couple more garages for demo richness
+            if (demoGarages.length < 5) {
+                demoGarages.push({unit: "E-08", size: "Large", status: "Available", notes: "Recently renovated"});
+            }
+            
+            console.log('%c[Demo] Full website prototype loaded. All pages navigable.', 'color:#c5a26f');
+        }
+        
+        // Boot the demo
+        window.onload = function() {
+            initDemo();
+        };
+        
+        // Keyboard shortcut hint for CEO
+        console.log('%c[Demo Tip] Press "/" to quickly go to Schedule. Type "admin" in console for direct admin access.', 'color:#555');
+    </script>
+</body>
+</html>

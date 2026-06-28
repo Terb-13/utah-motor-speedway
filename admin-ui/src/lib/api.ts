@@ -56,7 +56,8 @@ export type Inquiry = {
   raw: BookingRow | WaitlistRow;
 };
 
-export type BookingStatus = 'pending' | 'confirmed' | 'cancelled';
+export type PipelineStatus = 'New' | 'Contacted' | 'Qualified' | 'Booked' | 'Closed';
+export type BookingStatus = 'pending' | 'confirmed' | 'cancelled' | PipelineStatus;
 
 export async function fetchBookings(): Promise<BookingRow[]> {
   const res = await fetch('/api/admin/bookings', { credentials: 'include' });
@@ -69,7 +70,7 @@ export async function fetchBookings(): Promise<BookingRow[]> {
 
 export type PatchBookingInput = {
   id: string;
-  status?: BookingStatus;
+  status?: BookingStatus | PipelineStatus | string;
   preferred_date?: string;
   notes?: string | null;
 };

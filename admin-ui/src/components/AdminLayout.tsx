@@ -122,6 +122,9 @@ export function AdminLayout() {
       </aside>
 
       <div className="wf-main-wrap" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+        <div className="wf-demo-banner" role="status">
+          Demo environment — live operating data · no password required for this build
+        </div>
         <header
           style={{
             display: 'flex',

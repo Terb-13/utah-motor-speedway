@@ -11,6 +11,15 @@
 </head>
 <body class="bg-[#0a0a0a] text-[#c4c4c4] antialiased pb-20 md:pb-0">
 
+    <!-- DEMO HIGHLIGHT: Prominent button at the very top -->
+    <div style="background: linear-gradient(90deg, #c5a26f, #e8d5b5); color: #0a0a0a; text-align: center; padding: 10px 16px; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.5px; position: relative; z-index: 60;">
+      <a href="/admin" style="color: #0a0a0a; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+        <span>🚀</span> 
+        <span>OPEN STAFF COMMAND CENTER — DEMO (click here)</span>
+        <span style="font-size: 1.1em;">→</span>
+      </a>
+    </div>
+
     <nav class="umc-nav-shell sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between min-h-[4.5rem] sm:h-20 gap-4">
@@ -30,6 +39,8 @@
                     <a href="rocket-rally/index.html" class="nav-link">Rocket Rally</a>
                     <a href="events/index.html" class="nav-link">Events</a>
                     <a href="garages/index.html" class="nav-link">Private Garages</a>
+                    <a href="#schedule" class="nav-link">Schedule</a>
+                    <a href="/admin" class="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-2 rounded-lg border border-[#c5a26f] text-[#c5a26f] hover:bg-[#c5a26f] hover:text-[#0a0a0a] transition-colors">Staff Command Center</a>
                 </div>
 
                 <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu"
@@ -47,6 +58,8 @@
                 <a href="rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Rocket Rally</a>
                 <a href="events/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Events</a>
                 <a href="garages/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Private Garages</a>
+                <a href="#schedule" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Schedule</a>
+                <a href="/admin" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f] font-semibold">Staff Command Center →</a>
             </div>
         </div>
     </nav>
@@ -219,6 +232,65 @@
         </div>
     </section>
 
+    <!-- NEW: Public Schedule & Availability for customers + sales -->
+    <section class="border-t border-white/[0.06] bg-[#0c0c0c] py-16 sm:py-20" id="schedule">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+                <div>
+                    <p class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-2">Real-time view</p>
+                    <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">Schedule &amp; Availability</h2>
+                </div>
+                <p class="text-white/50 max-w-md text-sm">See what's already booked and what’s still open. Perfect for planning or inquiring.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Track / Experience Bookings -->
+                <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-lg text-white">Track &amp; Experiences</h3>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-white/60">Upcoming bookings</span>
+                    </div>
+                    <div id="schedule-bookings" class="space-y-3 min-h-[180px]">
+                        <div class="text-white/50 text-sm">Loading availability…</div>
+                    </div>
+                    <p class="text-[10px] text-white/40 mt-4">Dates shown are currently reserved. Submit an inquiry for open dates or alternatives.</p>
+                </div>
+
+                <!-- Private Garages Availability -->
+                <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-lg text-white">Private Garages</h3>
+                        <a href="garages/index.html" class="text-xs text-[#c5a26f] hover:underline">View all &amp; waitlist →</a>
+                    </div>
+                    <div id="schedule-garages" class="grid grid-cols-1 sm:grid-cols-2 gap-3 min-h-[180px]">
+                        <div class="text-white/50 text-sm col-span-full">Loading garages…</div>
+                    </div>
+                    <p class="text-[10px] text-white/40 mt-4">Status reflects current availability. Contact sales for leasing options.</p>
+                </div>
+            </div>
+
+            <!-- Campus Events (Jun–Aug 2026) -->
+            <div class="mt-8 bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
+                    <div>
+                        <p class="text-[#c5a26f] text-[10px] tracking-[0.28em] uppercase mb-1">2026 Calendar</p>
+                        <h3 class="font-semibold text-lg text-white heading-font">Upcoming Campus Events</h3>
+                    </div>
+                    <a href="events/index.html" class="text-xs text-[#c5a26f] hover:underline shrink-0">Full events calendar →</a>
+                </div>
+                <div id="schedule-events" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 min-h-[80px]">
+                    <div class="text-white/50 text-sm col-span-full">Loading events…</div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <a href="garages/index.html" class="inline-flex items-center gap-2 text-sm text-[#c5a26f] hover:text-white transition">Interested in a garage or track day? Inquire now <span>→</span></a>
+                <span class="mx-3 text-white/20">•</span>
+                <a href="/admin" class="inline-flex items-center gap-1 text-sm font-semibold text-[#c5a26f] hover:text-white">Sales team: Full tools in Staff Command Center →</a>
+            </div>
+        </div>
+    </section>
+
     <section class="py-28 sm:py-36 px-6 border-t border-white/[0.06]">
         <div class="max-w-2xl mx-auto text-center reveal">
             <h2 class="text-3xl sm:text-5xl text-white heading-font font-medium mb-6 leading-tight">Begin your journey</h2>
@@ -275,7 +347,7 @@
                     <a href="rocket-rally/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Rocket Rally</a>
                     <a href="events/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Events</a>
                     <a href="garages/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Private Garages</a>
-                    <a href="admin" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors text-[#c5a26f]/70 text-xs tracking-wider">Team Access →</a>
+                    <a href="/admin" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors text-[#c5a26f] font-medium">Staff Command Center →</a>
                 </div>
             </div>
             <div id="contact" class="md:col-span-4 reveal scroll-mt-24">
@@ -382,5 +454,85 @@
     </div>
 
     <script src="js/site.js" defer></script>
+    <script>
+        // Public Schedule & Availability loader
+        (function initPublicSchedule() {
+            const bookingsEl = document.getElementById('schedule-bookings');
+            const garagesEl = document.getElementById('schedule-garages');
+            const eventsEl = document.getElementById('schedule-events');
+            if (!bookingsEl || !garagesEl) return;
+
+            function formatEventDate(ev) {
+                if (ev.endDate && ev.endDate !== ev.date) {
+                    var d1 = new Date(ev.date + 'T12:00:00');
+                    var d2 = new Date(ev.endDate + 'T12:00:00');
+                    var opts = { month: 'short', day: 'numeric' };
+                    return d1.toLocaleDateString('en-US', opts) + ' – ' + d2.toLocaleDateString('en-US', Object.assign({}, opts, { year: 'numeric' }));
+                }
+                return new Date(ev.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            }
+
+            fetch('/api/availability')
+                .then(r => r.json())
+                .then(data => {
+                    // Track / Experience Bookings
+                    if (data.upcomingBookings && data.upcomingBookings.length) {
+                        const html = data.upcomingBookings.slice(0, 8).map(b => {
+                            const exp = (b.experience || '').replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                            return `
+                                <div class="flex items-center justify-between text-sm border-b border-white/10 pb-2 last:border-b-0 last:pb-0">
+                                    <div>
+                                        <span class="font-medium text-white">${b.date}</span>
+                                        <span class="ml-2 text-white/50">${exp}</span>
+                                    </div>
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">Booked</span>
+                                </div>`;
+                        }).join('');
+                        bookingsEl.innerHTML = html;
+                    } else {
+                        bookingsEl.innerHTML = `<div class="text-white/60 text-sm">No upcoming bookings shown. Great availability right now — inquire for your preferred date.</div>`;
+                    }
+
+                    // Garages
+                    const available = (data.garages || []).filter(g => g.status === 'Available');
+                    if (available.length) {
+                        const html = available.map(g => `
+                            <div class="border border-white/10 rounded-xl p-3 bg-[#111]">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="font-semibold text-white">${g.unit}</div>
+                                        <div class="text-xs text-white/50">${g.size}</div>
+                                    </div>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Available</span>
+                                </div>
+                                ${g.notes ? `<div class="text-xs text-white/50 mt-1.5 leading-snug">${g.notes}</div>` : ''}
+                            </div>
+                        `).join('');
+                        garagesEl.innerHTML = html;
+                    } else {
+                        garagesEl.innerHTML = `<div class="col-span-full text-white/60 text-sm">All current units are assigned. Join the waitlist on the garages page.</div>`;
+                    }
+
+                    // Campus events (next 6)
+                    if (eventsEl && data.events && data.events.length) {
+                        var upcomingEvents = data.events.slice(0, 6);
+                        eventsEl.innerHTML = upcomingEvents.map(function(ev) {
+                            return '<div class="border border-white/10 rounded-xl p-4 bg-[#111]">' +
+                                '<div class="text-[10px] tracking-wider uppercase text-[#c5a26f]/80 mb-1">' + ev.category + '</div>' +
+                                '<div class="font-medium text-white text-sm leading-snug">' + ev.title + '</div>' +
+                                '<div class="text-xs text-white/45 mt-1.5">' + formatEventDate(ev) + '</div>' +
+                                (ev.location ? '<div class="text-[10px] text-white/30 mt-1">' + ev.location + '</div>' : '') +
+                            '</div>';
+                        }).join('');
+                    } else if (eventsEl) {
+                        eventsEl.innerHTML = '<div class="col-span-full text-white/60 text-sm">Event calendar loading…</div>';
+                    }
+                })
+                .catch(() => {
+                    bookingsEl.innerHTML = `<div class="text-white/60 text-sm">Availability loading temporarily unavailable. Please inquire directly.</div>`;
+                    garagesEl.innerHTML = `<div class="text-white/60 text-sm">Check the Private Garages page for current listings.</div>`;
+                });
+        })();
+    </script>
 </body>
 </html>

@@ -20,28 +20,10 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const expected = process.env.ADMIN_DASHBOARD_PASSWORD;
-  if (!expected) {
-    return res.status(503).json({
-      error: 'Admin login is not configured',
-      hint: 'Set ADMIN_DASHBOARD_PASSWORD in environment variables',
-    });
-  }
-
+  // DEMO MODE: Password removed for easy CEO hands-on demo.
+  // Any login attempt succeeds immediately.
   if (!getSigningSecret()) {
     return res.status(503).json({ error: 'Admin session signing is not configured' });
-  }
-
-  let body;
-  try {
-    body = await parseJsonBody(req);
-  } catch (e) {
-    return res.status(400).json({ error: e.message || 'Invalid body' });
-  }
-
-  const password = body.password != null ? String(body.password) : '';
-  if (!timingSafeEqualString(password, expected)) {
-    return res.status(401).json({ error: 'Invalid credentials' });
   }
 
   const token = signSessionToken();
@@ -51,5 +33,5 @@ module.exports = async function handler(req, res) {
 
   const secure = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
   res.setHeader('Set-Cookie', buildSetCookieHeader(token, { secure }));
-  return res.status(200).json({ ok: true });
+  return res.status(200).json({ ok: true, demo: true });
 };

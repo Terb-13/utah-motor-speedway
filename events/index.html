@@ -29,6 +29,7 @@
                     <a href="../rocket-rally/index.html" class="nav-link">Rocket Rally</a>
                     <a href="index.html" class="nav-link" aria-current="page">Events</a>
                     <a href="../garages/index.html" class="nav-link">Private Garages</a>
+                    <a href="/admin" class="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-2 rounded-lg border border-[#c5a26f] text-[#c5a26f] hover:bg-[#c5a26f] hover:text-[#0a0a0a] transition-colors">Staff Command Center</a>
                 </div>
                 <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-xl text-[#c5a26f] rounded-xl border border-white/10 hover:bg-white/5 transition">
                     <i class="fa-solid fa-bars" aria-hidden="true"></i><span class="sr-only">Open menu</span>
@@ -42,6 +43,7 @@
                 <a href="../rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Rocket Rally</a>
                 <a href="index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f]" aria-current="page">Events</a>
                 <a href="../garages/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Private Garages</a>
+                <a href="/admin" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f] font-semibold">Staff Command Center →</a>
             </div>
         </div>
     </nav>
@@ -79,6 +81,24 @@
                 </div>
             </div>
         </section>
+
+        <!-- 2026 Event Calendar -->
+        <section class="border-t border-white/[0.06] bg-[#0a0a0a] py-16 sm:py-24" id="calendar-2026">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+                    <p class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-3">June – August 2026</p>
+                    <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">Campus Event Calendar</h2>
+                    <p class="mt-4 text-white/40 font-light leading-relaxed">Key dates from the Utah Motorsports Campus schedule — racing, karting, drift, and drive experiences on site.</p>
+                </div>
+
+                <div id="events-calendar-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal-stagger">
+                    <div class="col-span-full text-white/50 text-sm text-center py-8">Loading calendar…</div>
+                </div>
+
+                <p class="text-center text-xs text-white/30 mt-8">Dates subject to change. Source: Utah Motorsports Campus 2026 calendar.</p>
+            </div>
+        </section>
+
         <section class="bg-[#0c0c0c] border-t border-white/[0.06] py-20 sm:py-28">
             <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center reveal">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl text-white heading-font font-medium leading-tight">Bring your vision to Wildfire</h2>
@@ -177,5 +197,43 @@
         </div>
     </div>
     <script src="../js/site.js" defer></script>
+    <script>
+        (function loadEventsCalendar() {
+            var grid = document.getElementById('events-calendar-grid');
+            if (!grid) return;
+
+            function formatEventDate(ev) {
+                if (ev.endDate && ev.endDate !== ev.date) {
+                    var d1 = new Date(ev.date + 'T12:00:00');
+                    var d2 = new Date(ev.endDate + 'T12:00:00');
+                    var opts = { month: 'short', day: 'numeric' };
+                    return d1.toLocaleDateString('en-US', opts) + ' – ' + d2.toLocaleDateString('en-US', Object.assign({}, opts, { year: 'numeric' }));
+                }
+                return new Date(ev.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+            }
+
+            fetch('../api/availability')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    var events = (data && data.events) || [];
+                    if (!events.length) {
+                        grid.innerHTML = '<div class="col-span-full text-white/60 text-sm text-center py-6">Calendar unavailable right now.</div>';
+                        return;
+                    }
+                    grid.innerHTML = events.map(function(ev) {
+                        return '<article class="racing-card border border-white/[0.08] bg-[#0c0c0c] rounded-sm p-5 sm:p-6 flex flex-col">' +
+                            '<div class="text-[10px] tracking-[0.25em] uppercase text-[#c5a26f]/80 mb-2">' + ev.category + '</div>' +
+                            '<h3 class="text-lg text-white heading-font font-medium leading-snug flex-grow">' + ev.title + '</h3>' +
+                            '<div class="mt-4 pt-4 border-t border-white/[0.06] space-y-1">' +
+                                '<div class="text-sm text-white/70"><i class="fa-regular fa-calendar text-[#c5a26f]/70 mr-2" aria-hidden="true"></i>' + formatEventDate(ev) + '</div>' +
+                                (ev.location ? '<div class="text-xs text-white/40"><i class="fa-solid fa-location-dot text-[#c5a26f]/50 mr-2" aria-hidden="true"></i>' + ev.location + '</div>' : '') +
+                            '</div></article>';
+                    }).join('');
+                })
+                .catch(function() {
+                    grid.innerHTML = '<div class="col-span-full text-red-400/70 text-sm text-center py-6">Unable to load event calendar.</div>';
+                });
+        })();
+    </script>
 </body>
 </html>

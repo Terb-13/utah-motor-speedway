@@ -11,6 +11,15 @@
 </head>
 <body class="bg-[#0a0a0a] text-[#c4c4c4] pb-24 md:pb-0">
 
+    <!-- DEMO HIGHLIGHT: Prominent button at the very top -->
+    <div style="background: linear-gradient(90deg, #c5a26f, #e8d5b5); color: #0a0a0a; text-align: center; padding: 10px 16px; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.5px; position: relative; z-index: 60;">
+      <a href="/admin" style="color: #0a0a0a; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+        <span>🚀</span> 
+        <span>OPEN STAFF COMMAND CENTER — DEMO (click here)</span>
+        <span style="font-size: 1.1em;">→</span>
+      </a>
+    </div>
+
     <nav class="umc-nav-shell sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between min-h-[4.5rem] sm:h-20 gap-4">
@@ -29,6 +38,7 @@
                     <a href="../rocket-rally/index.html" class="nav-link">Rocket Rally</a>
                     <a href="../events/index.html" class="nav-link">Events</a>
                     <a href="index.html" class="nav-link" aria-current="page">Private Garages</a>
+                    <a href="/admin" class="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-2 rounded-lg border border-[#c5a26f] text-[#c5a26f] hover:bg-[#c5a26f] hover:text-[#0a0a0a] transition-colors">Staff Command Center</a>
                 </div>
                 <button type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-xl text-[#c5a26f] rounded-xl border border-white/10 hover:bg-white/5 transition">
                     <i class="fa-solid fa-bars" aria-hidden="true"></i><span class="sr-only">Open menu</span>
@@ -42,6 +52,7 @@
                 <a href="../rocket-rally/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Rocket Rally</a>
                 <a href="../events/index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-white/90">Events</a>
                 <a href="index.html" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f]" aria-current="page">Private Garages</a>
+                <a href="/admin" class="py-3 px-2 rounded-xl hover:bg-white/[0.04] text-[#c5a26f] font-semibold">Staff Command Center →</a>
             </div>
         </div>
     </nav>
@@ -102,6 +113,40 @@
             </div>
         </section>
 
+        <!-- Interactive Garage Floorplan -->
+        <section class="border-t border-white/[0.06] bg-[#080808] py-16 sm:py-24" id="floorplan" aria-label="Interactive garage floorplan">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 reveal">
+                    <div class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-3">Live Inventory Map</div>
+                    <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium mb-4">Explore the Garage Estate</h2>
+                    <p class="text-white/40 font-light leading-relaxed">Click any bay to view details. Available units can be requested via the waitlist — we’ll prioritize your preferred bay when applications open.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-[1fr_320px] gap-6 lg:gap-8 items-start">
+                    <div class="reveal garage-floorplan-wrap">
+                        <div class="garage-floorplan-track" aria-hidden="true">
+                            <i class="fa-solid fa-road"></i>
+                            Direct circuit access
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                        <div class="garage-floorplan-body" id="garage-floorplan-body">
+                            <div class="text-white/40 text-sm text-center py-12">Loading floorplan…</div>
+                        </div>
+                        <div class="garage-floorplan-legend px-4 pb-4" id="garage-floorplan-legend" aria-label="Status legend">
+                            <span class="garage-legend-item"><span class="garage-legend-dot" style="background:#6ee7b7"></span> Available</span>
+                            <span class="garage-legend-item"><span class="garage-legend-dot" style="background:#fcd34d"></span> Reserved</span>
+                            <span class="garage-legend-item"><span class="garage-legend-dot" style="background:#fca5a5"></span> Occupied</span>
+                            <span class="garage-legend-item"><span class="garage-legend-dot" style="background:#a1a1aa"></span> Maintenance</span>
+                        </div>
+                    </div>
+
+                    <div class="reveal garage-bay-detail is-empty" id="garage-bay-detail" aria-live="polite">
+                        <p>Select a bay on the floorplan to view unit details.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Available Garages -->
         <section class="border-t border-white/[0.06] bg-[#0a0a0a] py-16 sm:py-20" id="availability">
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
@@ -110,7 +155,7 @@
                         <div class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-2">Current Inventory</div>
                         <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">Available Garages</h2>
                     </div>
-                    <a href="#garage-waitlist" class="hidden sm:inline text-sm text-[#c5a26f] hover:text-[#e8d5b5] underline underline-offset-4">Join waitlist for future units →</a>
+                    <a href="#floorplan" class="hidden sm:inline text-sm text-[#c5a26f] hover:text-[#e8d5b5] underline underline-offset-4">View interactive floorplan →</a>
                 </div>
 
                 <div id="garage-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -199,7 +244,7 @@
                     <a href="../rocket-rally/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Rocket Rally</a>
                     <a href="../events/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Events</a>
                     <a href="index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Private Garages</a>
-                    <a href="../admin" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors text-[#c5a26f]/70 text-xs tracking-wider">Team Access →</a>
+                    <a href="/admin" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors text-[#c5a26f] font-medium">Staff Command Center →</a>
                 </div>
             </div>
             <div class="md:col-span-4 reveal scroll-mt-24">
@@ -266,34 +311,175 @@
     </div>
     <script src="../js/site.js" defer></script>
     <script>
-        // Load available garages from public API
-        (function loadGarageAvailability() {
+        // ── Garage floorplan layout (demo) ──
+        // Wings mirror the physical estate; bays merge with live /api/availability data.
+        var GARAGE_WINGS = [
+            { id: 'A', label: 'Wing A — Founders Row', units: ['A-01', 'A-02', 'A-03', 'A-04'] },
+            { id: 'B', label: 'Wing B — Main Collection', units: ['B-05', 'B-06', 'B-07', 'B-08'] },
+            { id: 'C', label: 'Wing C — Extended', units: ['C-09', 'C-10', 'C-11', 'C-12', 'C-13', 'C-14'] }
+        ];
+
+        var STATUS_CLASS = {
+            'Available': 'garage-bay--available',
+            'Occupied': 'garage-bay--occupied',
+            'Reserved': 'garage-bay--reserved',
+            'Maintenance': 'garage-bay--maintenance'
+        };
+
+        function escapeHtml(str) {
+            return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function renderBayDetail(bay) {
+            var panel = document.getElementById('garage-bay-detail');
+            if (!panel) return;
+            if (!bay) {
+                panel.className = 'reveal garage-bay-detail is-empty';
+                panel.innerHTML = '<p>Select a bay on the floorplan to view unit details.</p>';
+                return;
+            }
+
+            var status = bay.status || 'Future Phase';
+            var canRequest = status === 'Available' || status === 'Reserved';
+            var ctaLabel = status === 'Available' ? 'Request this bay' : (status === 'Reserved' ? 'Join waitlist for this bay' : 'Join general waitlist');
+
+            panel.className = 'reveal garage-bay-detail';
+            panel.innerHTML =
+                '<div class="text-[10px] tracking-[0.3em] uppercase text-[#c5a26f] mb-2">' + escapeHtml(bay.wingLabel) + '</div>' +
+                '<h3 class="text-2xl text-white heading-font font-medium">' + escapeHtml(bay.unit) + '</h3>' +
+                '<div class="mt-2 flex flex-wrap gap-2 items-center">' +
+                    '<span class="text-xs px-2.5 py-1 rounded-full border ' + (STATUS_CLASS[status] ? 'garage-bay-status' : '') + '">' + escapeHtml(status) + '</span>' +
+                    (bay.size ? '<span class="text-xs text-white/50">' + escapeHtml(bay.size) + '</span>' : '') +
+                '</div>' +
+                (bay.notes ? '<p class="mt-4 text-sm text-white/50 leading-relaxed font-light">' + escapeHtml(bay.notes) + '</p>' : '') +
+                '<ul class="mt-4 space-y-1.5 text-xs text-white/40">' +
+                    '<li><i class="fa-solid fa-temperature-low text-[#c5a26f]/70 mr-2"></i>Climate controlled</li>' +
+                    '<li><i class="fa-solid fa-road text-[#c5a26f]/70 mr-2"></i>Direct track access</li>' +
+                    (bay.size === 'Large' ? '<li><i class="fa-solid fa-arrows-up-down text-[#c5a26f]/70 mr-2"></i>Extra height for lifts</li>' : '') +
+                '</ul>' +
+                (canRequest
+                    ? '<button type="button" id="garage-bay-request-btn" class="mt-6 w-full min-h-[44px] rounded-xl cta-primary border-0 text-sm font-semibold tracking-wide">' + ctaLabel + '</button>'
+                    : '<p class="mt-6 text-xs text-white/35 leading-relaxed">' + (status === 'Occupied' ? 'This bay is currently assigned to a founding member.' : status === 'Maintenance' ? 'This unit is undergoing preparation and is not available for assignment.' : 'This bay is part of a future phase.') + '</p>');
+        }
+
+        function selectBay(bay, btn) {
+            document.querySelectorAll('.garage-bay.is-selected').forEach(function(el) { el.classList.remove('is-selected'); });
+            if (btn) btn.classList.add('is-selected');
+            renderBayDetail(bay);
+
+            var requestBtn = document.getElementById('garage-bay-request-btn');
+            if (requestBtn) {
+                requestBtn.addEventListener('click', function() {
+                    var notesEl = document.getElementById('waitlist-notes');
+                    var waitlistSection = document.getElementById('garage-waitlist');
+                    if (notesEl) {
+                        notesEl.value = 'Interested in unit ' + bay.unit + (bay.size ? ' (' + bay.size + ')' : '') + '.';
+                    }
+                    if (waitlistSection) {
+                        waitlistSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        var nameInput = document.getElementById('waitlist-name');
+                        if (nameInput) nameInput.focus({ preventScroll: true });
+                    }
+                });
+            }
+        }
+
+        function buildFloorplan(garagesFromApi) {
+            var body = document.getElementById('garage-floorplan-body');
+            if (!body) return;
+
+            var byUnit = {};
+            (garagesFromApi || []).forEach(function(g) {
+                byUnit[g.unit] = g;
+            });
+
+            var html = GARAGE_WINGS.map(function(wing) {
+                var bays = wing.units.map(function(unitId) {
+                    var live = byUnit[unitId];
+                    if (!live) {
+                        return '<button type="button" class="garage-bay garage-bay--future is-future" disabled aria-label="' + escapeHtml(unitId) + ', future phase">' +
+                            '<div class="garage-bay-unit">' + escapeHtml(unitId) + '</div>' +
+                            '<div class="garage-bay-status">Future</div></button>';
+                    }
+                    var status = live.status || 'Available';
+                    var statusClass = STATUS_CLASS[status] || 'garage-bay--available';
+                    return '<button type="button" class="garage-bay ' + statusClass + '" data-unit="' + escapeHtml(unitId) + '" aria-label="' + escapeHtml(unitId) + ', ' + escapeHtml(live.size || 'Standard') + ', ' + escapeHtml(status) + '">' +
+                        '<div class="garage-bay-unit">' + escapeHtml(unitId) + '</div>' +
+                        (live.size ? '<div class="garage-bay-size">' + escapeHtml(live.size) + '</div>' : '') +
+                        '<div class="garage-bay-status">' + escapeHtml(status) + '</div></button>';
+                }).join('');
+
+                return '<div class="garage-wing">' +
+                    '<div class="garage-wing-label">' + escapeHtml(wing.label) + '</div>' +
+                    '<div class="garage-wing-grid">' + bays + '</div></div>';
+            }).join('');
+
+            body.innerHTML = html;
+
+            body.querySelectorAll('.garage-bay:not(.is-future)').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var unitId = btn.getAttribute('data-unit');
+                    var live = byUnit[unitId];
+                    if (!live) return;
+                    var wing = GARAGE_WINGS.find(function(w) { return w.units.indexOf(unitId) !== -1; });
+                    selectBay({
+                        unit: unitId,
+                        size: live.size,
+                        status: live.status,
+                        notes: live.notes,
+                        wingLabel: wing ? wing.label : ''
+                    }, btn);
+                });
+            });
+        }
+
+        function renderAvailableCards(garages) {
             var grid = document.getElementById('garage-grid');
             if (!grid) return;
+            var available = (garages || []).filter(function(g) { return g.status === 'Available'; });
+            if (!available.length) {
+                grid.innerHTML = '<div class="col-span-full text-white/60 text-sm py-6 text-center">No units currently listed as Available. Join the waitlist for updates.</div>';
+                return;
+            }
+            grid.innerHTML = available.map(function(g) {
+                var unit = g.unit || g.unit_number;
+                var sizeBadge = '<span class="text-[10px] px-2 py-0.5 rounded border border-white/15 text-white/70">' + escapeHtml(g.size || 'Standard') + '</span>';
+                return '<div class="border border-white/10 bg-[#0c0c0c] rounded-xl p-5 flex flex-col">' +
+                    '<div class="flex items-start justify-between">' +
+                        '<div><div class="font-semibold text-lg text-white tracking-tight">' + escapeHtml(unit) + '</div>' +
+                        '<div class="mt-0.5">' + sizeBadge + '</div></div>' +
+                        '<div class="text-right"><span class="inline-block text-xs font-medium tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Available</span></div>' +
+                    '</div>' +
+                    (g.notes ? '<p class="text-sm text-white/60 mt-3 leading-relaxed">' + escapeHtml(g.notes) + '</p>' : '') +
+                    '<button type="button" class="mt-4 text-xs font-semibold text-[#c5a26f] hover:text-[#e8d5b5] text-left bay-card-cta" data-unit="' + escapeHtml(unit) + '">View on floorplan →</button>' +
+                    '<div class="mt-auto pt-2 text-xs text-white/40">Climate controlled • Direct track access</div>' +
+                '</div>';
+            }).join('');
 
-            fetch('../api/garages')
+            grid.querySelectorAll('.bay-card-cta').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    var unitId = link.getAttribute('data-unit');
+                    var floorBtn = document.querySelector('.garage-bay[data-unit="' + unitId + '"]');
+                    document.getElementById('floorplan').scrollIntoView({ behavior: 'smooth' });
+                    if (floorBtn) floorBtn.click();
+                });
+            });
+        }
+
+        // Load floorplan + availability from unified API
+        (function loadGarageFloorplan() {
+            fetch('../api/availability')
                 .then(function(r) { return r.json(); })
                 .then(function(res) {
                     var garages = (res && res.garages) || [];
-                    if (!garages.length) {
-                        grid.innerHTML = '<div class="col-span-full text-white/60 text-sm py-6 text-center">No units currently listed as Available. Join the waitlist for updates.</div>';
-                        return;
-                    }
-                    grid.innerHTML = garages.map(function(g) {
-                        var sizeBadge = '<span class="text-[10px] px-2 py-0.5 rounded border border-white/15 text-white/70">' + (g.size || 'Standard') + '</span>';
-                        return '<div class="border border-white/10 bg-[#0c0c0c] rounded-xl p-5 flex flex-col">' +
-                            '<div class="flex items-start justify-between">' +
-                                '<div><div class="font-semibold text-lg text-white tracking-tight">' + g.unit_number + '</div>' +
-                                '<div class="mt-0.5">' + sizeBadge + '</div></div>' +
-                                '<div class="text-right"><span class="inline-block text-xs font-medium tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Available</span></div>' +
-                            '</div>' +
-                            (g.notes ? '<p class="text-sm text-white/60 mt-3 leading-relaxed">' + g.notes + '</p>' : '') +
-                            '<div class="mt-auto pt-4 text-xs text-white/40">Climate controlled • Direct track access</div>' +
-                        '</div>';
-                    }).join('');
+                    buildFloorplan(garages);
+                    renderAvailableCards(garages);
                 })
                 .catch(function() {
-                    grid.innerHTML = '<div class="col-span-full text-red-400/70 text-sm py-4 text-center">Unable to load availability right now.</div>';
+                    var body = document.getElementById('garage-floorplan-body');
+                    if (body) body.innerHTML = '<div class="text-red-400/70 text-sm text-center py-8">Unable to load floorplan. Please try again shortly.</div>';
+                    var grid = document.getElementById('garage-grid');
+                    if (grid) grid.innerHTML = '<div class="col-span-full text-red-400/70 text-sm py-4 text-center">Unable to load availability right now.</div>';
                 });
         })();
     </script>

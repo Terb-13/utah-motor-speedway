@@ -70,9 +70,18 @@ module.exports = async function handler(req, res) {
 
     const patch = {};
     if (body.status !== undefined && body.status !== null) {
-      const st = (body.status || '').toString().toLowerCase().trim();
-      if (!STATUS.has(st)) {
-        return res.status(400).json({ error: 'Invalid status. Use New, Contacted, Qualified, Booked, Closed or legacy pending/confirmed/cancelled' });
+      const raw = (body.status || '').toString().trim();
+      const lower = raw.toLowerCase();
+      // Legacy booking statuses stay lowercase; pipeline statuses use Title Case
+      let st;
+      if (LEGACY_STATUS.has(lower)) {
+        st = lower;
+      } else if (PIPELINE_STATUS.has(raw)) {
+        st = raw;
+      } else {
+        return res.status(400).json({
+          error: 'Invalid status. Use New, Contacted, Qualified, Booked, Closed or legacy pending/confirmed/cancelled',
+        });
       }
       patch.status = st;
     }
