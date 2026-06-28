@@ -177,3 +177,73 @@ export async function patchWaitlist(input: PatchWaitlistInput): Promise<Waitlist
   }
   return (data as { entry: WaitlistRow }).entry;
 }
+
+// Garage Inventory types and functions
+export type GarageStatus = 'Available' | 'Occupied' | 'Reserved' | 'Maintenance';
+
+export type GarageRow = {
+  id: string;
+  unit_number: string;
+  size: string;
+  status: GarageStatus;
+  tenant_name?: string | null;
+  notes?: string | null;
+  created_at?: string;
+};
+
+export async function fetchGarages(): Promise<GarageRow[]> {
+  const res = await fetch('/api/admin/garages', { credentials: 'include' });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error((data as { error?: string }).error || 'Failed to load garages');
+  }
+  return (data as { garages?: GarageRow[] }).garages || [];
+}
+
+export type CreateGarageInput = {
+  unit_number: string;
+  size?: string;
+  status?: GarageStatus;
+  tenant_name?: string | null;
+  notes?: string | null;
+};
+
+export async function createGarage(input: CreateGarageInput): Promise<GarageRow> {
+  const res = await fetch('/api/admin/garages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(input),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error((data as { error?: string }).error || 'Failed to create garage');
+  }
+  return (data as { garage: GarageRow }).garage;
+}
+
+export type PatchGarageInput = {
+  id: string;
+  status?: GarageStatus;
+  tenant_name?: string | null;
+  notes?: string | null;
+  size?: string;
+};
+
+export async function patchGarage(input: PatchGarageInput): Promise<GarageRow> {
+  const res = await fetch('/api/admin/garages', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(input),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(
+      (data as { error?: string; details?: string }).error ||
+        (data as { details?: string }).details ||
+        'Failed to update garage'
+    );
+  }
+  return (data as { garage: GarageRow }).garage;
+}

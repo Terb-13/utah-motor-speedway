@@ -102,6 +102,26 @@
             </div>
         </section>
 
+        <!-- Available Garages -->
+        <section class="border-t border-white/[0.06] bg-[#0a0a0a] py-16 sm:py-20" id="availability">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="flex items-end justify-between mb-8">
+                    <div>
+                        <div class="text-[#c5a26f] text-xs tracking-[0.3em] uppercase mb-2">Current Inventory</div>
+                        <h2 class="text-3xl sm:text-4xl text-white heading-font font-medium">Available Garages</h2>
+                    </div>
+                    <a href="#garage-waitlist" class="hidden sm:inline text-sm text-[#c5a26f] hover:text-[#e8d5b5] underline underline-offset-4">Join waitlist for future units →</a>
+                </div>
+
+                <div id="garage-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Populated by JS from /api/garages -->
+                    <div class="col-span-full text-white/50 text-sm py-8 text-center">Loading available units…</div>
+                </div>
+
+                <p class="mt-6 text-center text-xs text-white/40">Availability is shown in real time for demo purposes. Actual units are limited and assigned by founding membership.</p>
+            </div>
+        </section>
+
         <section class="bg-[#080808] py-20 sm:py-28 border-t border-white/[0.06] relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-b from-[#c5a26f]/[0.05] via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
             <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative">
@@ -179,6 +199,7 @@
                     <a href="../rocket-rally/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Rocket Rally</a>
                     <a href="../events/index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Events</a>
                     <a href="index.html" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors">Private Garages</a>
+                    <a href="../admin" class="block hover:text-[#c5a26f] py-1 min-h-[44px] md:min-h-0 flex items-center transition-colors text-[#c5a26f]/70 text-xs tracking-wider">Team Access →</a>
                 </div>
             </div>
             <div class="md:col-span-4 reveal scroll-mt-24">
@@ -244,5 +265,37 @@
         </div>
     </div>
     <script src="../js/site.js" defer></script>
+    <script>
+        // Load available garages from public API
+        (function loadGarageAvailability() {
+            var grid = document.getElementById('garage-grid');
+            if (!grid) return;
+
+            fetch('../api/garages')
+                .then(function(r) { return r.json(); })
+                .then(function(res) {
+                    var garages = (res && res.garages) || [];
+                    if (!garages.length) {
+                        grid.innerHTML = '<div class="col-span-full text-white/60 text-sm py-6 text-center">No units currently listed as Available. Join the waitlist for updates.</div>';
+                        return;
+                    }
+                    grid.innerHTML = garages.map(function(g) {
+                        var sizeBadge = '<span class="text-[10px] px-2 py-0.5 rounded border border-white/15 text-white/70">' + (g.size || 'Standard') + '</span>';
+                        return '<div class="border border-white/10 bg-[#0c0c0c] rounded-xl p-5 flex flex-col">' +
+                            '<div class="flex items-start justify-between">' +
+                                '<div><div class="font-semibold text-lg text-white tracking-tight">' + g.unit_number + '</div>' +
+                                '<div class="mt-0.5">' + sizeBadge + '</div></div>' +
+                                '<div class="text-right"><span class="inline-block text-xs font-medium tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Available</span></div>' +
+                            '</div>' +
+                            (g.notes ? '<p class="text-sm text-white/60 mt-3 leading-relaxed">' + g.notes + '</p>' : '') +
+                            '<div class="mt-auto pt-4 text-xs text-white/40">Climate controlled • Direct track access</div>' +
+                        '</div>';
+                    }).join('');
+                })
+                .catch(function() {
+                    grid.innerHTML = '<div class="col-span-full text-red-400/70 text-sm py-4 text-center">Unable to load availability right now.</div>';
+                });
+        })();
+    </script>
 </body>
 </html>
