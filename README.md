@@ -18,7 +18,7 @@ Static marketing pages (HTML, Tailwind CDN, shared [`css/site.css`](css/site.css
 | `css/site.css`, `js/site.js` | Shared styles and behavior |
 | `api/*.js` | Vercel functions at `/api/*` (includes `api/admin/*` for the dashboard) |
 | `admin-ui/` | Vite + React source for `/admin` (not named `admin/` — that URL would be shadowed on Vercel) |
-| `admin-build/` | Build output (gitignored; produced by `npm run build:admin`) |
+| `dist/` | Vercel static output: `vercel-build` → Vite writes `dist/admin/`, then copies marketing pages, `css/`, `js/`, etc. (gitignored) |
 | `.env.example` | Variable names for local and Vercel |
 
 ## Environment variables
@@ -38,7 +38,7 @@ Copy `.env.example` to **`.env.local`** for `vercel dev`. Set real values in the
 
 ### Admin dashboard (`/admin`)
 
-React + Vite app in [`admin-ui/`](admin-ui/) (gold-on-charcoal UI, FullCalendar, bookings/waitlist tables). Build output goes to **`admin-build/`**; Vercel rewrites `/admin` → that bundle.
+React + Vite app in [`admin-ui/`](admin-ui/) (gold-on-charcoal UI, FullCalendar, bookings/waitlist tables). **`npm run vercel-build`** puts the SPA in **`dist/admin/`** and syncs the marketing site into **`dist/`**; Vercel’s **Output Directory** is **`dist`**. Public HTML stays at the repo root for editing; the deploy copy lives under `dist/`.
 
 - **Local UI:** `npm install` then `npm run dev:admin` (defaults API proxy to `http://127.0.0.1:3000` — run **`vercel dev`** in another terminal so `/api/admin/*` exists).
 - **Production:** set `ADMIN_DASHBOARD_PASSWORD` on Vercel; deploy runs `npm run vercel-build` (builds admin + keeps static marketing files).

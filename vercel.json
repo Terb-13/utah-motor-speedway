@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "dist",
   "functions": {
     "api/**/*.js": {
       "memory": 256,
@@ -7,10 +8,9 @@
     }
   },
   "rewrites": [
-    { "source": "/admin/assets/:path*", "destination": "/admin-build/assets/:path*" },
-    { "source": "/admin", "destination": "/admin-build/index.html" },
-    { "source": "/admin/", "destination": "/admin-build/index.html" },
-    { "source": "/admin/:path*", "destination": "/admin-build/index.html" }
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/admin/", "destination": "/admin/index.html" },
+    { "source": "/admin/:path*", "destination": "/admin/index.html" }
   ],
   "headers": [
     {

@@ -7,7 +7,7 @@ export default defineConfig({
   base: '/admin/',
   root: path.resolve(__dirname),
   build: {
-    outDir: path.resolve(__dirname, '../admin-build'),
+    outDir: path.resolve(__dirname, '../dist/admin'),
     emptyOutDir: true,
   },
   server: {

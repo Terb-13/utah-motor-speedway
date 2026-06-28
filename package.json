@@ -6,8 +6,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "vercel-build": "npm run build:admin",
-    "build": "npm run build:admin",
+    "vercel-build": "npm run build:admin && node scripts/vercel-sync-static.cjs",
+    "build": "npm run vercel-build",
     "build:admin": "vite build --config admin-ui/vite.config.ts",
     "dev:admin": "vite --config admin-ui/vite.config.ts"
   },

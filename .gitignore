@@ -4,5 +4,6 @@
 .vercel
 node_modules/
 admin-build/
+dist/
 .DS_Store
 *.log
