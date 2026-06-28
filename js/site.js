@@ -61,6 +61,18 @@
         observer.observe(el);
     });
 
+    document.querySelectorAll('input[type="date"].booking-field').forEach(function (input) {
+        input.addEventListener('click', function () {
+            try {
+                if (typeof input.showPicker === 'function') {
+                    input.showPicker();
+                }
+            } catch (err) {
+                /* Browser may block showPicker outside direct user gesture in some cases */
+            }
+        });
+    });
+
     var modal = document.getElementById('booking-modal');
     var form = document.getElementById('booking-form');
     var closeBtn = document.getElementById('booking-modal-close');

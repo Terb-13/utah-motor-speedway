@@ -420,6 +420,57 @@ textarea.booking-field {
     resize: vertical;
 }
 
+/* Date fields — visible calendar affordance + click-anywhere to open picker */
+input[type="date"].booking-field {
+    color-scheme: dark;
+    cursor: pointer;
+    position: relative;
+    padding-right: 2.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23c5a26f'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75' d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    background-size: 1.15rem;
+    min-height: 3rem;
+}
+
+input[type="date"].booking-field::-webkit-calendar-picker-indicator {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+input[type="date"].booking-field::-webkit-datetime-edit,
+input[type="date"].booking-field::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+}
+
+input[type="date"].booking-field::-webkit-datetime-edit-text,
+input[type="date"].booking-field::-webkit-datetime-edit-month-field,
+input[type="date"].booking-field::-webkit-datetime-edit-day-field,
+input[type="date"].booking-field::-webkit-datetime-edit-year-field {
+    color: rgb(161 161 170);
+}
+
+input[type="date"].booking-field:focus::-webkit-datetime-edit-text,
+input[type="date"].booking-field:focus::-webkit-datetime-edit-month-field,
+input[type="date"].booking-field:focus::-webkit-datetime-edit-day-field,
+input[type="date"].booking-field:focus::-webkit-datetime-edit-year-field,
+input[type="date"].booking-field:valid::-webkit-datetime-edit-text,
+input[type="date"].booking-field:valid::-webkit-datetime-edit-month-field,
+input[type="date"].booking-field:valid::-webkit-datetime-edit-day-field,
+input[type="date"].booking-field:valid::-webkit-datetime-edit-year-field {
+    color: rgb(244 244 245);
+}
+
+input[type="date"].booking-field:hover {
+    background-color: rgba(14, 14, 14, 0.95);
+}
+
 .waitlist-card {
     text-align: left;
     max-width: 36rem;
